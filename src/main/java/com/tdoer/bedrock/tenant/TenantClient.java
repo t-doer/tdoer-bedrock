@@ -29,5 +29,9 @@ public interface TenantClient {
 
     Client getClient();
 
+    Long getTenantId();
+
+    String getClientId();
+
     void listHosts(List<String> list);
 }

@@ -49,6 +49,8 @@ public class CloudEnvironment {
 
     private Locale language;
 
+    private EnvironmentDigest digest;
+
     public CloudEnvironment(Tenant tenant, ProductRental productRental, TenantClient tenantClient, ContextInstance contextInstance, Application application, Locale language) {
         Assert.notNull(tenant, "Tenant cannot be null");
         Assert.notNull(productRental, "ProductRental cannot be null");
@@ -63,8 +65,23 @@ public class CloudEnvironment {
         this.contextInstance = contextInstance;
         this.application = application;
         this.language = language;
+
+        // Generate digest right now, in order to avoid infinite loop to load
+        // product, client objects in wrong use case.
+        //
+        digest = generateDigest();
     }
 
+    protected EnvironmentDigest generateDigest(){
+        EnvironmentDigest digest = new EnvironmentDigest();
+        digest.setTenantId(tenant.getId());
+        digest.setProductId(productRental.getProductId());
+        digest.setClientId(tenantClient.getClientId());
+        digest.setContextPath(contextInstance.getContextPath().getAbsoluteValue());
+        digest.setApplicationId(application.getId());
+        digest.setLanguage(LocaleUtil.getLocale(language));
+        return digest;
+    }
     /**
      * Current tenant is being requesting
      *
@@ -87,7 +104,7 @@ public class CloudEnvironment {
     }
 
     public Product getProduct() {
-        return tenantClient.getClient().getProduct();
+        return productRental.getProduct();
     }
 
     public ClientConfig getClientConfig() {
@@ -128,6 +145,10 @@ public class CloudEnvironment {
 
     public String getApplicationId() {
         return getApplication().getId();
+    }
+
+    public EnvironmentDigest getDigest() {
+        return digest;
     }
 
     @Override

@@ -30,6 +30,10 @@ public interface ProductRental extends Serializable {
 
     Product getProduct();
 
+    Long getTenantId();
+
+    String getProductId();
+
     Date getStartDate();
 
     Date getEndDate();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2019 T-Doer (tdoer.com).
+ * Copyright 2019 T-Doer (tdoer.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tdoer.bedrock.web;
+package com.tdoer.bedrock;
 
-import com.tdoer.bedrock.CloudEnvironment;
 import com.tdoer.springboot.util.LocaleUtil;
 import org.springframework.util.StringUtils;
 
@@ -25,9 +24,12 @@ import org.springframework.util.StringUtils;
  * @create 2017-09-19
  */
 public class EnvironmentDigest {
-    protected String clientId;
 
     protected Long tenantId;
+
+    protected String productId;
+
+    protected String clientId;
 
     protected String contextPath;
 
@@ -41,6 +43,14 @@ public class EnvironmentDigest {
 
     public void setClientId(String clientId) {
         this.clientId = clientId;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public Long getTenantId() {
@@ -75,21 +85,12 @@ public class EnvironmentDigest {
         this.language = language;
     }
 
-    public static EnvironmentDigest digest(CloudEnvironment environment) {
-        EnvironmentDigest digest = new EnvironmentDigest();
-        digest.setTenantId(environment.getTenant().getId());
-        digest.setClientId(environment.getClient().getId());
-        digest.setContextPath(environment.getContextPath().getAbsoluteValue());
-        digest.setApplicationId(environment.getApplication().getId());
-        digest.setLanguage(LocaleUtil.getLocale(environment.getLanguage()));
-        return digest;
-    }
-
     public static EnvironmentDigest fromDigestString(String digestStr) {
         String[] arr = StringUtils.delimitedListToStringArray(digestStr, "|");
         int i = 0;
         EnvironmentDigest digest = new EnvironmentDigest();
         digest.setTenantId(Long.parseLong(arr[i++]));
+        digest.setProductId(arr[i++]);
         digest.setClientId(arr[i++]);
         digest.setContextPath(arr[i++]);
         digest.setApplicationId(arr[i++]);
@@ -100,6 +101,7 @@ public class EnvironmentDigest {
     public String toDigestString() {
         StringBuilder sb = new StringBuilder();
         sb.append(tenantId).append("|");
+        sb.append(productId).append("|");
         sb.append(clientId).append("|");
         sb.append(contextPath).append("|");
         sb.append(applicationId).append("|");
@@ -112,6 +114,7 @@ public class EnvironmentDigest {
         StringBuilder sb = new StringBuilder();
         sb.append("EnvironmentDigest[");
         sb.append(tenantId).append(",");
+        sb.append(productId).append(",");
         sb.append(clientId).append(",");
         sb.append(contextPath).append(",");
         sb.append(applicationId).append(",");
