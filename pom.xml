@@ -7,13 +7,13 @@
     <parent>
         <groupId>com.tdoer</groupId>
         <artifactId>tdoer-parent-pom</artifactId>
-        <version>1.0.1-RELEASE</version>
+        <version>1.0.0-RELEASE</version>
         <relativePath/> <!-- lookupApplication parent from repository -->
     </parent>
 
     <groupId>com.tdoer</groupId>
     <artifactId>tdoer-bedrock</artifactId>
-    <version>1.0.0-RELEASE</version>
+    <version>1.0.1-RELEASE</version>
     <name>T-Doer Bedrock</name>
     <description>T-Doer Bedrock SaaS Framework Specification</description>
     <licenses>

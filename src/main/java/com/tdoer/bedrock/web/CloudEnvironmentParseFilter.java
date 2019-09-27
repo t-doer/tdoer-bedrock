@@ -135,6 +135,6 @@ public class CloudEnvironmentParseFilter implements Filter, InitializingBean {
             WebUtil.addValueIntoResponseHeaderAndCookie(response, request, CloudConstants.TENANT_ID, environment.getTenant().getCode());
         }
 
-        request.setAttribute(CloudConstants.ENVIRONMENT_DIGEST, EnvironmentDigest.digest(environment));
+        request.setAttribute(CloudConstants.ENVIRONMENT_DIGEST, environment.getDigest());
     }
 }
