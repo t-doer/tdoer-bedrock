@@ -1,2 +1,6 @@
 /.idea/
 /tdoer-bedrock.iml
+/target
+/bin
+.project
+.settings
