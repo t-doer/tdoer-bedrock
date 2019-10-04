@@ -31,7 +31,7 @@ public interface ContextConfig {
      *
      * @param list
      */
-    void listCurentUserRoles(List<ContextRole> list);
+    void listCurrentUserRoles(List<ContextRole> list);
 
     /**
      * List context roles of given user Id
