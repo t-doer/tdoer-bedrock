@@ -31,6 +31,8 @@ public interface User extends Serializable {
      */
     Long getId();
 
+    String getGuid();
+
     /**
      * The user's tenant ID. The tenant rent products to its users.
      *

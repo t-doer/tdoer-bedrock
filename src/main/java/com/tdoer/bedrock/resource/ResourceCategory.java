@@ -25,9 +25,9 @@ import java.util.Map;
  * @create 2017-09-19
  */
 public enum ResourceCategory {
-    APPLICATION, CLIENT;
+    APPLICATION, SERVICE, CLIENT;
 
-    private static final Map<String, ResourceCategory> mappings = new HashMap<>(2);
+    private static final Map<String, ResourceCategory> mappings = new HashMap<>(3);
 
     static {
         for (ResourceCategory clientCategory : values()) {

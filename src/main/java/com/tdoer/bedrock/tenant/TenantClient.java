@@ -33,5 +33,12 @@ public interface TenantClient {
 
     String getClientId();
 
+    /**
+     * Client secret
+     *
+     * @return
+     */
+    String getSecret();
+
     void listHosts(List<String> list);
 }

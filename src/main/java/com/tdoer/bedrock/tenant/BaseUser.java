@@ -23,6 +23,8 @@ package com.tdoer.bedrock.tenant;
 public class BaseUser implements User {
     protected Long id;
 
+    protected String guid;
+
     protected Long tenantId;
 
     protected String account;
@@ -50,6 +52,15 @@ public class BaseUser implements User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
     }
 
     @Override

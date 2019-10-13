@@ -13,31 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tdoer.bedrock.context;
+package com.tdoer.bedrock.product;
 
-import java.io.Serializable;
+import com.tdoer.bedrock.service.Service;
+import com.tdoer.bedrock.service.ServiceInstallation;
+
 /**
  * @Description
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
-public interface ContextType extends Serializable {
+public interface ClientServiceInstallation extends ServiceInstallation {
 
-    Integer getType();
+    String getClientId();
 
-    String getName();
-
-    String getCode();
-
-    String getCategory();
-
-    ContextType getParent();
-
-    ContextType[] getChildren();
-
-    ContextType getRoot();
-
-    ContextType find(Integer contextType);
-
-    ContextPath getContextPath();
+    Long getTenantId();
 }

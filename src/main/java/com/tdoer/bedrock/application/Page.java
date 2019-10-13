@@ -54,4 +54,11 @@ public interface Page extends ApplicationResource {
      */
     Action getAction(Long actionId);
 
+    /**
+     * 页面的访问URI，肯定不为空
+     *
+     * @return 页面的访问URI，肯定不为空
+     */
+    String getURI();
+
 }

@@ -25,9 +25,9 @@ import java.util.Map;
  * @create 2017-09-19
  */
 public enum ResourceType {
-    PAGE, ACTION, NAVIGATION;
+    PAGE, ACTION, SERVICE_METHOD, NAVIGATION;
 
-    private static final Map<String, ResourceType> mappings = new HashMap<>(3);
+    private static final Map<String, ResourceType> mappings = new HashMap<>(4);
 
     static {
         for (ResourceType clientCategory : values()) {

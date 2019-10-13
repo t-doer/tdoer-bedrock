@@ -36,8 +36,6 @@ public interface ContextRole extends GrantedAuthority, Serializable {
 
     String getProductId();
 
-    String getClientId();
-
     Long getTenantId();
 
     void listAuthorities(List<RoleAuthority> list);

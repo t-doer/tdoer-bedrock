@@ -19,6 +19,7 @@ import com.tdoer.bedrock.product.Product;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * @Description
@@ -33,6 +34,8 @@ public interface ProductRental extends Serializable {
     Long getTenantId();
 
     String getProductId();
+
+    Locale getDefaultLanguage();
 
     Date getStartDate();
 

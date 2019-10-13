@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2019 T-Doer (tdoer.com).
+ * Copyright 2019 T-Doer (tdoer.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 package com.tdoer.bedrock.context;
 
 import com.tdoer.bedrock.application.ApplicationInstallation;
+import com.tdoer.bedrock.context.ContextPath;
+
 /**
  * @Description
  * @author Htinker Hu (htinker@163.com)
@@ -24,8 +26,6 @@ import com.tdoer.bedrock.application.ApplicationInstallation;
 public interface ContextApplicationInstallation extends ApplicationInstallation {
 
     ContextPath getContextPath();
-
-    String getProductId();
 
     String getClientId();
 

@@ -49,32 +49,11 @@ public interface Client {
     ClientCategory getCategory();
 
     /**
-     * Client secret
-     *
-     * @return
-     */
-    String getSecret();
-
-    /**
      * The client's access scopes
      *
      * @return
      */
     String[] getScopes();
-
-    /**
-     * The client's grant types
-     *
-     * @return
-     */
-    String[] getGrantTypes();
-
-    /**
-     * The client's auto approval's scope
-     *
-     * @return
-     */
-    String[] getAutoApprovals();
 
     /**
      * The client's authorities or roles that it can plays as in its product

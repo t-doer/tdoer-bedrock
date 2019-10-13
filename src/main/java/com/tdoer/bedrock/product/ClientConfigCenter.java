@@ -15,6 +15,7 @@
  */
 package com.tdoer.bedrock.product;
 
+import com.tdoer.bedrock.context.ContextInstallation;
 import com.tdoer.bedrock.context.ContextPath;
 
 import java.util.List;
@@ -29,9 +30,9 @@ public interface ClientConfigCenter {
 
     void listApplicationInstallations(String productId, String clientId, Long tenantId, List<ClientApplicationInstallation> list);
 
-    ClientService getClientService(String applicationId, String productId, String clientId, Long tenantId);
+    ClientServiceInstallation getClientService(String applicationId, String productId, String clientId, Long tenantId);
 
-    void listClientServices(String productId, String clientId, Long tenantId, List<ClientService> list);
+    void listClientServices(String productId, String clientId, Long tenantId, List<ClientServiceInstallation> list);
 
     ContextInstallation getContextInstallation(ContextPath contextPath, String productId, String clientId, Long tenantId);
 

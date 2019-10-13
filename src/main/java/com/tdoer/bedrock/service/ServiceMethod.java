@@ -72,6 +72,14 @@ public interface ServiceMethod extends Serializable {
     boolean match(String httpMethod, String path);
 
     /**
+     * 应用ID，是扩展属性，如果非空，就意味着该服务方法只能开放给指定的应用，否则不限定，可以开放给
+     * 所有应用；
+     *
+     * @return 应用ID，可能为{@code null}
+     */
+    String getApplicationId();
+
+    /**
      * Product Id, to which the service method belongs
      *
      * @return Product Id, it may be {@code Null}

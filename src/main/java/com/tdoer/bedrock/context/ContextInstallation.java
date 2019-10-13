@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2019 T-Doer (tdoer.com).
+ * Copyright 2019 T-Doer (tdoer.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tdoer.bedrock.product;
+package com.tdoer.bedrock.context;
 
 import com.tdoer.bedrock.context.ContextPath;
 
@@ -24,8 +24,6 @@ import java.util.Locale;
  * @create 2017-09-19
  */
 public interface ContextInstallation {
-    String getProductId();
-
     String getClientId();
 
     Long getTenantId();

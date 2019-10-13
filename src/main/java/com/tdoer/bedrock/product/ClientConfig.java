@@ -15,6 +15,7 @@
  */
 package com.tdoer.bedrock.product;
 
+import com.tdoer.bedrock.context.ContextInstallation;
 import com.tdoer.bedrock.context.ContextPath;
 
 import java.util.List;
@@ -55,7 +56,7 @@ public interface ClientConfig {
      * @param serviceId
      * @return
      */
-    ClientService getService(String serviceId);
+    ClientServiceInstallation getService(String serviceId);
 
     /**
      * Check whether the tenant's client can access the service of specific Id or not
@@ -70,7 +71,7 @@ public interface ClientConfig {
      *
      * @param list
      */
-    void listAccessibleService(List<ClientService> list);
+    void listAccessibleService(List<ClientServiceInstallation> list);
 
     /**
      * The context installation in the tenant's client of specific context path

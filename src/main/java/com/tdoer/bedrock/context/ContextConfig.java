@@ -64,7 +64,6 @@ public interface ContextConfig {
      */
     void listPublicAuthorities(List<PublicAuthority> list);
 
-
     /**
      * Check if the http request path's access is permitted in current context instance.
      *

@@ -31,6 +31,8 @@ public interface ContextInstance extends Serializable {
      */
     Long getInstanceId();
 
+    String getGuid();
+
     /**
      * Organization Name or User Name
      *

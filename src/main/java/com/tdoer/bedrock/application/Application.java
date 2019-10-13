@@ -48,6 +48,13 @@ public interface Application extends Serializable {
     String getDescription();
 
     /**
+     * 应用提供商，可以是个人或组织。
+     *
+     * @return 应用提供商，可能为{@code null}
+     */
+    String getProvider();
+
+    /**
      * Application author's name
      *
      * @return Application author's name, may be {@code Null}

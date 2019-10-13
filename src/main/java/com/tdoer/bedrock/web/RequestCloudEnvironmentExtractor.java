@@ -23,7 +23,7 @@ import com.tdoer.bedrock.context.ContextInstanceCenter;
 import com.tdoer.bedrock.context.ContextPath;
 import com.tdoer.bedrock.context.ContextPathParser;
 import com.tdoer.bedrock.product.ClientConfigCenter;
-import com.tdoer.bedrock.product.ContextInstallation;
+import com.tdoer.bedrock.context.ContextInstallation;
 import com.tdoer.bedrock.tenant.ProductRental;
 import com.tdoer.bedrock.tenant.RentalCenter;
 import com.tdoer.bedrock.tenant.Tenant;

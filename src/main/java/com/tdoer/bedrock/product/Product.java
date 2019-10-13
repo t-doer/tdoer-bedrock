@@ -46,13 +46,6 @@ public interface Product extends Serializable {
     String getDescription();
 
     /**
-     * Get the default language of the product
-     *
-     * @return
-     */
-    Locale getDefaultLanguage();
-
-    /**
      * List the languages the product supports
      *
      * @param list

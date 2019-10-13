@@ -40,6 +40,8 @@ public interface Tenant extends ContextInstance, Serializable {
      */
     Long getId();
 
+    String getGuid();
+
     /**
      * The tenant's code
      *
