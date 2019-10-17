@@ -31,7 +31,7 @@ public interface TenantClient {
 
     Long getTenantId();
 
-    String getClientId();
+    Long getClientId();
 
     /**
      * Client secret

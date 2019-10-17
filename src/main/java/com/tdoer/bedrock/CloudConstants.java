@@ -23,7 +23,7 @@ package com.tdoer.bedrock;
 public interface CloudConstants {
     String CONTEXT_PATH_PARAM = "cp";
 
-    String APPLICATION_ID_PARAM = "app-id";
+    String APPLICATION_CODE_PARAM = "appc";
 
     String CLIENT_ID = "_fw_client_id";
 

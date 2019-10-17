@@ -34,13 +34,21 @@ public interface ContextRole extends GrantedAuthority, Serializable {
 
     ContextPath getContextPath();
 
-    String getProductId();
-
     Long getTenantId();
 
-    void listAuthorities(List<RoleAuthority> list);
+    /**
+     * List front-end resource, such like page, action and navigation etc.
+     * @param list
+     */
+    void listFrontendResource(List<RoleAuthority> list);
 
-    boolean permitServiceMethod(String httpMethod, String path);
+    /**
+     * List back-end resource, mainly service methods.
+     * @param list
+     */
+    void listServiceMethods(List<RoleAuthority> list);
+
+    boolean permitServiceMethodAccess(String httpMethod, String path);
 
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()

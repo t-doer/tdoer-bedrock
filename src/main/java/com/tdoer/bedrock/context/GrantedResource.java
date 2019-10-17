@@ -13,25 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tdoer.bedrock.tenant;
+package com.tdoer.bedrock.context;
 
+import com.tdoer.bedrock.resource.Resource;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.io.Serializable;
 /**
  * @Description
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
-public interface RentalCenter {
-    Tenant getTenant(String tenantCode);
-
-    Tenant getTenant(Long tenantId);
-
-    ProductRental getProductRendtal(Long tenantId, Long productId);
-
-    ProductRental[] getProductRentals(Long tenantId);
-
-    TenantClient getTenantClient(String host);
-
-    TenantClient getTenantClient(Long tenantId, Long clientId);
-
-    TenantClient[] getTenantClients(Long tenantId);
+public interface GrantedResource extends GrantedAuthority {
+    Resource getResource();
 }

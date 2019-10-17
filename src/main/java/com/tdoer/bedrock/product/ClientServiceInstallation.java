@@ -15,7 +15,6 @@
  */
 package com.tdoer.bedrock.product;
 
-import com.tdoer.bedrock.service.Service;
 import com.tdoer.bedrock.service.ServiceInstallation;
 
 /**
@@ -25,7 +24,7 @@ import com.tdoer.bedrock.service.ServiceInstallation;
  */
 public interface ClientServiceInstallation extends ServiceInstallation {
 
-    String getClientId();
+    Long getClientId();
 
     Long getTenantId();
 }

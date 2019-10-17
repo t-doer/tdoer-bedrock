@@ -29,7 +29,13 @@ public interface Product extends Serializable {
      *
      * @return Product Id
      */
-    String getId();
+    Long getId();
+
+    /**
+     * Product code
+     * @return Product code
+     */
+    String getCode();
 
     /**
      * Product name
@@ -44,6 +50,12 @@ public interface Product extends Serializable {
      * @return
      */
     String getDescription();
+
+    /**
+     * Product version
+     * @return
+     */
+    String getVersion();
 
     /**
      * List the languages the product supports

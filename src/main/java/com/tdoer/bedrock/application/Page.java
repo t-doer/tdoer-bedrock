@@ -30,11 +30,25 @@ public interface Page extends ApplicationResource {
     }
 
     /**
-     * Page Id, that's, the resource Id
+     * Get the name, or a brief description, of the resource
      *
-     * @return age Id
+     * @return Resource name
      */
-    Long getPageId();
+    String getName();
+
+    /**
+     * Resource code, for example, page's code, action's code, navigation item's node ID etc.
+     *
+     * @return Resource code
+     */
+    String getCode();
+
+    /**
+     * 页面的访问URI，肯定不为空
+     *
+     * @return 页面的访问URI，肯定不为空
+     */
+    String getURI();
 
     /**
      * List actions of the page available in current environment {@link com.tdoer.bedrock.CloudEnvironment},
@@ -52,13 +66,13 @@ public interface Page extends ApplicationResource {
      * @param actionId
      * @return
      */
-    Action getAction(Long actionId);
+    Action getAction(Long actionId) throws ActionNotFoundException;
 
     /**
-     * 页面的访问URI，肯定不为空
+     * Get action of specific code available in the application
      *
-     * @return 页面的访问URI，肯定不为空
+     * @param actionCode
+     * @return
      */
-    String getURI();
-
+    Action getAction(String actionCode) throws ActionNotFoundException;
 }

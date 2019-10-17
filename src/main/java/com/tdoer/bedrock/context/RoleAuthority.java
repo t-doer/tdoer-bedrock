@@ -19,6 +19,6 @@ package com.tdoer.bedrock.context;
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
-public interface RoleAuthority extends Authority {
+public interface RoleAuthority extends GrantedResource {
     Long getRoleId();
 }

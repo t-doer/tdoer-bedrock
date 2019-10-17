@@ -24,13 +24,25 @@ import java.util.List;
  * @create 2017-09-19
  */
 public interface Service extends Serializable {
-
     /**
      * Service Id
-     *
      * @return Service Id
      */
-    String getId();
+    Long getId();
+
+    /**
+     * Service code
+     *
+     * @return Service code
+     */
+    String getCode();
+
+    /**
+     * Service type
+     *
+     * @return Service type
+     */
+    ServiceType getType();
 
     /**
      * Service provider's name
@@ -54,20 +66,6 @@ public interface Service extends Serializable {
     String getDescription();
 
     /**
-     * Service author's name
-     *
-     * @return Service author's name, may be {@code Null}
-     */
-    String getAuthor();
-
-    /**
-     * Service maintainers, user names delimited by comma
-     *
-     * @return Service maintainers, may be {@code Null}
-     */
-    String getMaintainers();
-
-    /**
      * Service version
      *
      * @return Service version, maybe be {@code Null}
@@ -76,7 +74,8 @@ public interface Service extends Serializable {
 
     /**
      * List available service methods in current environment {@link com.tdoer.bedrock.CloudEnvironment},
-     * that's, list available service method according to current client, tenant and context instance.
+     * that's, list available service method according to current application, product, client, tenant and context
+     * instance.
      * <br>
      * Service methods will be appended to the given list.
      *
@@ -91,6 +90,17 @@ public interface Service extends Serializable {
      * @param methodId
      * @return Service method if found, otherwise {@code null}
      */
-    ServiceMethod getMethod(Long methodId);
+    ServiceMethod getMethod(Long methodId) throws ServiceMethodNotFoundException;
 
+    /**
+     * List other services which refer to the service
+     * @param list
+     */
+    void listReferer(List<Service> list);
+
+    /**
+     * List other services to which the service refers
+     * @param list
+     */
+    void listReferee(List<Service> list);
 }

@@ -31,7 +31,14 @@ public interface Application extends Serializable {
      *
      * @return Application Id
      */
-    String getId();
+    Long getId();
+
+    /**
+     * Application code
+     *
+     * @return Application code
+     */
+    String getCode();
 
     /**
      * Application name
@@ -55,20 +62,6 @@ public interface Application extends Serializable {
     String getProvider();
 
     /**
-     * Application author's name
-     *
-     * @return Application author's name, may be {@code Null}
-     */
-    String getAuthor();
-
-    /**
-     * Application maintainers, user names delimited by comma
-     *
-     * @return Application maintainers, may be {@code Null}
-     */
-    String getMaintainers();
-
-    /**
      * Application version
      *
      * @return Application version, maybe be {@code Null}
@@ -76,8 +69,8 @@ public interface Application extends Serializable {
     String getVersion();
 
     /**
-     * List available pages in current environment {@link com.tdoer.bedrock.CloudEnvironment},
-     * that's, list available page according to current client, tenant and context instance.
+     * List available pages of the application according to current request environment
+     * {@link com.tdoer.bedrock.CloudEnvironment}.
      * <br>
      * Pages will be appended to the given list.
      *
@@ -86,8 +79,7 @@ public interface Application extends Serializable {
     void listCurrentPages(List<Page> list);
 
     /**
-     * List available services in current environment {@link com.tdoer.bedrock.CloudEnvironment},
-     * that's, list available services according to current client, tenant and context instance.
+     * List services the application needs to call in current environment {@link com.tdoer.bedrock.CloudEnvironment}.
      * <br>
      * Services will be appended to the given list.
      *
@@ -96,12 +88,28 @@ public interface Application extends Serializable {
     void listCurrentServices(List<Service> list);
 
     /**
+     * Whether the application can access the service or not
+     *
+     * @param serviceId
+     * @return
+     */
+    boolean isServiceAccessible(Long serviceId);
+
+    /**
      * Get page of specific Id available in the application
      *
      * @param pageId
      * @return Page if found, otherwise {@code null}
      */
-    Page getPage(Long pageId);
+    Page getPage(Long pageId) throws PageNotFoundException;
+
+    /**
+     * Get page of specific code available in the application
+     *
+     * @param pageCode
+     * @return Page if found, otherwise {@code null}
+     */
+    Page getPage(String pageCode) throws PageNotFoundException;
 
     /**
      * Get action of specific Id available in the application
@@ -109,6 +117,13 @@ public interface Application extends Serializable {
      * @param actionId
      * @return
      */
-    Action getAction(Long actionId);
+    Action getAction(Long actionId) throws ActionNotFoundException;
 
+    /**
+     * Get action of specific code available in the application
+     *
+     * @param actionCode
+     * @return
+     */
+    Action getAction(String actionCode) throws ActionNotFoundException;
 }

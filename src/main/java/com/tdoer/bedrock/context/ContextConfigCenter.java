@@ -27,13 +27,14 @@ public interface ContextConfigCenter {
 
     void listUserRoles(ContextPath contextPath, Long userId, List<ContextRole> list);
 
-    void listPublicAuthorities(ContextPath contextPath, String productId, String clientId, Long tenantId, List<PublicAuthority> list);
+    void listPublicAuthorities(ContextPath contextPath, Long tenantId, List<PublicAuthority> list);
 
-    void listContextRoles(ContextPath contextPath, String productId, String clientId, Long tenantId, List<ContextRole> list);
+    void listContextRoles(ContextPath contextPath, Long tenantId, List<ContextRole> list);
 
-    ContextRole getContextRole(Long roleId, ContextPath contextPath, String productId, String clientId, Long tenantId);
+    ContextRole getContextRole(Long roleId, ContextPath contextPath, Long tenantId);
 
-    void listApplicationInstallation(ContextPath contextPath, String productId, String clientId, Long tenantId, List<ApplicationInstallation> list);
+    void listApplicationInstallation(String clientId, ContextPath contextPath, Long tenantId,
+                                     List<ContextApplicationInstallation> list);
 
-    ContextApplicationInstallation getApplicationInstallation(String applicationId, ContextPath contextPath, String productId, String clientId, Long tenantId);
+    ContextApplicationInstallation getApplicationInstallation(String clientId, ContextPath contextPath, Long tenantId, String applicationId);
 }

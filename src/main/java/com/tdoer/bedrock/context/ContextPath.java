@@ -62,12 +62,16 @@ public final class ContextPath implements Serializable {
         return parent;
     }
 
-    public ContextPath getTopPath() {
+    public ContextPath getRootPath() {
         ContextPath c = this;
         while (c.getParentPath() != null) {
             c = c.getParentPath();
         }
         return c;
+    }
+
+    public boolean isRootPath(){
+        return (parent == null);
     }
 
     public Integer getType() {

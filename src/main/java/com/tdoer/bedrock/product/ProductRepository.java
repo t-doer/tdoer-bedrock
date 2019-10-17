@@ -14,15 +14,22 @@
  * limitations under the License.
  */
 package com.tdoer.bedrock.product;
+
+import java.util.List;
+
 /**
  * @Description
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
 public interface ProductRepository {
-    Product getProduct(String productId);
+    Product getProduct(Long productId);
 
-    Client[] getClients(String productId);
+    Product getProduct(String productCode);
 
-    Client getClient(String clientId);
+    void listProducts(List<Product> list);
+
+    Client[] getClients(Long productId);
+
+    Client getClient(Long clientId);
 }

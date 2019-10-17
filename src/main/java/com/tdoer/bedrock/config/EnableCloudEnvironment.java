@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2019 T-Doer (tdoer.com).
+ * Copyright 2019 T-Doer (tdoer.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tdoer.bedrock.context;
+package com.tdoer.bedrock.config;
 
-import com.tdoer.bedrock.resource.Resource;
+import com.tdoer.bedrock.CloudConfiguration;
+import org.springframework.context.annotation.Import;
 
-import java.io.Serializable;
+import java.lang.annotation.*;
+
 /**
- * @Description
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
-public interface Authority extends Serializable {
-    Resource getResource();
+
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@Import({CloudConfiguration.class})
+public @interface EnableCloudEnvironment {
 }

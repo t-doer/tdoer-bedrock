@@ -131,7 +131,7 @@ public class CloudEnvironmentParseFilter implements Filter, InitializingBean {
         String clientId = WebUtil.findValueFromRequest(request, CloudConstants.CLIENT_ID);
 
         if (!StringUtils.hasText(tenantCode) || !StringUtils.hasText(clientId)) {
-            WebUtil.addValueIntoResponseHeaderAndCookie(response, request, CloudConstants.CLIENT_ID, environment.getClient().getId());
+            WebUtil.addValueIntoResponseHeaderAndCookie(response, request, CloudConstants.CLIENT_ID, environment.getClient().getCode());
             WebUtil.addValueIntoResponseHeaderAndCookie(response, request, CloudConstants.TENANT_ID, environment.getTenant().getCode());
         }
 

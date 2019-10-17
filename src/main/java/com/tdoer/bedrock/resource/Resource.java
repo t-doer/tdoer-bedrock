@@ -15,8 +15,6 @@
  */
 package com.tdoer.bedrock.resource;
 
-import com.tdoer.bedrock.context.ContextPath;
-
 import java.io.Serializable;
 /**
  * @Description
@@ -33,20 +31,6 @@ public interface Resource extends Serializable {
     Long getId();
 
     /**
-     * Get the name, or a brief description, of the resource
-     *
-     * @return Resource name
-     */
-    String getName();
-
-    /**
-     * Resource code, for example, page's code, action's code, navigation item's node ID etc.
-     *
-     * @return Resource code
-     */
-    String getCode();
-
-    /**
      * Resource category
      *
      * @return Resource category
@@ -59,25 +43,4 @@ public interface Resource extends Serializable {
      * @return Resource type
      */
     ResourceType getType();
-
-    /**
-     * Tenant Id, to which the resource belongs to
-     *
-     * @return Tenant Id, it may be {@code Null}
-     */
-    Long getTenantId();
-
-    /**
-     * Client Id, to which the resource belongs to
-     *
-     * @return Client Id, it may be {@code Null}
-     */
-    String getClientId();
-
-    /**
-     * Context path, to which the resource belongs to
-     *
-     * @return Context path, it may be {@code Null}
-     */
-    ContextPath getContextPath();
 }

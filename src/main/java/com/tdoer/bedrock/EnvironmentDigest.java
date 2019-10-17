@@ -15,7 +15,6 @@
  */
 package com.tdoer.bedrock;
 
-import com.tdoer.springboot.util.LocaleUtil;
 import org.springframework.util.StringUtils;
 
 /**
@@ -27,29 +26,29 @@ public class EnvironmentDigest {
 
     protected Long tenantId;
 
-    protected String productId;
+    protected Long productId;
 
-    protected String clientId;
+    protected Long clientId;
 
     protected String contextPath;
 
-    protected String applicationId;
+    protected Long applicationId;
 
     protected String language;
 
-    public String getClientId() {
+    public Long getClientId() {
         return clientId;
     }
 
-    public void setClientId(String clientId) {
+    public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
 
-    public String getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
@@ -69,11 +68,11 @@ public class EnvironmentDigest {
         this.contextPath = contextPath;
     }
 
-    public String getApplicationId() {
+    public Long getApplicationId() {
         return applicationId;
     }
 
-    public void setApplicationId(String applicationId) {
+    public void setApplicationId(Long applicationId) {
         this.applicationId = applicationId;
     }
 
@@ -90,10 +89,10 @@ public class EnvironmentDigest {
         int i = 0;
         EnvironmentDigest digest = new EnvironmentDigest();
         digest.setTenantId(Long.parseLong(arr[i++]));
-        digest.setProductId(arr[i++]);
-        digest.setClientId(arr[i++]);
+        digest.setProductId(Long.parseLong(arr[i++]));
+        digest.setClientId(Long.parseLong(arr[i++]));
         digest.setContextPath(arr[i++]);
-        digest.setApplicationId(arr[i++]);
+        digest.setApplicationId(Long.parseLong(arr[i++]));
         digest.setLanguage(arr[i++]);
         return digest;
     }

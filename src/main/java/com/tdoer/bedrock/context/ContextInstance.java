@@ -25,20 +25,25 @@ import java.io.Serializable;
  */
 public interface ContextInstance extends Serializable {
     /**
-     * Organization Id or User Id
+     * Context instance Id
      *
      * @return
      */
-    Long getInstanceId();
+    Long getId();
 
+    /**
+     * Context instance guid
+     *
+     * @return
+     */
     String getGuid();
 
     /**
-     * Organization Name or User Name
+     * Context instance name
      *
      * @return
      */
-    String getInstanceName();
+    String getName();
 
     /**
      * Organization Code or User Login Account
@@ -53,6 +58,13 @@ public interface ContextInstance extends Serializable {
      * @return
      */
     Long getDetailObjectId();
+
+    /**
+     * Is the instance a tenant, the root context instance?
+     *
+     * @return
+     */
+    boolean isTenant();
 
     /**
      * Parent contextPath instance. If the instance is a tenant, its parent contextPath instance
@@ -79,6 +91,10 @@ public interface ContextInstance extends Serializable {
      */
     ContextPath getContextPath();
 
+    /**
+     * Context type
+     * @return
+     */
     ContextType getContextType();
 
     /**

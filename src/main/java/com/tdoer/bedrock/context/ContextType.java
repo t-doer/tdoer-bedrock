@@ -23,7 +23,7 @@ import java.io.Serializable;
  */
 public interface ContextType extends Serializable {
 
-    Integer getType();
+    Long getType();
 
     String getName();
 
@@ -37,7 +37,13 @@ public interface ContextType extends Serializable {
 
     ContextType getRoot();
 
-    ContextType find(Integer contextType);
+    ContextType find(Long contextType);
 
     ContextPath getContextPath();
+
+    /**
+     * Is the root context type, that's "TENANT"?.
+     * @return
+     */
+    boolean isRoot();
 }

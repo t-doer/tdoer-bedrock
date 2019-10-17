@@ -31,7 +31,15 @@ public interface ApplicationRepository {
      * @param applicationId
      * @return
      */
-    Application getApplication(String applicationId);
+    Application getApplication(Long applicationId);
+
+    /**
+     * Get application of specific code
+     *
+     * @param applicationCode
+     * @return
+     */
+    Application getApplication(String applicationCode);
 
     /**
      * List pages of specific application which for the product, client, tenant, and context instance.
@@ -43,7 +51,8 @@ public interface ApplicationRepository {
      * @param contextPath
      * @param list
      */
-    void listPages(String applicationId, String productId, String clientId, Long tenantId, ContextPath contextPath, List<Page> list);
+    void listPages(Long applicationId, Long productId, Long clientId, Long tenantId, ContextPath contextPath,
+                   List<Page> list);
 
     /**
      * List actions of specific page which for the product, client, tenant, and context instance.
@@ -56,7 +65,8 @@ public interface ApplicationRepository {
      * @param contextPath
      * @param list
      */
-    void listActions(Long pageId, String applicationId, String productId, String clientId, Long tenantId, ContextPath contextPath, List<Action> list);
+    void listActions(Long pageId, Long applicationId, Long productId, Long clientId, Long tenantId,
+                     ContextPath contextPath, List<Action> list);
 
     /**
      * List services of specific service Id which for the product, client, tenant, and context instance.
@@ -68,5 +78,6 @@ public interface ApplicationRepository {
      * @param contextPath
      * @param list
      */
-    void listServices(String applicationId, String productId, String clientId, Long tenantId, ContextPath contextPath, List<Service> list);
+    void listServices(Long applicationId, Long productId, Long clientId, Long tenantId, ContextPath contextPath,
+                      List<Service> list);
 }

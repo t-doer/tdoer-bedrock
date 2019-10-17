@@ -31,7 +31,6 @@ public class CloudEnvironmentParseFilterFactory {
         this.extractor = extractor;
     }
 
-
     public CloudEnvironmentParseFilter newCloudEnvironmentParseFilter() {
 
         return new CloudEnvironmentParseFilter(extractor);

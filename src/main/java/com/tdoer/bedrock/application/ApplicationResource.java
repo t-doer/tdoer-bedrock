@@ -37,14 +37,7 @@ public interface ApplicationResource extends Resource {
      *
      * @return Application Id, never be null
      */
-    String getApplicationId();
-
-    /**
-     * Product Id, to which the resource belongs
-     *
-     * @return Product Id, it may be {@code Null}
-     */
-    String getProductId();
+    Long getApplicationId();
 
     /**
      * List the provider methods which associates with a action or a page

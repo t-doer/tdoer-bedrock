@@ -15,7 +15,9 @@
  */
 package com.tdoer.bedrock.service;
 
-import com.tdoer.bedrock.context.ContextPath;
+import com.tdoer.bedrock.resource.Resource;
+import com.tdoer.bedrock.resource.ResourceCategory;
+import com.tdoer.bedrock.resource.ResourceType;
 import org.springframework.http.HttpMethod;
 
 import java.io.Serializable;
@@ -25,7 +27,16 @@ import java.io.Serializable;
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
-public interface ServiceMethod extends Serializable {
+public interface ServiceMethod extends Resource {
+    @Override
+    default ResourceCategory getCategory(){
+        return ResourceCategory.SERVICE;
+    }
+
+    @Override
+    default ResourceType getType() {
+        return ResourceType.SERVICE_METHOD;
+    }
 
     /**
      * Get the service methond's Id
@@ -35,11 +46,11 @@ public interface ServiceMethod extends Serializable {
     Long getId();
 
     /**
-     * The Id of the service who provides the service method
+     * The Id of the service which provides the service method
      *
      * @return
      */
-    String getServiceId();
+    Long getServiceId();
 
     /**
      * Get provider method's name
@@ -63,48 +74,17 @@ public interface ServiceMethod extends Serializable {
     String getURI();
 
     /**
-     * Check if given http method and path matches the provider method
+     * Whether the service method is a customized one or not.
+     *
+     * @return
+     */
+    boolean isCustomized();
+    /**
+     * Check if given http method and path matches the service method
      *
      * @param httpMethod
      * @param path
      * @return
      */
     boolean match(String httpMethod, String path);
-
-    /**
-     * 应用ID，是扩展属性，如果非空，就意味着该服务方法只能开放给指定的应用，否则不限定，可以开放给
-     * 所有应用；
-     *
-     * @return 应用ID，可能为{@code null}
-     */
-    String getApplicationId();
-
-    /**
-     * Product Id, to which the service method belongs
-     *
-     * @return Product Id, it may be {@code Null}
-     */
-    String getProductId();
-
-    /**
-     * Tenant Id, to which the service method belongs to
-     *
-     * @return Tenant Id, it may be {@code Null}
-     */
-    Long getTenantId();
-
-    /**
-     * Client Id, to which the service method belongs to
-     *
-     * @return Client Id, it may be {@code Null}
-     */
-    String getClientId();
-
-    /**
-     * Context path, to which the service method belongs to
-     *
-     * @return Context path, it may be {@code Null}
-     */
-    ContextPath getContextPath();
-
 }

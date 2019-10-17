@@ -19,6 +19,6 @@ package com.tdoer.bedrock.context;
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
-public interface PublicAuthority extends Authority {
+public interface PublicAuthority extends GrantedResource {
 
 }

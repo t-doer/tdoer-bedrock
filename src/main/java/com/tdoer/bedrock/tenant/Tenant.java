@@ -33,28 +33,15 @@ import java.util.List;
  * @create 2017-09-19
  */
 public interface Tenant extends ContextInstance, Serializable {
-    /**
-     * The tenant's Id
-     *
-     * @return The tenant's Id
-     */
-    Long getId();
+    @Override
+    default boolean isTenant(){
+        return true;
+    }
 
-    String getGuid();
-
-    /**
-     * The tenant's code
-     *
-     * @return The tenant's code
-     */
-    String getCode();
-
-    /**
-     * The tenant's name
-     *
-     * @return The tenant's name
-     */
-    String getName();
+    @Override
+    default ContextInstance getParent(){
+        return null;
+    }
 
     /**
      * List the tenant's product rentals

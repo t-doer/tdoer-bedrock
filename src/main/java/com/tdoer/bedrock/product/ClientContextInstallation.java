@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2019 T-Doer (tdoer.com).
+ * Copyright 2019 T-Doer (tdoer.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tdoer.bedrock.tenant;
+package com.tdoer.bedrock.product;
+
+import com.tdoer.bedrock.context.ContextInstallation;
+
+import java.util.Locale;
 
 /**
- * @Description
  * @author Htinker Hu (htinker@163.com)
- * @create 2017-09-19
+ * @create 2019-10-17
  */
-public interface RentalCenter {
-    Tenant getTenant(String tenantCode);
+public interface ClientContextInstallation extends ContextInstallation {
+    Long getClientId();
 
-    Tenant getTenant(Long tenantId);
+    Long getTenantId();
 
-    ProductRental getProductRendtal(Long tenantId, Long productId);
+    Long getEntryApplicationId();
 
-    ProductRental[] getProductRentals(Long tenantId);
+    String getEntryNavItem();
 
-    TenantClient getTenantClient(String host);
-
-    TenantClient getTenantClient(Long tenantId, Long clientId);
-
-    TenantClient[] getTenantClients(Long tenantId);
+    Locale getEntryLanguage();
 }

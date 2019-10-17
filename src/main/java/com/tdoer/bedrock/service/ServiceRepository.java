@@ -20,15 +20,59 @@ import com.tdoer.bedrock.context.ContextPath;
 import java.util.List;
 
 /**
- * @Description
+ * @Description Service repository holds all enabled services and service methods.
+ *
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
 public interface ServiceRepository {
 
-    Service getService(String serviceId);
+    /**
+     * Get the service according to its id.
+     *
+     * @param serviceId
+     * @return
+     * @throws ServiceNotFoundException if the service is not found or disabled.
+     */
+    Service getService(Long serviceId) throws ServiceNotFoundException;
 
-    void listServiceMethods(String serviceId, String productId, String clientId, Long tenantId, ContextPath contextPath, List<ServiceMethod> list);
+    /**
+     * Get the service according to its code.
+     *
+     * @param serviceCode
+     * @return
+     * @throws ServiceNotFoundException if the service is not found or disabled.
+     */
+    Service getService(String serviceCode) throws ServiceNotFoundException;
 
-    ServiceMethod getServiceMethod(Long methodId);
+    /**
+     * List services which are loaded into the respository.
+     *
+     * @param list
+     */
+    void listServices(List<Service> list);
+
+    /**
+     * Get the service method according to its id.
+     *
+     * @param methodId
+     * @return
+     * @throws ServiceMethodNotFoundException if the service is not found or disabled.
+     */
+    ServiceMethod getServiceMethod(Long methodId) throws ServiceMethodNotFoundException;
+
+    /**
+     * List all available service methods of specific service Id and cloud environment elements.
+     *
+     * @param serviceId Service Id, cannot be null
+     * @param applicationId Application Id, cannot be null
+     * @param productId Product Id, cannot be null
+     * @param clientId Client Id, cannot be null
+     * @param tenantId Tenant Id, cannot be null
+     * @param contextPath Context path, cannot be null
+     * @param list List to hold service methods
+     */
+    void listServiceMethods(Long serviceId, Long applicationId, Long productId, Long clientId, Long tenantId,
+                            ContextPath contextPath, List<ServiceMethod> list);
+
 }

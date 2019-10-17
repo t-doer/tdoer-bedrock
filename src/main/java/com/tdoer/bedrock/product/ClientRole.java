@@ -22,9 +22,6 @@ import org.springframework.security.core.GrantedAuthority;
  * @create 2017-09-19
  */
 public interface ClientRole extends GrantedAuthority {
-    String getClientId();
-
-    String getName();
 
     String getCode();
 }

@@ -63,6 +63,12 @@ public interface BedrockErrorCodes extends com.tdoer.springboot.http.StatusCodes
     @ReasonPhrase("Application ({0}) is not supported by the context instance ({1})")
     int APPLICATION_NOT_SUPPORTED_BY_CONTEXT_INSTANCE = 4012;
 
+    @ReasonPhrase("No client found (clientId) - ({0})")
+    int NO_CLIENT = 4013;
+
+    @ReasonPhrase("No tenant found (tenantId) - ({0})")
+    int NO_TENANT = 4014;
+
     /* ----------------------------------------------------
      * Server-side error codes: 5001 ~ 5200
      * ----------------------------------------------------

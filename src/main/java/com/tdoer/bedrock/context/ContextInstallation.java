@@ -15,24 +15,10 @@
  */
 package com.tdoer.bedrock.context;
 
-import com.tdoer.bedrock.context.ContextPath;
-
-import java.util.Locale;
 /**
- * @Description
  * @author Htinker Hu (htinker@163.com)
- * @create 2017-09-19
+ * @create 2019-10-17
  */
 public interface ContextInstallation {
-    String getClientId();
-
-    Long getTenantId();
-
     ContextPath getContextPath();
-
-    String getEntryApplicationId();
-
-    String getEntryNavItem();
-
-    Locale getEntryLanguage();
 }

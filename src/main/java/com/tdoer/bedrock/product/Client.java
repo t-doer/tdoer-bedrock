@@ -25,7 +25,13 @@ public interface Client {
      *
      * @return
      */
-    String getId();
+    Long getId();
+
+    /**
+     * Client code
+     * @return
+     */
+    String getCode();
 
     /**
      * Client name
@@ -39,7 +45,7 @@ public interface Client {
      *
      * @return
      */
-    Product getProduct();
+    Long getProductId();
 
     /**
      * Clent category

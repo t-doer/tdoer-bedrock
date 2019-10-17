@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2019 T-Doer (tdoer.com).
+ * Copyright 2019 T-Doer (tdoer.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tdoer.bedrock.resource;
+package com.tdoer.bedrock.service;
 
 import org.springframework.lang.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * @Description
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
-public enum ResourceType {
-    PAGE, ACTION, NAVIGATION, FILE, SERVICE_METHOD;
+public enum ServiceType {
+    GATEWAY, BUSINESS, INFRASTRUCTURE;
 
-    private static final Map<String, ResourceType> mappings = new HashMap<>(5);
+    private static final Map<String, ServiceType> mappings = new HashMap<>(3);
 
     static {
-        for (ResourceType clientCategory : values()) {
+        for (ServiceType clientCategory : values()) {
             mappings.put(clientCategory.name(), clientCategory);
         }
     }
@@ -43,7 +44,7 @@ public enum ResourceType {
      * @return the corresponding {@code ResourceType}, or {@code null} if not found
      */
     @Nullable
-    public static ResourceType resolve(@Nullable String type) {
+    public static ServiceType resolve(@Nullable String type) {
         return (type != null ? mappings.get(type) : null);
     }
 

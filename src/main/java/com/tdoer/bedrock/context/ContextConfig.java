@@ -15,8 +15,6 @@
  */
 package com.tdoer.bedrock.context;
 
-import com.tdoer.bedrock.application.ApplicationInstallation;
-
 import java.util.List;
 import java.util.Locale;
 /**
@@ -31,7 +29,7 @@ public interface ContextConfig {
      *
      * @param list
      */
-    void listCurentUserRoles(List<ContextRole> list);
+    void listCurrentUserRoles(List<ContextRole> list);
 
     /**
      * List context roles of given user Id
@@ -58,6 +56,14 @@ public interface ContextConfig {
     ContextRole getContextRole(Long roleId);
 
     /**
+     * Get context role available in the context instance.
+     *
+     * @param roleCode
+     * @return
+     */
+    ContextRole getContextRole(String roleCode);
+
+    /**
      * List public authorities in current context instance which all users can access.
      *
      * @param list
@@ -78,7 +84,7 @@ public interface ContextConfig {
      *
      * @param list
      */
-    void listApplicationInstallations(List<ApplicationInstallation> list);
+    void listApplicationInstallations(List<ContextApplicationInstallation> list);
 
     /**
      * Get an application installed in current contextPath instance.
@@ -94,12 +100,25 @@ public interface ContextConfig {
      * @param applicationId Application Id
      * @return true if the application is supported
      */
-    boolean supportApplication(String applicationId);
+    boolean supportApplication(Long applicationId);
 
-    String getEntryApplicationId();
+    /**
+     * Default entry application code
+     * @return
+     */
+    String getEntryApplicationCode();
 
+    /**
+     * Default entry nav item
+     * @return
+     */
     String getEntryNavItem();
 
+    /**
+     * Default entry language
+     *
+     * @return
+     */
     Locale getEntryLanguage();
 
 }

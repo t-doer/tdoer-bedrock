@@ -33,7 +33,7 @@ public interface ProductRental extends Serializable {
 
     Long getTenantId();
 
-    String getProductId();
+    Long getProductId();
 
     Locale getDefaultLanguage();
 

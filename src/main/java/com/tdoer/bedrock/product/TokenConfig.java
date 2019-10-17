@@ -20,6 +20,10 @@ package com.tdoer.bedrock.product;
  * @create 2017-09-19
  */
 public interface TokenConfig {
+    Long getClientId();
+
+    Long getTenantId();
+
     /**
      * The client's grant types
      *
@@ -34,7 +38,7 @@ public interface TokenConfig {
      */
     String[] getAutoApprovals();
 
-    String[] getWebRedirectURIs();
+    String getWebRedirectURI();
 
     Integer getAccessTokenValidityInSeconds();
 

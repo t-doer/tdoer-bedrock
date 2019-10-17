@@ -51,15 +51,14 @@ public class CloudEnvironment {
 
     private EnvironmentDigest digest;
 
-    public CloudEnvironment(Tenant tenant, ProductRental productRental, TenantClient tenantClient, ContextInstance contextInstance, Application application, Locale language) {
-        Assert.notNull(tenant, "Tenant cannot be null");
+    public CloudEnvironment(ProductRental productRental, TenantClient tenantClient, ContextInstance contextInstance, Application application, Locale language) {
         Assert.notNull(productRental, "ProductRental cannot be null");
         Assert.notNull(tenantClient, "TenantClient cannot be null");
         Assert.notNull(contextInstance, "ContextInstance cannot be null");
         Assert.notNull(application, "Application cannot be null");
         Assert.notNull(language, "Language cannot be null");
 
-        this.tenant = tenant;
+        this.tenant = productRental.getTenant();
         this.productRental = productRental;
         this.tenantClient = tenantClient;
         this.contextInstance = contextInstance;
@@ -91,14 +90,6 @@ public class CloudEnvironment {
         return tenant;
     }
 
-    public ProductRental getProductRental() {
-        return productRental;
-    }
-
-    public TenantClient getTenantClient() {
-        return tenantClient;
-    }
-
     public Client getClient() {
         return tenantClient.getClient();
     }
@@ -107,20 +98,8 @@ public class CloudEnvironment {
         return productRental.getProduct();
     }
 
-    public ClientConfig getClientConfig() {
-        return tenantClient.getClient().getClientConfig();
-    }
-
     public ContextInstance getContextInstance() {
         return contextInstance;
-    }
-
-    public ContextConfig getContextConfig() {
-        return contextInstance.getContextConfig();
-    }
-
-    public ContextPath getContextPath() {
-        return contextInstance.getContextPath();
     }
 
     public Application getApplication() {
@@ -131,24 +110,47 @@ public class CloudEnvironment {
         return language;
     }
 
+    public EnvironmentDigest getDigest() {
+        return digest;
+    }
+
+    public ProductRental getProductRental() {
+        return productRental;
+    }
+
+    public TenantClient getTenantClient() {
+        return tenantClient;
+    }
+
+    // -----------------------------------------------------------
+    // Shortcut methods
+    // -----------------------------------------------------------
+
+    public ClientConfig getClientConfig() {
+        return tenantClient.getClient().getClientConfig();
+    }
+
+    public ContextConfig getContextConfig() {
+        return contextInstance.getContextConfig();
+    }
+
+    public ContextPath getContextPath() {
+        return contextInstance.getContextPath();
+    }
+
     public Long getTenantId() {
         return tenant.getId();
     }
 
-    public String getClientId() {
-        return getClient().getId();
+    public Long getClientId() {
+        return tenantClient.getClientId();
+    }
+    public Long getProductId() {
+        return productRental.getProductId();
     }
 
-    public String getProductId() {
-        return getProduct().getId();
-    }
-
-    public String getApplicationId() {
+    public Long getApplicationId() {
         return getApplication().getId();
-    }
-
-    public EnvironmentDigest getDigest() {
-        return digest;
     }
 
     @Override
@@ -156,10 +158,10 @@ public class CloudEnvironment {
         StringBuilder sb = new StringBuilder();
         sb.append("CloudEnvironment{");
         sb.append("Tenant[").append(tenant.getId()).append(",").append(tenant.getCode()).append(",").append(tenant.getName()).append("],");
-        sb.append("TenantClient[").append(getClient().getId()).append(",").append(getClient().getName()).append("],");
-        sb.append("Product[").append(getProduct().getId()).append(",").append(getProduct().getName()).append("],");
-        sb.append("ContextInstance[").append(contextInstance.getContextPath().getAbsoluteValue()).append(",").append(contextInstance.getInstanceName()).append("],");
-        sb.append("Application[").append(application.getId()).append(",").append(application.getName()).append("],");
+        sb.append("TenantClient[").append(getClient().getCode()).append(",").append(getClient().getName()).append("],");
+        sb.append("Product[").append(getProduct().getCode()).append(",").append(getProduct().getName()).append("],");
+        sb.append("ContextInstance[").append(contextInstance.getContextPath().getAbsoluteValue()).append(",").append(contextInstance.getName()).append("],");
+        sb.append("Application[").append(application.getCode()).append(",").append(application.getName()).append("],");
         sb.append("Language[").append(LocaleUtil.getLocale(language)).append("]");
         sb.append("}");
         return sb.toString();

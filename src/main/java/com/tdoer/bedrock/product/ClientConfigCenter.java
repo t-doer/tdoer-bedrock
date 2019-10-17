@@ -15,7 +15,6 @@
  */
 package com.tdoer.bedrock.product;
 
-import com.tdoer.bedrock.context.ContextInstallation;
 import com.tdoer.bedrock.context.ContextPath;
 
 import java.util.List;
@@ -26,17 +25,17 @@ import java.util.List;
  */
 public interface ClientConfigCenter {
 
-    ClientApplicationInstallation getApplicationInstallation(String applicationId, String productId, String clientId, Long tenantId);
+    ClientApplicationInstallation getApplicationInstallation(Long clientId, Long tenantId, Long applicationId);
 
-    void listApplicationInstallations(String productId, String clientId, Long tenantId, List<ClientApplicationInstallation> list);
+    void listApplicationInstallations(Long clientId, Long tenantId, List<ClientApplicationInstallation> list);
 
-    ClientServiceInstallation getClientService(String applicationId, String productId, String clientId, Long tenantId);
+    ClientServiceInstallation getClientServiceInstallation(Long clientId, Long tenantId, Long serviceId);
 
-    void listClientServices(String productId, String clientId, Long tenantId, List<ClientServiceInstallation> list);
+    void listClientServiceInstallations(Long clientId, Long tenantId, List<ClientServiceInstallation> list);
 
-    ContextInstallation getContextInstallation(ContextPath contextPath, String productId, String clientId, Long tenantId);
+    ClientContextInstallation getContextInstallation(Long clientId, Long tenantId, ContextPath contextPath);
 
-    void listContextInstallations(String productId, String clientId, Long tenantId, List<ContextInstallation> list);
+    void listContextInstallations(Long clientId, Long tenantId, List<ClientContextInstallation> list);
 
-    TokenConfig getTokenConfig(String clientId, Long tenantId);
+    TokenConfig getTokenConfig(Long clientId, Long tenantId);
 }

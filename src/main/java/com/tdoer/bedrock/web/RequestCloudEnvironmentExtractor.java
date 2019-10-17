@@ -17,23 +17,15 @@ package com.tdoer.bedrock.web;
 
 import com.tdoer.bedrock.*;
 import com.tdoer.bedrock.application.Application;
-import com.tdoer.bedrock.application.ApplicationRepository;
 import com.tdoer.bedrock.context.ContextInstance;
-import com.tdoer.bedrock.context.ContextInstanceCenter;
 import com.tdoer.bedrock.context.ContextPath;
-import com.tdoer.bedrock.context.ContextPathParser;
-import com.tdoer.bedrock.product.ClientConfigCenter;
-import com.tdoer.bedrock.context.ContextInstallation;
 import com.tdoer.bedrock.tenant.ProductRental;
-import com.tdoer.bedrock.tenant.RentalCenter;
-import com.tdoer.bedrock.tenant.Tenant;
 import com.tdoer.bedrock.tenant.TenantClient;
 import com.tdoer.springboot.error.ErrorCodeException;
 import com.tdoer.springboot.util.LocaleUtil;
 import com.tdoer.springboot.util.WebUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,43 +39,6 @@ import java.util.Locale;
 public class RequestCloudEnvironmentExtractor {
 
     private final static Logger logger = LoggerFactory.getLogger(RequestCloudEnvironmentExtractor.class);
-
-    private ContextInstanceCenter contextInstanceCenter;
-
-    private RentalCenter rentalCenter;
-
-    private ApplicationRepository applicationRepository;
-
-    private ContextPathParser contextPathParser;
-
-    private ClientConfigCenter clientConfigCenter;
-
-    public void setContextInstanceCenter(ContextInstanceCenter contextInstanceCenter) {
-        Assert.notNull(contextInstanceCenter, "ContextInstanceCenter cannot be null");
-
-        this.contextInstanceCenter = contextInstanceCenter;
-    }
-
-
-    public void setRentalCenter(RentalCenter tenantService) {
-        Assert.notNull(tenantService, "TenantService cannot be null");
-
-        this.rentalCenter = tenantService;
-    }
-
-    public void setContextPathParser(ContextPathParser contextPathParser) {
-        Assert.notNull(contextPathParser, "ContextPathParser cannot be null");
-
-        this.contextPathParser = contextPathParser;
-    }
-
-    public void setApplicationRepository(ApplicationRepository applicationRepository) {
-        this.applicationRepository = applicationRepository;
-    }
-
-    public void setClientConfigCenter(ClientConfigCenter clientConfigCenter) {
-        this.clientConfigCenter = clientConfigCenter;
-    }
 
     protected EnvironmentDigest extractEnvironmentDigest(HttpServletRequest request) {
 
@@ -103,14 +58,14 @@ public class RequestCloudEnvironmentExtractor {
         String clientId = WebUtil.findValueFromRequest(request, CloudConstants.CLIENT_ID);
         if (StringUtils.hasText(clientId) && StringUtils.hasText(tenantId)) {
             logger.debug("Loading TenantClient by (tenantId, clientId) - ({}, {})", tenantId, clientId);
-            tenantClient = rentalCenter.getTenantClient(Long.parseLong(tenantId), clientId);
+            tenantClient = Platform.getRentalCenter().getTenantClient(Long.parseLong(tenantId), Long.parseLong(clientId));
             if (tenantClient == null) {
                 throw new InvalidRequestException(BedrockErrorCodes.NO_TENANT_CLIENT_BY_IDS, tenantId, clientId);
             }
         } else {
             String host = request.getServerName();
             logger.debug("Loading TenantClient by request's provider name: {}", host);
-            tenantClient = rentalCenter.getTenantClient(host);
+            tenantClient = Platform.getRentalCenter().getTenantClient(host);
             if (tenantClient == null) {
                 throw new InvalidRequestException(BedrockErrorCodes.NO_TENANT_CLIENT_BY_HOST, host);
             }
@@ -125,7 +80,7 @@ public class RequestCloudEnvironmentExtractor {
         String cp = WebUtil.findValueFromRequest(request, CloudConstants.CONTEXT_PATH_PARAM);
         logger.debug("Found context path: {}", cp);
         if (StringUtils.hasText(cp)) {
-            return contextPathParser.parse(cp);
+            return Platform.getContextPathParser().parse(cp);
         }
         return null;
     }
@@ -146,19 +101,20 @@ public class RequestCloudEnvironmentExtractor {
     protected CloudEnvironment buildFromRequest(HttpServletRequest request) {
         try {
             TenantClient tenantClient = extractTenantClient(request);
-            ProductRental productRental = rentalCenter.getProductRendtal(tenantClient.getTenant().getId(), tenantClient.getClient().getProduct().getId());
+            ProductRental productRental = Platform.getRentalCenter().getProductRendtal(
+                    tenantClient.getTenantId(), tenantClient.getClient().getProductId());
             if (productRental == null) {
-                throw new InvalidRequestException(BedrockErrorCodes.NO_PRODUCT_RENTAL, tenantClient.getTenant().getId(), tenantClient.getClient().getProduct().getId());
+                throw new InvalidRequestException(BedrockErrorCodes.NO_PRODUCT_RENTAL, tenantClient.getTenantId(),
+                        tenantClient.getClient().getProductId());
             }
 
             ContextInstance contextInstance = null;
-            Tenant tenant = tenantClient.getTenant();
             ContextPath contextPath = extractContextPath(request);
             if (contextPath == null) {
-                contextInstance = tenant;
+                contextInstance = tenantClient.getTenant();
                 logger.debug("No context path extracted from request, use tenant as default context instance: {}", contextInstance);
             } else {
-                contextInstance = contextInstanceCenter.getContextInstance(contextPath);
+                contextInstance = Platform.getContextInstanceCenter().getContextInstance(contextPath);
                 if (contextInstance == null) {
                     throw new InvalidRequestException(BedrockErrorCodes.NO_CONTEXT_INSTANCE, contextPath);
                 }
@@ -167,32 +123,24 @@ public class RequestCloudEnvironmentExtractor {
                 }
             }
 
-            Application application = null;
-            ContextInstallation ci = null;
-            String appId = WebUtil.findValueFromRequest(request, CloudConstants.APPLICATION_ID_PARAM);
-            if (!StringUtils.hasText(appId)) {
-                logger.debug("No application Id found in request: {}", request.getRequestURL());
-                ci = clientConfigCenter.getContextInstallation(contextPath, productRental.getProduct().getId(), tenantClient.getClient().getId(), tenant.getId());
-                appId = ci.getEntryApplicationId();
-                logger.debug("Use default application Id ({}) in client's context installation {}", appId, ci);
+            String appCode = WebUtil.findValueFromRequest(request, CloudConstants.APPLICATION_CODE_PARAM);
+            if(!StringUtils.hasText(appCode)){
+                logger.debug("No application code found in request: {}", request.getRequestURL());
+                appCode = contextInstance.getContextConfig().getEntryApplicationCode();
+                logger.debug("Use context config's default application code: {}", appCode);
             }
 
-            application = applicationRepository.getApplication(appId);
+            Application application = Platform.getApplicationRepository().getApplication(appCode);
             if (application == null) {
-                throw new InvalidRequestException(BedrockErrorCodes.UNKNOWN_APPLICATION_ID, appId);
+                throw new InvalidRequestException(BedrockErrorCodes.UNKNOWN_APPLICATION_ID, appCode);
             }
 
-            Locale language = null;
-            if (ci == null) {
-                ci = clientConfigCenter.getContextInstallation(contextPath, productRental.getProduct().getId(), tenantClient.getClient().getId(), tenant.getId());
-            }
-
-            language = ci.getEntryLanguage();
+            Locale language = productRental.getDefaultLanguage();
             if (language == null) {
                 language = Locale.SIMPLIFIED_CHINESE;
             }
 
-            return new CloudEnvironment(tenant, productRental, tenantClient, contextInstance, application, language);
+            return new CloudEnvironment(productRental, tenantClient, contextInstance, application, language);
 
         } catch (InvalidRequestException req) {
             throw req;
@@ -203,14 +151,14 @@ public class RequestCloudEnvironmentExtractor {
 
     protected CloudEnvironment buildFromDigest(EnvironmentDigest digest) {
         try {
-            TenantClient tenantClient = rentalCenter.getTenantClient(digest.getTenantId(), digest.getClientId());
-            ProductRental productRental = rentalCenter.getProductRendtal(digest.getTenantId(), tenantClient.getClient().getProduct().getId());
-
-            Tenant tenant = rentalCenter.getTenant(digest.getTenantId());
-            ContextInstance contextInstance = contextInstanceCenter.getContextInstance(contextPathParser.parse(digest.getContextPath()));
-            Application application = applicationRepository.getApplication(digest.getApplicationId());
+            TenantClient tenantClient = Platform.getRentalCenter().getTenantClient(digest.getTenantId(), digest.getClientId());
+            ProductRental productRental = Platform.getRentalCenter().getProductRendtal(digest.getTenantId(),
+                    tenantClient.getClient().getProductId());
+            ContextPath contextPath = Platform.getContextPathParser().parse(digest.getContextPath());
+            ContextInstance contextInstance = Platform.getContextInstanceCenter().getContextInstance(contextPath);
+            Application application = Platform.getApplicationRepository().getApplication(digest.getApplicationId());
             Locale language = LocaleUtil.getLocale(digest.getLanguage());
-            return new CloudEnvironment(tenant, productRental, tenantClient, contextInstance, application, language);
+            return new CloudEnvironment(productRental, tenantClient, contextInstance, application, language);
         } catch (Throwable t) {
             throw new InvalidRequestException(BedrockErrorCodes.INVALID_ENV_DIGEST, t, digest.toDigestString());
         }

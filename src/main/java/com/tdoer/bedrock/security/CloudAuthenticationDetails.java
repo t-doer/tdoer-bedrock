@@ -41,7 +41,7 @@ public interface CloudAuthenticationDetails extends Serializable {
 
     String getUserAgent();
 
-    String getClientId();
+    Long getClientId();
 
     Long getTenantId();
 

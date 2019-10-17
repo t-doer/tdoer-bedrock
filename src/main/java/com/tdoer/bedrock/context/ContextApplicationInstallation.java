@@ -27,7 +27,7 @@ public interface ContextApplicationInstallation extends ApplicationInstallation 
 
     ContextPath getContextPath();
 
-    String getClientId();
+    Long getClientId();
 
     Long getTenantId();
 }

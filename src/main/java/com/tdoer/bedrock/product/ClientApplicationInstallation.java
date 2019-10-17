@@ -23,7 +23,7 @@ import com.tdoer.bedrock.application.ApplicationInstallation;
  */
 public interface ClientApplicationInstallation extends ApplicationInstallation {
 
-    String getClientId();
+    Long getClientId();
 
     Long getTenantId();
 }
