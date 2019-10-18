@@ -15,7 +15,10 @@
  */
 package com.tdoer.bedrock.product;
 
+import com.tdoer.bedrock.application.Application;
+import com.tdoer.bedrock.context.ContextInstance;
 import com.tdoer.bedrock.context.ContextPath;
+import com.tdoer.bedrock.service.Service;
 
 import java.util.List;
 /**
@@ -37,10 +40,10 @@ public interface ClientConfig {
      * Check whether the tenant's client supports the application of specific Id,
      * that's, the application is installed in the tenant' client.
      *
-     * @param applicationId
+     * @param application
      * @return
      */
-    boolean supportApplication(Long applicationId);
+    boolean supportApplication(Application application);
 
     /**
      * List application installation in the tenant's client
@@ -58,12 +61,12 @@ public interface ClientConfig {
     ClientServiceInstallation getServiceInstallation(Long serviceId);
 
     /**
-     * Check whether the tenant's client can access the service of specific Id or not
+     * Check whether the tenant's client can access the service
      *
-     * @param serviceId
+     * @param service
      * @return
      */
-    boolean isServiceAccessible(Long serviceId);
+    boolean isServiceAccessible(Service service);
 
     /**
      * List accessible service for the tenant's client
@@ -84,10 +87,10 @@ public interface ClientConfig {
      * Check whether the tenant's client supports the context instance, that's,
      * the context is installed in the tenant's client
      *
-     * @param contextPath
+     * @param contextInstance
      * @return
      */
-    boolean supportContext(ContextPath contextPath);
+    boolean supportContext(ContextInstance contextInstance);
 
     /**
      * Lists the context installation in the tenant's client

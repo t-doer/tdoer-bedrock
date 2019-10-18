@@ -54,8 +54,8 @@ public class RequestCloudEnvironmentExtractor {
 
         TenantClient tenantClient = null;
 
-        String tenantId = WebUtil.findValueFromRequest(request, CloudConstants.TENANT_ID);
-        String clientId = WebUtil.findValueFromRequest(request, CloudConstants.CLIENT_ID);
+        String tenantId = WebUtil.findValueFromRequest(request, CloudConstants.TENANT_GUID);
+        String clientId = WebUtil.findValueFromRequest(request, CloudConstants.CLIENT_CODE);
         if (StringUtils.hasText(clientId) && StringUtils.hasText(tenantId)) {
             logger.debug("Loading TenantClient by (tenantId, clientId) - ({}, {})", tenantId, clientId);
             tenantClient = Platform.getRentalCenter().getTenantClient(Long.parseLong(tenantId), Long.parseLong(clientId));

@@ -15,6 +15,8 @@
  */
 package com.tdoer.bedrock;
 
+import org.springframework.util.Assert;
+
 /**
  * @Description
  * @author Htinker Hu (htinker@163.com)
@@ -154,16 +156,15 @@ public class CloudEnvironmentHolder {
         public CloudEnvironment getEnvironment() {
             CloudEnvironment ctx = environmentHolder.get();
 
-            // TODO
-//            if (ctx == null) {
-//                throw new IllegalStateException("Environment is not set yet");
-//            }
+            if (ctx == null) {
+                throw new IllegalStateException("Environment is not set yet");
+            }
 
             return ctx;
         }
 
         public void setEnvironment(CloudEnvironment environment) {
-            //TODO
+            Assert.notNull(environment, "Only non-null CloudEnvironment instances are permitted");
             environmentHolder.set(environment);
         }
 
@@ -185,17 +186,16 @@ public class CloudEnvironmentHolder {
 
         public CloudEnvironment getEnvironment() {
             CloudEnvironment ctx = environmentHolder.get();
-//
-//            if (ctx == null) {
-//                throw new IllegalStateException("Environment is not set yet");
-//            }
+
+            if (ctx == null) {
+                throw new IllegalStateException("Environment is not set yet");
+            }
 
             return ctx;
         }
 
         public void setEnvironment(CloudEnvironment environment) {
-            // TODO
-            // Assert.notNull(environment, "Only non-null CloudEnvironment instances are permitted");
+            Assert.notNull(environment, "Only non-null CloudEnvironment instances are permitted");
             environmentHolder.set(environment);
         }
 

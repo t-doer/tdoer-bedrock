@@ -15,6 +15,8 @@
  */
 package com.tdoer.bedrock.context;
 
+import com.tdoer.bedrock.application.Application;
+
 import java.util.List;
 import java.util.Locale;
 /**
@@ -97,10 +99,10 @@ public interface ContextConfig {
     /**
      * Check whether an application was installed and enabled in current context instance.
      *
-     * @param applicationId Application Id
+     * @param application Application
      * @return true if the application is supported
      */
-    boolean supportApplication(Long applicationId);
+    boolean supportApplication(Application application);
 
     /**
      * Default entry application code

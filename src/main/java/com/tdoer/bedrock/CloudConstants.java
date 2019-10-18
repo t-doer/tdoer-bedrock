@@ -25,9 +25,11 @@ public interface CloudConstants {
 
     String APPLICATION_CODE_PARAM = "appc";
 
-    String CLIENT_ID = "_fw_client_id";
+    String CLIENT_CODE = "_fw_client_code";
 
-    String TENANT_ID = "_fw_tenant_id";
+    String TENANT_GUID = "_fw_tenant_guid";
+
+    String SERVICE_CODE = "_fw_service_code";
 
     String ENVIRONMENT_DIGEST = "_fw_env_digest";
 }

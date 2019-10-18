@@ -90,10 +90,10 @@ public interface Application extends Serializable {
     /**
      * Whether the application can access the service or not
      *
-     * @param serviceId
+     * @param service
      * @return
      */
-    boolean isServiceAccessible(Long serviceId);
+    boolean isServiceAccessible(Service service);
 
     /**
      * Get page of specific Id available in the application

@@ -15,6 +15,9 @@
  */
 package com.tdoer.bedrock.service;
 
+import com.tdoer.bedrock.application.Application;
+import com.tdoer.bedrock.product.Client;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -93,14 +96,51 @@ public interface Service extends Serializable {
     ServiceMethod getMethod(Long methodId) throws ServiceMethodNotFoundException;
 
     /**
+     * List applications which refer to or call the service
+     * @param list
+     */
+    void listRefererApplications(List<Application> list);
+    /**
      * List other services which refer to the service
      * @param list
      */
-    void listReferer(List<Service> list);
+    void listRefererServices(List<Service> list);
 
     /**
      * List other services to which the service refers
      * @param list
      */
-    void listReferee(List<Service> list);
+    void listRefereeServices(List<Service> list);
+
+    /**
+     * Is the service permits the access from the referer service?
+     *
+     * @param service
+     * @return
+     */
+    boolean permitAccessFromService(Service service);
+
+    /**
+     * Is the service permits the access from the referer application?
+     *
+     * @param application
+     * @return
+     */
+    boolean permitAccessFromApplication(Application application);
+
+    /**
+     * Is the service permits the access from the referer client?
+     *
+     * @param client
+     * @return
+     */
+    boolean permitAccessFromClient(Client client);
+
+    /**
+     * Is the service match the request going on?
+     * @param httpMethod
+     * @param requestURI
+     * @return
+     */
+    boolean matchRequest(String httpMethod, String requestURI);
 }

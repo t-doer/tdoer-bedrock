@@ -111,28 +111,28 @@ public class CloudEnvironmentParseFilter implements Filter, InitializingBean {
 
         // Check if the tenant product supports the context instance
         ClientConfig clientConfig = env.getClientConfig();
-        if (!clientConfig.supportContext(env.getContextPath())) {
+        if (!clientConfig.supportContext(env.getContextInstance())) {
             throw new InvalidRequestException(BedrockErrorCodes.CONTEXT_INSTANCE_NOT_SUPPORTED_BY_TENANT_CLIENT, env.getContextPath(), env.getTenantId(), env.getClientId());
         }
 
         // Check if the tenant product supports the application
-        if (!clientConfig.supportApplication(env.getApplicationId())) {
+        if (!clientConfig.supportApplication(env.getApplication())) {
             throw new InvalidRequestException(BedrockErrorCodes.APPLICATION_NOT_SUPPORTED_BY_TENANT_CLIENT, env.getApplicationId(), env.getTenantId(), env.getClientId());
         }
 
         // Check if the context instance supports the application
-        if (!env.getContextConfig().supportApplication(env.getApplicationId())) {
+        if (!env.getContextConfig().supportApplication(env.getApplication())) {
             throw new InvalidRequestException(BedrockErrorCodes.APPLICATION_NOT_SUPPORTED_BY_CONTEXT_INSTANCE, env.getApplicationId(), env.getContextPath());
         }
     }
 
     protected void setResponseHeader(HttpServletRequest request, HttpServletResponse response, CloudEnvironment environment) {
-        String tenantCode = WebUtil.findValueFromRequest(request, CloudConstants.TENANT_ID);
-        String clientId = WebUtil.findValueFromRequest(request, CloudConstants.CLIENT_ID);
+        String tenantCode = WebUtil.findValueFromRequest(request, CloudConstants.TENANT_GUID);
+        String clientId = WebUtil.findValueFromRequest(request, CloudConstants.CLIENT_CODE);
 
         if (!StringUtils.hasText(tenantCode) || !StringUtils.hasText(clientId)) {
-            WebUtil.addValueIntoResponseHeaderAndCookie(response, request, CloudConstants.CLIENT_ID, environment.getClient().getCode());
-            WebUtil.addValueIntoResponseHeaderAndCookie(response, request, CloudConstants.TENANT_ID, environment.getTenant().getCode());
+            WebUtil.addValueIntoResponseHeaderAndCookie(response, request, CloudConstants.CLIENT_CODE, environment.getClient().getCode());
+            WebUtil.addValueIntoResponseHeaderAndCookie(response, request, CloudConstants.TENANT_GUID, environment.getTenant().getCode());
         }
 
         request.setAttribute(CloudConstants.ENVIRONMENT_DIGEST, environment.getDigest());

@@ -80,11 +80,11 @@ public interface ServiceMethod extends Resource {
      */
     boolean isCustomized();
     /**
-     * Check if given http method and path matches the service method
+     * Check if given http method and uri matches the service method
      *
      * @param httpMethod
-     * @param path
+     * @param requestURI
      * @return
      */
-    boolean match(String httpMethod, String path);
+    boolean match(String httpMethod, String requestURI);
 }
