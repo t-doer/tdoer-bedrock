@@ -15,6 +15,7 @@
  */
 package com.tdoer.bedrock.application;
 
+import com.tdoer.bedrock.BedrockErrorCodes;
 import com.tdoer.springboot.error.ErrorCodeException;
 
 /**
@@ -24,34 +25,19 @@ import com.tdoer.springboot.error.ErrorCodeException;
  */
 public class ActionNotFoundException extends ErrorCodeException {
 
-    private String applicationId;
+    private Object identifier;
 
-    public ActionNotFoundException(int errorCode) {
-
-        super(errorCode);
+    public ActionNotFoundException(Long actionId) {
+        super(BedrockErrorCodes.ACTION_NOT_FOUND_BY_ID, new Long[]{actionId});
+        identifier = actionId;
     }
 
-    public ActionNotFoundException(int errorCode, String errorMessage) {
-        super(errorCode, errorMessage);
+    public ActionNotFoundException(Long pageId, String actionCode) {
+        super(BedrockErrorCodes.ACTION_NOT_FOUND_BY_CODE, pageId, actionCode);
+        identifier = pageId + ":" + actionCode;
     }
 
-    public ActionNotFoundException(int errorCode, Throwable cause) {
-        super(errorCode, cause, null);
-    }
-
-    public ActionNotFoundException(int errorCode, Object... formatArgs) {
-        super(errorCode, null, formatArgs);
-    }
-
-    public ActionNotFoundException(int errorCode, Throwable cause, Object... messageFormatArgs) {
-        super(errorCode, cause, messageFormatArgs);
-    }
-
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public Object getIdentifier() {
+        return identifier;
     }
 }

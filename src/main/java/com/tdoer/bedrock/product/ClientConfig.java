@@ -29,34 +29,34 @@ import java.util.List;
 public interface ClientConfig {
 
     /**
-     * Get the application installation in the tenant's client of specific Id.
+     * Get the application installation of specific application Id in the tenant's client.
      *
-     * @param applicationId
-     * @return
+     * @param applicationId Application Id, cannot be <code>null</code>
+     * @return {@link ClientApplicationInstallation} if found, otherwise return <code>null</code>
      */
     ClientApplicationInstallation getApplicationInstallation(Long applicationId);
 
     /**
      * Check whether the tenant's client supports the application of specific Id,
-     * that's, the application is installed in the tenant' client.
+     * that's, the application is installed in the tenant's client.
      *
-     * @param application
-     * @return
+     * @param application Application to check, cannot be <code>null</code>
+     * @return true if the application is supported by the tenant's client
      */
     boolean supportApplication(Application application);
 
     /**
      * List application installation in the tenant's client
      *
-     * @param list
+     * @param list List to hold {@link ClientApplicationInstallation}, cannot be <code>null</code>
      */
     void listApplicationInstallation(List<ClientApplicationInstallation> list);
 
     /**
-     * Get the accessible service of specific Id
+     * Get the service installation of specific service Id
      *
-     * @param serviceId
-     * @return
+     * @param serviceId Service Id, cannot be <code>null</code>
+     * @return {@link ClientServiceInstallation} if it's exists
      */
     ClientServiceInstallation getServiceInstallation(Long serviceId);
 

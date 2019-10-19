@@ -15,6 +15,7 @@
  */
 package com.tdoer.bedrock.application;
 
+import com.tdoer.bedrock.BedrockErrorCodes;
 import com.tdoer.springboot.error.ErrorCodeException;
 
 /**
@@ -24,34 +25,19 @@ import com.tdoer.springboot.error.ErrorCodeException;
  */
 public class PageNotFoundException extends ErrorCodeException {
 
-    private String applicationId;
+    private Object identifier;
 
-    public PageNotFoundException(int errorCode) {
-
-        super(errorCode);
+    public PageNotFoundException(Long pageId) {
+        super(BedrockErrorCodes.PAGE_NOT_FOUND_BY_ID, new Long[]{pageId});
+        identifier = pageId;
     }
 
-    public PageNotFoundException(int errorCode, String errorMessage) {
-        super(errorCode, errorMessage);
+    public PageNotFoundException(Long applicationId, String pageCode) {
+        super(BedrockErrorCodes.PAGE_NOT_FOUND_BY_CODE, applicationId, pageCode);
+        identifier = applicationId + ":" + pageCode;
     }
 
-    public PageNotFoundException(int errorCode, Throwable cause) {
-        super(errorCode, cause, null);
-    }
-
-    public PageNotFoundException(int errorCode, Object... formatArgs) {
-        super(errorCode, null, formatArgs);
-    }
-
-    public PageNotFoundException(int errorCode, Throwable cause, Object... messageFormatArgs) {
-        super(errorCode, cause, messageFormatArgs);
-    }
-
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public Object getIdentifier() {
+        return identifier;
     }
 }

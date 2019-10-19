@@ -18,18 +18,57 @@ package com.tdoer.bedrock.product;
 import java.util.List;
 
 /**
- * @Description
+ * @Description Product repository holds all products and their clients.
+ *
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
 public interface ProductRepository {
-    Product getProduct(Long productId);
+    /**
+     * Get product of specific ID
+     *
+     * @param productId Product ID, cannot be <code>null</code>
+     * @return Product if found
+     * @throws ProductNotFoundException if the product dose not exist or is disabled
+     */
+    Product getProduct(Long productId) throws ProductNotFoundException;
 
-    Product getProduct(String productCode);
+    /**
+     * Get product of specific product code
+     * @param productCode Product code, cannot be <code>null</code>
+     * @return Product if found
+     * @throws ProductNotFoundException if the product dose not exist or is disabled
+     */
+    Product getProduct(String productCode) throws ProductNotFoundException;
 
+    /**
+     * List all enabled products
+     *
+     * @param list List to hold products, cannot be <code>null</code>
+     */
     void listProducts(List<Product> list);
 
-    Client[] getClients(Long productId);
+    /**
+     * Get client of specific ID
+     * @param clientId Client ID, cannot be <code>null</code>
+     * @return Client if found
+     * @throws ClientNotFoundException if the client dose not exist or is disabled
+     */
+    Client getClient(Long clientId) throws ClientNotFoundException;
 
-    Client getClient(Long clientId);
+    /**
+     * Get client of specific client code
+     * @param clientCode Client code, cannot be <code>null</code>
+     * @return Client if found
+     * @throws ClientNotFoundException if the client dose not exist or is disabled
+     */
+    Client getClient(String clientCode) throws ClientNotFoundException;
+
+    /**
+     * Get all client of specific product
+     *
+     * @param productId Product ID, cannot be <code>null</code>
+     * @return A product's all enabled clients
+     */
+    Client[] getClients(Long productId);
 }

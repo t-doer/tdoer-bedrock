@@ -15,6 +15,8 @@
  */
 package com.tdoer.bedrock.application;
 
+import com.tdoer.bedrock.BedrockErrorCodes;
+import com.tdoer.bedrock.CloudConstants;
 import com.tdoer.springboot.error.ErrorCodeException;
 /**
  * @Description
@@ -23,34 +25,19 @@ import com.tdoer.springboot.error.ErrorCodeException;
  */
 public class ApplicationNotFoundException extends ErrorCodeException {
 
-    private String applicationId;
+    protected Object identifier;
 
-    public ApplicationNotFoundException(int errorCode) {
-
-        super(errorCode);
+    public ApplicationNotFoundException(Long applicationId) {
+        super(BedrockErrorCodes.APPLICATION_NOT_FOUND_BY_ID, new Long[]{applicationId});
+        identifier = applicationId;
     }
 
-    public ApplicationNotFoundException(int errorCode, String errorMessage) {
-        super(errorCode, errorMessage);
+    public ApplicationNotFoundException(String applicationCode) {
+        super(BedrockErrorCodes.APPLICATION_NOT_FOUND_BY_CODE, new String[]{applicationCode});
+        identifier = applicationCode;
     }
 
-    public ApplicationNotFoundException(int errorCode, Throwable cause) {
-        super(errorCode, cause, null);
-    }
-
-    public ApplicationNotFoundException(int errorCode, Object... formatArgs) {
-        super(errorCode, null, formatArgs);
-    }
-
-    public ApplicationNotFoundException(int errorCode, Throwable cause, Object... messageFormatArgs) {
-        super(errorCode, cause, messageFormatArgs);
-    }
-
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public Object getIdentifier() {
+        return identifier;
     }
 }

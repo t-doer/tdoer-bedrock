@@ -104,7 +104,7 @@ public class RequestCloudEnvironmentExtractor {
             ProductRental productRental = Platform.getRentalCenter().getProductRendtal(
                     tenantClient.getTenantId(), tenantClient.getClient().getProductId());
             if (productRental == null) {
-                throw new InvalidRequestException(BedrockErrorCodes.NO_PRODUCT_RENTAL, tenantClient.getTenantId(),
+                throw new InvalidRequestException(BedrockErrorCodes.PRODUCT_RENTAL_NOT_FOUND, tenantClient.getTenantId(),
                         tenantClient.getClient().getProductId());
             }
 

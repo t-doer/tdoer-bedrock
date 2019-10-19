@@ -26,54 +26,59 @@ import java.util.Locale;
 public interface Product extends Serializable {
     /**
      * Product Id
-     *
-     * @return Product Id
+     * @return Product Id, must not be <code>null</code>
      */
     Long getId();
 
     /**
      * Product code
-     * @return Product code
+     * @return Product code, must not be <code>null</code>
      */
     String getCode();
 
     /**
      * Product name
-     *
-     * @return
+     * @return Product name, must not be <code>null</code>
      */
     String getName();
 
     /**
      * Product description
      *
-     * @return
+     * @return Product description, may be <code>null</code>
      */
     String getDescription();
 
     /**
      * Product version
-     * @return
+     * @return Product version, must not be <code>null</code>
      */
     String getVersion();
 
     /**
      * List the languages the product supports
      *
-     * @param list
+     * @param list List to hold languages
      */
     void listLanguages(List<Locale> list);
 
     /**
-     * Get the client of the product by the specific Id
+     * Get the product's client of specific ID
      *
-     * @param clientId
-     * @return
+     * @param clientId Client ID, cannot be <code>null</code>
+     * @return Client if found, otherwise return <code>null</code>
      */
-    Client getClient(String clientId);
+    Client getClient(Long clientId);
 
     /**
-     * List the product's clients
+     * Get the product's client of specific client code
+     * @param clientCode Client code, cannot be <code>null</code>
+     * @return Client if found, otherwise return <code>null</code>
+     */
+    Client getClient(String clientCode);
+
+    /**
+     * List the product's enabled clients
      *
      * @param list
      */

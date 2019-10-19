@@ -31,18 +31,18 @@ public interface ApplicationRepository {
      *
      * @param applicationId Application Id, cannot be <code>null</code>
      * @return Application if found
-     * @throws ActionNotFoundException if application does not exist or is disabled
+     * @throws ApplicationNotFoundException if application does not exist or is disabled
      */
-    Application getApplication(Long applicationId) throws ActionNotFoundException;
+    Application getApplication(Long applicationId) throws ApplicationNotFoundException;
 
     /**
      * Get application of specific code
      *
-     * @param applicationCode Application code
+     * @param applicationCode Application code, cannot be <code>null</code>
      * @return Application if found
-     * @throws ActionNotFoundException if application does not exist or is disabled
+     * @throws ApplicationNotFoundException if application does not exist or is disabled
      */
-    Application getApplication(String applicationCode) throws ActionNotFoundException;
+    Application getApplication(String applicationCode) throws ApplicationNotFoundException;
 
     /**
      * List all available applications in the repository.

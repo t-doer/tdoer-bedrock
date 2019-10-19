@@ -110,27 +110,28 @@ public interface Application extends Serializable {
     void listCurrentRefereeServices(List<Service> list);
 
     /**
-     * Whether the application can access the service or not
+     * Check whether the application can access the service or not. If the service
+     * is installed for the tenant's client, it's accessible.
      *
-     * @param service
-     * @return
+     * @param service The service to check
+     * @return true if the service is accessible, otherwise false
      */
     boolean isServiceAccessible(Service service);
 
     /**
      * Get action of specific Id available in the application
      *
-     * @param actionId
-     * @return
+     * @param actionId Action Id, cannot be <code>null</code>
+     * @return {@link Action} if it exists in the application, otherwise return <code>null</code>
      */
-    Action getAction(Long actionId) throws ActionNotFoundException;
+    Action getAction(Long actionId);
 
     /**
      * Get action of specific code available in the application
      *
-     * @param actionCode
-     * @return
+     * @param actionCode Action code, cannot be <code>null</code>
+     * @return {@link Action} if it exists in the application, otherwise return <code>null</code>
      */
-    Action getAction(String actionCode) throws ActionNotFoundException;
+    Action getAction(String actionCode);
 
 }

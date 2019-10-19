@@ -96,9 +96,8 @@ public interface Service extends Serializable {
      *
      * @param methodId Method Id
      * @return Service method if found
-     * @throws ServiceMethodNotFoundException
      */
-    ServiceMethod getMethod(Long methodId) throws ServiceMethodNotFoundException;
+    ServiceMethod getMethod(Long methodId);
 
     /**
      * List the clients which refer to or call the service

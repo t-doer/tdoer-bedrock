@@ -15,6 +15,7 @@
  */
 package com.tdoer.bedrock.service;
 
+import com.tdoer.bedrock.BedrockErrorCodes;
 import com.tdoer.springboot.error.ErrorCodeException;
 
 /**
@@ -24,34 +25,13 @@ import com.tdoer.springboot.error.ErrorCodeException;
  */
 public class ServiceMethodNotFoundException extends ErrorCodeException {
 
-    private String serviceId;
+    private Long methodId;
 
-    public ServiceMethodNotFoundException(int errorCode) {
-
-        super(errorCode);
+    public ServiceMethodNotFoundException(Long methodId) {
+        super(BedrockErrorCodes.SERVICE_METHOD_NOT_FOUND_BY_ID, new Long[]{methodId});
     }
 
-    public ServiceMethodNotFoundException(int errorCode, String errorMessage) {
-        super(errorCode, errorMessage);
-    }
-
-    public ServiceMethodNotFoundException(int errorCode, Throwable cause) {
-        super(errorCode, cause, null);
-    }
-
-    public ServiceMethodNotFoundException(int errorCode, Object... formatArgs) {
-        super(errorCode, null, formatArgs);
-    }
-
-    public ServiceMethodNotFoundException(int errorCode, Throwable cause, Object... messageFormatArgs) {
-        super(errorCode, cause, messageFormatArgs);
-    }
-
-    public String getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(String serviceId) {
-        this.serviceId = serviceId;
+    public Long getMethodId() {
+        return methodId;
     }
 }

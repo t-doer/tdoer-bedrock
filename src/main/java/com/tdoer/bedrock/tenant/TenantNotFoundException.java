@@ -15,6 +15,7 @@
  */
 package com.tdoer.bedrock.tenant;
 
+import com.tdoer.bedrock.BedrockErrorCodes;
 import com.tdoer.springboot.error.ErrorCodeException;
 
 /**
@@ -24,34 +25,19 @@ import com.tdoer.springboot.error.ErrorCodeException;
  */
 public class TenantNotFoundException extends ErrorCodeException {
 
-    private String applicationId;
+    private Object identifier;
 
-    public TenantNotFoundException(int errorCode) {
-
-        super(errorCode);
+    public TenantNotFoundException(Long tenantId) {
+        super(BedrockErrorCodes.TENANT_NOT_FOUND_BY_ID, tenantId);
+        identifier = tenantId;
     }
 
-    public TenantNotFoundException(int errorCode, String errorMessage) {
-        super(errorCode, errorMessage);
+    public TenantNotFoundException(String guidOrCode) {
+        super(BedrockErrorCodes.TENANT_NOT_FOUND_BY_GUID_OR_CODE, guidOrCode);
+        identifier = guidOrCode;
     }
 
-    public TenantNotFoundException(int errorCode, Throwable cause) {
-        super(errorCode, cause, null);
-    }
-
-    public TenantNotFoundException(int errorCode, Object... formatArgs) {
-        super(errorCode, null, formatArgs);
-    }
-
-    public TenantNotFoundException(int errorCode, Throwable cause, Object... messageFormatArgs) {
-        super(errorCode, cause, messageFormatArgs);
-    }
-
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
+    public Object getIdentifier() {
+        return identifier;
     }
 }
