@@ -15,6 +15,7 @@
  */
 package com.tdoer.bedrock.security;
 
+import com.tdoer.bedrock.BedrockErrorCodes;
 import com.tdoer.springboot.error.ErrorCodeException;
 
 /**
@@ -23,24 +24,7 @@ import com.tdoer.springboot.error.ErrorCodeException;
  * @create 2017-09-19
  */
 public class UnauthorizedUserException extends ErrorCodeException {
-    public UnauthorizedUserException(int errorCode) {
-
-        super(errorCode);
-    }
-
-    public UnauthorizedUserException(int errorCode, String errorMessage) {
-        super(errorCode, errorMessage);
-    }
-
-    public UnauthorizedUserException(int errorCode, Throwable cause) {
-        super(errorCode, cause, null);
-    }
-
-    public UnauthorizedUserException(int errorCode, Object... formatArgs) {
-        super(errorCode, null, formatArgs);
-    }
-
-    public UnauthorizedUserException(int errorCode, Throwable cause, Object... messageFormatArgs) {
-        super(errorCode, cause, messageFormatArgs);
+    public UnauthorizedUserException() {
+        super(BedrockErrorCodes.UNAUTHORIZED);
     }
 }

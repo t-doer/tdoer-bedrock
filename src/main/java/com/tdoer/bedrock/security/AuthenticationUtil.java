@@ -15,7 +15,6 @@
  */
 package com.tdoer.bedrock.security;
 
-import com.tdoer.bedrock.BedrockErrorCodes;
 import com.tdoer.bedrock.tenant.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +37,7 @@ public class AuthenticationUtil {
     public static UserDetails getUserDetails() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            throw new UnauthorizedUserException(BedrockErrorCodes.UNAUTHORIZED);
+            throw new UnauthorizedUserException();
         }
 
         return ((UserDetails) authentication.getPrincipal());
