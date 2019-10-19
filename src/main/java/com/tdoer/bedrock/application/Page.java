@@ -30,41 +30,45 @@ public interface Page extends ApplicationResource {
     }
 
     /**
-     * Get the name, or a brief description, of the resource
+     * Page name
      *
-     * @return Resource name
+     * @return Page name, it must not be blank
      */
     String getName();
 
     /**
-     * Resource code, for example, page's code, action's code, navigation item's node ID etc.
+     * Page code
      *
-     * @return Resource code
+     * @return Page code, it must not be blank
      */
     String getCode();
 
     /**
-     * 页面的访问URI，肯定不为空
+     * Page's URI
      *
-     * @return 页面的访问URI，肯定不为空
+     * @return Page's URI, it must not be blank
      */
     String getURI();
 
     /**
-     * Get action of specific Id available in the application
+     * Get action of specific Id available in the application. If the action
+     * exists, but it dose not below to the application, it will return <code>null</code>
      *
-     * @param actionId
-     * @return
+     * @param actionId Action Id, cannot be <code>null</code>
+     * @return Action if the action exists and is enabled and below to the application,
+     * otherwise return <code>null</code>
      */
-    Action getAction(Long actionId) throws ActionNotFoundException;
+    Action getAction(Long actionId);
 
     /**
-     * Get action of specific code available in the application
+     * Get action of specific code available in the application. If the action
+     * exists, but it dose not below to the application, it will return <code>null</code>
      *
-     * @param actionCode
-     * @return
+     * @param actionCode Action code, cannot be <code>null</code>
+     * @return Action if the action exists and is enabled and below to the application,
+     * otherwise return <code>null</code>
      */
-    Action getAction(String actionCode) throws ActionNotFoundException;
+    Action getAction(String actionCode);
 
     /**
      * List actions of the page available in current environment {@link com.tdoer.bedrock.CloudEnvironment},

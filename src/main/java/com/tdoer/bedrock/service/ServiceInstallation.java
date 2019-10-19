@@ -20,5 +20,9 @@ package com.tdoer.bedrock.service;
  * @create 2019-10-13
  */
 public interface ServiceInstallation {
+    /**
+     * Get the installed service
+     * @return The installed service
+     */
     Service getService();
 }

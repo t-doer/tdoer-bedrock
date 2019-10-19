@@ -23,7 +23,16 @@ import com.tdoer.bedrock.application.ApplicationInstallation;
  */
 public interface ClientApplicationInstallation extends ApplicationInstallation {
 
+    /**
+     * The Id of the client in which the application is installed
+     * @return Client Id, it must not be <code>null</code>
+     */
     Long getClientId();
 
+    /**
+     * The Id of the tenant, in which the application is installed specifically
+     *
+     * @return Tenant Id, it must not be <code>null</code>, but it may be zero.
+     */
     Long getTenantId();
 }

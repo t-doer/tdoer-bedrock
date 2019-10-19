@@ -80,7 +80,7 @@ public interface Product extends Serializable {
     /**
      * List the product's enabled clients
      *
-     * @param list
+     * @param list List to hold clients, cannot be <code>null</code>
      */
     void listClients(List<Client> list);
 }

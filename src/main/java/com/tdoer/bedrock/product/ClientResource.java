@@ -23,6 +23,10 @@ import com.tdoer.bedrock.resource.ResourceCategory;
  * @create 2017-09-19
  */
 public interface ClientResource extends Resource {
+    /**
+     * Resource category must be CLIENT
+     * @return {@link ResourceCategory}, must not be <cod>null</cod>
+     */
     @Override
     default ResourceCategory getCategory() {
         return ResourceCategory.CLIENT;

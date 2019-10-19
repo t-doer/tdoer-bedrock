@@ -23,5 +23,10 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public interface ClientRole extends GrantedAuthority {
 
+    /**
+     * Client's role to play with services.
+     *
+     * @return Client role's code, it must not blank
+     */
     String getCode();
 }

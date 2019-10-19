@@ -36,14 +36,14 @@ public interface Application extends Serializable {
     /**
      * Application code
      *
-     * @return Application code
+     * @return Application code, must not be blank
      */
     String getCode();
 
     /**
      * Application name
      *
-     * @return Application name
+     * @return Application name, must not be blank
      */
     String getName();
 
@@ -55,26 +55,26 @@ public interface Application extends Serializable {
     String getDescription();
 
     /**
-     * 应用提供商，可以是个人或组织。
+     * Application provider's name, it can be an organization or a person
      *
-     * @return 应用提供商，可能为{@code null}
+     * @return Provide's name, it must not be blank
      */
     String getProvider();
 
     /**
      * Application version
      *
-     * @return Application version, maybe be {@code Null}
+     * @return Application version, must not be blank
      */
     String getVersion();
 
     /**
      * Get page of specific Id available in the application
      *
-     * @param pageId
+     * @param pageId Page Id, it cannot be <code>null</code>
      * @return Page if found, otherwise {@code null}
      */
-    Page getPage(Long pageId) throws PageNotFoundException;
+    Page getPage(Long pageId);
 
     /**
      * Get page of specific code available in the application
@@ -82,13 +82,11 @@ public interface Application extends Serializable {
      * @param pageCode
      * @return Page if found, otherwise {@code null}
      */
-    Page getPage(String pageCode) throws PageNotFoundException;
+    Page getPage(String pageCode);
 
     /**
      * List available pages of the application in current cloud environment
      * {@link com.tdoer.bedrock.CloudEnvironment}.
-     * <br>
-     * Pages will be appended to the given list.
      *
      * @param list List to hold pages, cannot be <code>null</code>
      */

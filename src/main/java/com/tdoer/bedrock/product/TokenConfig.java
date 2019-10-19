@@ -20,29 +20,56 @@ package com.tdoer.bedrock.product;
  * @create 2017-09-19
  */
 public interface TokenConfig {
+    /**
+     * Client Id
+     * @return Client Id, must not be <code>null</code>
+     */
     Long getClientId();
 
+    /**
+     * Tenant Id
+     * @return Tenant Id, must not be <code>null</code>
+     */
     Long getTenantId();
 
     /**
-     * The client's grant types
+     * The client's grant types, for example, authorization_code, password etc.
      *
-     * @return
+     * @return token grant type, must not be empty
      */
     String[] getGrantTypes();
 
     /**
      * The client's auto approval's scope
      *
-     * @return
+     * @return Auto approval, must not be empty
      */
     String[] getAutoApprovals();
 
+    /**
+     * The redirection URI once user's access token is granted
+     * @return Redirection URI, may be blank
+     */
     String getWebRedirectURI();
 
+    /**
+     * Access token's validity duration in seconds.
+     *
+     * @return Validity duration, must not be <code>null</code>
+     */
     Integer getAccessTokenValidityInSeconds();
 
+    /**
+     * Refresh token's validity duration in seconds.
+     *
+     * @return Validity duration, must not be <code>null</code>
+     */
     Integer getRefreshTokenValidityInSeconds();
 
+    /**
+     * Session policy
+     *
+     * @return Session policy, must not be <code>null</code>
+     */
     SessionPolicy getSessionPolicy();
 }

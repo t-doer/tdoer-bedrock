@@ -106,20 +106,20 @@ public interface ContextConfig {
 
     /**
      * Default entry application code
-     * @return
+     * @return Application code, it must not be blank
      */
     String getEntryApplicationCode();
 
     /**
      * Default entry nav item
-     * @return
+     * @return Navigation item's node Id, it must not be blank
      */
     String getEntryNavItem();
 
     /**
      * Default entry language
      *
-     * @return
+     * @return Language, it must not be <code>null</code>
      */
     Locale getEntryLanguage();
 

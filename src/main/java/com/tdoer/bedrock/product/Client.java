@@ -23,63 +23,66 @@ public interface Client {
     /**
      * Client Id
      *
-     * @return
+     * @return Client Id, must not be <code>null</code>
      */
     Long getId();
 
     /**
      * Client code
-     * @return
+     * @return Client code, must not be blank
      */
     String getCode();
 
     /**
      * Client name
      *
-     * @return
+     * @return Client name, must not be blank
      */
     String getName();
 
     /**
-     * The product the client belongs to
+     * The Id of the product to which the client belongs
      *
-     * @return
+     * @return Product Id, must not be <code>null</code>
      */
     Long getProductId();
 
     /**
-     * Clent category
+     * Clent category, B_END or C_END
      *
-     * @return
+     * @return Client category, must not be <code>null</code>
      */
     ClientCategory getCategory();
 
     /**
      * The client's access scopes
      *
-     * @return
+     * @return The client's access scopes
      */
     String[] getScopes();
 
     /**
-     * The client's authorities or roles that it can plays as in its product
+     * The client's roles that it can plays to services
      *
-     * @return
+     * @return Client's roles
      */
     ClientRole[] getRoles();
 
     /**
-     * Whether the client can be trusted or not
+     * Whether the client can be trusted or not. If a client program
+     * is developed by 3rd-party, usually the client should not be trusted,
+     * and conduct strict access policy
      *
-     * @return
+     * @return true if the client is trusted
      */
     boolean isTrusted();
 
 
     /**
-     * Client configuration
+     * Client configuration, for example, installed applications, services,
+     * and access token configuration.
      *
-     * @return
+     * @return Client configuration, must not be <code>null</code>
      */
     ClientConfig getClientConfig();
 

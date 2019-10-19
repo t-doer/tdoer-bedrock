@@ -76,7 +76,7 @@ public interface Service extends Serializable {
     String getVersion();
 
     /**
-     * List the service's service methods which are available in current cloud environment
+     * List the service's methods which are available in current cloud environment
      * {@link com.tdoer.bedrock.CloudEnvironment}.
      *
      * @param list List to hold service methods, cannot be <code>null</code>.
@@ -108,51 +108,52 @@ public interface Service extends Serializable {
 
     /**
      * List applications which refer to or call the service
-     * @param list
+     * @param list List to hold applications, cannot be <code>null</code>
      */
     void listRefererApplications(List<Application> list);
 
     /**
      * List other services which refer to or call the service
-     * @param list
+     * @param list List to hold service, cannot be <code>null</code>
      */
     void listRefererServices(List<Service> list);
 
     /**
      * List other services to which the service refers
-     * @param list
+     * @param list List to hold service, cannot be <code>null</code>
      */
     void listRefereeServices(List<Service> list);
 
     /**
-     * Is the service permits the access from the referer service?
+     * Check if the service permits the access from the referer service?
      *
-     * @param service
-     * @return
+     * @param referer The referer service to check, cannot be <code>null</code>
+     * @return true if the service permits the access
      */
-    boolean permitAccessFromService(Service service);
+    boolean permitAccessFromService(Service referer);
 
     /**
-     * Is the service permits the access from the referer application?
+     * Check if the service permits the access from the referer application?
      *
-     * @param application
-     * @return
+     * @param application The referer application to check, cannot be <code>null</code>
+     * @return true if the service permits the access
      */
     boolean permitAccessFromApplication(Application application);
 
     /**
-     * Is the service permits the access from the referer client?
+     * Check if the service permits the access from the referer client?
      *
-     * @param client
-     * @return
+     * @param client The client to check, cannot be <code>null</code>
+     * @return true if the service permits the access
      */
     boolean permitAccessFromClient(Client client);
 
     /**
-     * Is the service match the request going on?
-     * @param httpMethod
-     * @param requestURI
-     * @return
+     * Check if the service has a method which matchs the HTTP request
+     *
+     * @param httpMethod Http method
+     * @param requestURI Request URI
+     * @return true if there is one matched service method
      */
     boolean matchRequest(String httpMethod, String requestURI);
 }

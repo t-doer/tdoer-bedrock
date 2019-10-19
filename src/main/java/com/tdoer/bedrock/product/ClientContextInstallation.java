@@ -24,13 +24,36 @@ import java.util.Locale;
  * @create 2019-10-17
  */
 public interface ClientContextInstallation extends ContextInstallation {
+
+    /**
+     * The Id of the client in which the context is installed
+     * @return Client Id, it must not be <code>null</code>
+     */
     Long getClientId();
 
+    /**
+     * The Id of the tenant, in which the context is installed specifically
+     *
+     * @return Tenant Id, it must not be <code>null</code>, but it may be zero.
+     */
     Long getTenantId();
 
-    Long getEntryApplicationId();
+    /**
+     * Default entry application code
+     * @return Application code, it must not be blank
+     */
+    String getEntryApplicationCode();
 
+    /**
+     * Default entry nav item
+     * @return Navigation item's node Id, it must not be blank
+     */
     String getEntryNavItem();
 
+    /**
+     * Default entry language
+     *
+     * @return Language, it must not be <code>null</code>
+     */
     Locale getEntryLanguage();
 }

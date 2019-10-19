@@ -28,23 +28,23 @@ public interface Action extends ApplicationResource {
     }
 
     /**
-     * Get the name, or a brief description, of the resource
+     * Action name
      *
-     * @return Resource name
+     * @return Acton name,it must not be blank
      */
     String getName();
 
     /**
-     * Resource code, for example, page's code, action's code, navigation item's node ID etc.
+     * Action code
      *
-     * @return Resource code
+     * @return Action code, it must not be blank
      */
     String getCode();
 
     /**
-     * Get the page's Id to which the action belongs
+     * Get the Id of the page to which the action belongs
      *
-     * @return
+     * @return Page Id, it must not be <code>null</code>
      */
     Long getPageId();
 }

@@ -63,39 +63,39 @@ public interface ClientConfig {
     /**
      * Check whether the tenant's client can access the service
      *
-     * @param service
-     * @return
+     * @param service The service to check, it cannot be <code>null</code>
+     * @return true if the service is accessible for the client
      */
     boolean isServiceAccessible(Service service);
 
     /**
      * List accessible service for the tenant's client
      *
-     * @param list
+     * @param list List to hold {@link ClientServiceInstallation}, cannot be <code>null</code>
      */
     void listAccessibleService(List<ClientServiceInstallation> list);
 
     /**
-     * The context installation in the tenant's client of specific context path
+     * The context instance or context type installation in the tenant's client of specific context path
      *
-     * @param contextPath
-     * @return
+     * @param contextPath The context path of a context instance, cannot be <code>null</code>
+     * @return {@link ClientContextInstallation} if it exists and is enabled
      */
     ClientContextInstallation getContextInstallation(ContextPath contextPath);
 
     /**
      * Check whether the tenant's client supports the context instance, that's,
-     * the context is installed in the tenant's client
+     * the context instance or context type is installed in the tenant's client
      *
-     * @param contextInstance
-     * @return
+     * @param contextInstance The context instance to check, cannot be <code>null</code>
+     * @return true if the client supports the context instance
      */
     boolean supportContext(ContextInstance contextInstance);
 
     /**
      * Lists the context installation in the tenant's client
      *
-     * @param list
+     * @param list List to hold {@link ClientContextInstallation}, cannot be <code>null</code>
      */
     void listContextInstallation(List<ClientContextInstallation> list);
 
@@ -103,7 +103,7 @@ public interface ClientConfig {
     /**
      * Get token configuration of the tenant's client
      *
-     * @return
+     * @return {@link TokenConfig}, it must not be <code>null</code>
      */
     TokenConfig getTokenConfig();
 

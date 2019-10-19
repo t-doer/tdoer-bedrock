@@ -23,8 +23,16 @@ import com.tdoer.bedrock.service.ServiceInstallation;
  * @create 2017-09-19
  */
 public interface ClientServiceInstallation extends ServiceInstallation {
-
+    /**
+     * The Id of the client in which the service is installed
+     * @return Client Id, it must not be <code>null</code>
+     */
     Long getClientId();
 
+    /**
+     * The Id of the tenant, in which the service is installed specifically
+     *
+     * @return Tenant Id, it must not be <code>null</code>, but it may be zero.
+     */
     Long getTenantId();
 }

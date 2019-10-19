@@ -33,16 +33,16 @@ public interface ApplicationResource extends Resource {
     }
 
     /**
-     * Application Id, to which the resource belongs
+     * The Id of the Application to which the resource belongs
      *
      * @return Application Id, never be null
      */
     Long getApplicationId();
 
     /**
-     * List the provider methods which associates with a action or a page
+     * List the service methods which the application resource associates with
      *
-     * @param list
+     * @param list List to hold service methods, cannot be <code>null</code>
      */
     void listServiceMethods(List<ServiceMethod> list);
 }

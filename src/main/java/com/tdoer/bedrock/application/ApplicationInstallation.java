@@ -20,6 +20,10 @@ package com.tdoer.bedrock.application;
  * @create 2017-09-19
  */
 public interface ApplicationInstallation {
+    /**
+     * The installed application
+     *
+     * @return the installed application, it must not be <code>null</code>
+     */
     Application getApplication();
-
 }

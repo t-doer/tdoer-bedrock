@@ -41,50 +41,52 @@ public interface ServiceMethod extends Resource {
     /**
      * Get the service methond's Id
      *
-     * @return
+     * @return Service method's Id, must not be <code>null</code>
      */
     Long getId();
 
     /**
-     * The Id of the service which provides the service method
+     * Get the Id of the service which provides the service method
      *
-     * @return
+     * @return Service Id, must not be <code>null</code>
      */
     Long getServiceId();
 
     /**
-     * Get provider method's name
+     * Get service method's name
      *
-     * @return
+     * @return Service method's name, must not be blank
      */
     String getName();
 
     /**
-     * Get provider method's HTTP method, for example, POST, GET, DELETE, UPDATE etc..
+     * Get the method's HTTP method, for example, POST, GET, DELETE, UPDATE etc..
      *
-     * @return
+     * @return HTTP method, must not be <code>null</code>
      */
     HttpMethod getHttpMethod();
 
     /**
-     * Get provider methods'a request URI
+     * Get the methods'a request URI, which following ant path pattern, for example,
+     * "/user/*", "/user/**" etc.
      *
-     * @return
+     * @return Method URI, must not be blank
      */
     String getURI();
 
     /**
-     * Whether the service method is a customized one or not.
+     * Whether the service method is a customized one or not. A customized service
+     * method can only be available for some cloud environment's elements.
      *
-     * @return
+     * @return true if the method is a customized one
      */
     boolean isCustomized();
     /**
-     * Check if given http method and uri matches the service method
+     * Check if the service method matches given http method and uri
      *
-     * @param httpMethod
-     * @param requestURI
-     * @return
+     * @param httpMethod HTTP method, for example, POST, GET etc.
+     * @param requestURI Request URI
+     * @return true if matches
      */
     boolean match(String httpMethod, String requestURI);
 }
