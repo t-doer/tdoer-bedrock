@@ -88,7 +88,7 @@ public interface BedrockErrorCodes extends com.tdoer.springboot.http.StatusCodes
     int NO_CONTEXT_INSTANCE = 40020;
 
     @ReasonPhrase("Illegal context path request: {0}")
-    int ILLEGAL_CONTEXT_PATH = 40021;
+    int INVALID_CONTEXT_PATH = 40021;
 
     @ReasonPhrase("No application Id found in request: {0}")
     int NO_APPLICATION_ID_IN_REQUEST = 40022;

@@ -15,6 +15,7 @@
  */
 package com.tdoer.bedrock.context;
 
+import com.tdoer.bedrock.BedrockErrorCodes;
 import com.tdoer.springboot.error.ErrorCodeException;
 /**
  * @Description
@@ -24,32 +25,13 @@ import com.tdoer.springboot.error.ErrorCodeException;
 public class ContextInstanceNotFoundException extends ErrorCodeException {
     private ContextPath contextPath;
 
-    public ContextInstanceNotFoundException(int errorCode) {
-
-        super(errorCode);
-    }
-
-    public ContextInstanceNotFoundException(int errorCode, String errorMessage) {
-        super(errorCode, errorMessage);
-    }
-
-    public ContextInstanceNotFoundException(int errorCode, Throwable cause) {
-        super(errorCode, cause, null);
-    }
-
-    public ContextInstanceNotFoundException(int errorCode, Object... formatArgs) {
-        super(errorCode, null, formatArgs);
-    }
-
-    public ContextInstanceNotFoundException(int errorCode, Throwable cause, Object... messageFormatArgs) {
-        super(errorCode, cause, messageFormatArgs);
+    public ContextInstanceNotFoundException(ContextPath contextPath) {
+        super(BedrockErrorCodes.NO_CONTEXT_INSTANCE, new Object[]{contextPath});
+        this.contextPath = contextPath;
     }
 
     public ContextPath getContextPath() {
         return contextPath;
     }
 
-    public void setContextPath(ContextPath contextPath) {
-        this.contextPath = contextPath;
-    }
 }

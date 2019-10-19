@@ -119,7 +119,7 @@ public class RequestCloudEnvironmentExtractor {
                     throw new InvalidRequestException(BedrockErrorCodes.NO_CONTEXT_INSTANCE, contextPath);
                 }
                 if (!contextInstance.getContextPath().equals(contextPath)) {
-                    throw new InvalidRequestException(BedrockErrorCodes.ILLEGAL_CONTEXT_PATH, contextPath);
+                    throw new InvalidRequestException(BedrockErrorCodes.INVALID_CONTEXT_PATH, contextPath);
                 }
             }
 

@@ -20,5 +20,5 @@ package com.tdoer.bedrock.context;
  * @create 2017-09-19
  */
 public interface ContextInstanceCenter {
-    ContextInstance getContextInstance(ContextPath contextPath);
+    ContextInstance getContextInstance(ContextPath contextPath) throws ContextInstanceNotFoundException;
 }

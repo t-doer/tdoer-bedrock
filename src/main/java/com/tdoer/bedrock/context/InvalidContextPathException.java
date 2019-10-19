@@ -15,6 +15,7 @@
  */
 package com.tdoer.bedrock.context;
 
+import com.tdoer.bedrock.BedrockErrorCodes;
 import com.tdoer.springboot.error.ErrorCodeException;
 
 /**
@@ -28,32 +29,13 @@ public class InvalidContextPathException extends ErrorCodeException {
 
     private String contextPath;
 
-    public InvalidContextPathException(int errorCode) {
-
-        super(errorCode);
-    }
-
-    public InvalidContextPathException(int errorCode, String errorMessage) {
-        super(errorCode, errorMessage);
-    }
-
-    public InvalidContextPathException(int errorCode, Throwable cause) {
-        super(errorCode, cause, null);
-    }
-
-    public InvalidContextPathException(int errorCode, Object... formatArgs) {
-        super(errorCode, null, formatArgs);
-    }
-
-    public InvalidContextPathException(int errorCode, Throwable cause, Object... messageFormatArgs) {
-        super(errorCode, cause, messageFormatArgs);
+    public InvalidContextPathException(String contextPath) {
+        super(BedrockErrorCodes.INVALID_CONTEXT_PATH, new String[]{contextPath});
+        this.contextPath = contextPath;
     }
 
     public String getContextPath() {
         return contextPath;
     }
 
-    public void setContextPath(String contextPath) {
-        this.contextPath = contextPath;
-    }
 }

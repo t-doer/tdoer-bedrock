@@ -21,5 +21,5 @@ package com.tdoer.bedrock.context;
  */
 public interface ContextPathParser {
 
-    ContextPath parse(String contextPath);
+    ContextPath parse(String contextPath) throws InvalidContextPathException;
 }
