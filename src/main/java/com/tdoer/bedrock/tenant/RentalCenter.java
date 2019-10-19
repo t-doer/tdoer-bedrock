@@ -21,9 +21,11 @@ package com.tdoer.bedrock.tenant;
  * @create 2017-09-19
  */
 public interface RentalCenter {
-    Tenant getTenant(String tenantCode);
+    Tenant getTenantByCode(String tenantCode);
 
-    Tenant getTenant(Long tenantId);
+    Tenant getTenantById(Long tenantId);
+
+    Tenant getTenantByGUID(String guid);
 
     ProductRental getProductRendtal(Long tenantId, Long productId);
 

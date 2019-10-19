@@ -51,16 +51,6 @@ public interface Page extends ApplicationResource {
     String getURI();
 
     /**
-     * List actions of the page available in current environment {@link com.tdoer.bedrock.CloudEnvironment},
-     * that's, list available actions of the page available to current client, product, tenant and context instance.
-     * <br>
-     *
-     * @param list
-     */
-    void listCurrentActions(List<Action> list);
-
-
-    /**
      * Get action of specific Id available in the application
      *
      * @param actionId
@@ -75,4 +65,18 @@ public interface Page extends ApplicationResource {
      * @return
      */
     Action getAction(String actionCode) throws ActionNotFoundException;
+
+    /**
+     * List actions of the page available in current environment {@link com.tdoer.bedrock.CloudEnvironment},
+     *
+     * @param list List to hold actions, cannot be <code>null</code>
+     */
+    void listCurrentActions(List<Action> list);
+
+    /**
+     * List the page's all enabled actions, including common and customized ones.
+     *
+     * @param list List to hold actions, cannot be <code>null</code>
+     */
+    void listAllActions(List<Action> list);
 }

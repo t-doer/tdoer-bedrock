@@ -15,7 +15,9 @@
  */
 package com.tdoer.bedrock.service;
 
+import com.tdoer.bedrock.application.Application;
 import com.tdoer.bedrock.context.ContextPath;
+import com.tdoer.bedrock.product.Client;
 
 import java.util.List;
 
@@ -28,51 +30,88 @@ import java.util.List;
 public interface ServiceRepository {
 
     /**
-     * Get the service according to its id.
+     * Get the service of specific id.
      *
-     * @param serviceId
-     * @return
-     * @throws ServiceNotFoundException if the service is not found or disabled.
+     * @param serviceId Service Id, cannot be <code>null</code>
+     * @return {@link Service}
+     * @throws ServiceNotFoundException if the service dose not exist or is disabled.
      */
     Service getService(Long serviceId) throws ServiceNotFoundException;
 
     /**
      * Get the service according to its code.
      *
-     * @param serviceCode
-     * @return
-     * @throws ServiceNotFoundException if the service is not found or disabled.
+     * @param serviceCode Service code, cannot be <code>null</code>
+     * @return {@link Service}
+     * @throws ServiceNotFoundException if the service dose not exist or is disabled.
      */
     Service getService(String serviceCode) throws ServiceNotFoundException;
 
     /**
-     * List services which are loaded into the respository.
+     * List all available services in the repository.
      *
-     * @param list
+     * @param list List to hold services, cannot be <code>null</code>
      */
-    void listServices(List<Service> list);
+    void listAllServices(List<Service> list);
 
     /**
-     * Get the service method according to its id.
+     * List a service's all referer clients.
      *
-     * @param methodId
-     * @return
-     * @throws ServiceMethodNotFoundException if the service is not found or disabled.
+     * @param serviceId Service Id, cannot be <code>null</code>
+     * @param list List to hold clients, cannot be <code>null</code>
+     */
+    void listRefererClients(Long serviceId, List<Client> list);
+
+    /**
+     * List a service's all referer applications
+     *
+     * @param serviceId Service Id, cannot be <code>null</code>
+     * @param list List to hold applications, cannot be <code>null</code>
+     */
+    void listRefererApplications(Long serviceId, List<Application> list);
+
+    /**
+     * List a service's all referer services.
+     *
+     * @param serviceId Service Id, cannot be <code>null</code>
+     * @param list List to hold services, cannot be <code>null</code>
+     */
+    void listRefererServices(Long serviceId, List<Service> list);
+
+    /**
+     * List a service's all referee services.
+     *
+     * @param serviceId Service Id, cannot be <code>null</code>
+     * @param list List to hold services, cannot be <code>null</code>
+     */
+    void listRefereeServices(Long serviceId, List<Service> list);
+
+    /**
+     * Get the service method of specific id.
+     *
+     * @param methodId Method Id, cannot be <code>null</code>
+     * @return {@link ServiceMethod}
+     * @throws ServiceMethodNotFoundException if the service method dose not exist or is disabled.
      */
     ServiceMethod getServiceMethod(Long methodId) throws ServiceMethodNotFoundException;
 
     /**
-     * List all available service methods of specific service Id and cloud environment elements.
+     * List all service methods of specific service Id which are available for current environment.
      *
-     * @param serviceId Service Id, cannot be null
-     * @param applicationId Application Id, cannot be null
-     * @param productId Product Id, cannot be null
-     * @param clientId Client Id, cannot be null
-     * @param tenantId Tenant Id, cannot be null
-     * @param contextPath Context path, cannot be null
-     * @param list List to hold service methods
+     * @param serviceId Service Id, cannot be <code>null</code>
+     * @param applicationId Application Id, cannot be <code>null</code>
+     * @param productId Product Id, cannot be <code>null</code>
+     * @param clientId Client Id, cannot be <code>null</code>
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextPath Context path, cannot be <code>null</code>
+     * @param list List to hold service methods, cannot be <code>null</code>
      */
-    void listServiceMethods(Long serviceId, Long applicationId, Long productId, Long clientId, Long tenantId,
+    void listCurrentServiceMethods(Long serviceId, Long applicationId, Long productId, Long clientId, Long tenantId,
                             ContextPath contextPath, List<ServiceMethod> list);
 
+    /**
+     * List a service's all available service methods, including common and customized ones
+     * @param list List to hold service methods, cannot be <code>null</code>
+     */
+    void listAllServiceMethods(Long serviceId, List<ServiceMethod> list);
 }

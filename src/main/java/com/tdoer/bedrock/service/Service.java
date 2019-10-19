@@ -29,35 +29,35 @@ import java.util.List;
 public interface Service extends Serializable {
     /**
      * Service Id
-     * @return Service Id
+     * @return Service Id, must not be <code>null</code>
      */
     Long getId();
 
     /**
      * Service code
      *
-     * @return Service code
+     * @return Service code, must not be <code>null</code>
      */
     String getCode();
 
     /**
      * Service type
      *
-     * @return Service type
+     * @return Service type, must not be <code>null</code>
      */
     ServiceType getType();
 
     /**
      * Service provider's name
      *
-     * @return
+     * @return Service provider, must not be <code>null</code>
      */
     String getProvider();
 
     /**
      * Service name
      *
-     * @return Service name
+     * @return Service name, must not be <code>null</code>
      */
     String getName();
 
@@ -71,37 +71,50 @@ public interface Service extends Serializable {
     /**
      * Service version
      *
-     * @return Service version, maybe be {@code Null}
+     * @return Service version, must not be <code>null</code>
      */
     String getVersion();
 
     /**
-     * List available service methods in current environment {@link com.tdoer.bedrock.CloudEnvironment},
-     * that's, list available service method according to current application, product, client, tenant and context
-     * instance.
-     * <br>
-     * Service methods will be appended to the given list.
+     * List the service's service methods which are available in current cloud environment
+     * {@link com.tdoer.bedrock.CloudEnvironment}.
      *
-     * @param list List to hold service methods.
+     * @param list List to hold service methods, cannot be <code>null</code>.
      */
     void listCurrentMethods(List<ServiceMethod> list);
 
+    /**
+     * List the service's all enabled service methods, including common and customized
+     * ones.
+     *
+     * @param list List to hold service methods, cannot be <code>null</code>.
+     */
+    void listAllMethods(List<ServiceMethod> list);
 
     /**
-     * Get service method of specific Id available in the service
+     * Get available service method of specific method Id in the service
      *
-     * @param methodId
-     * @return Service method if found, otherwise {@code null}
+     * @param methodId Method Id
+     * @return Service method if found
+     * @throws ServiceMethodNotFoundException
      */
     ServiceMethod getMethod(Long methodId) throws ServiceMethodNotFoundException;
+
+    /**
+     * List the clients which refer to or call the service
+     *
+     * @param list List to hold clients, cannot be <code>null</code>
+     */
+    void listRefererClients(List<Client> list);
 
     /**
      * List applications which refer to or call the service
      * @param list
      */
     void listRefererApplications(List<Application> list);
+
     /**
-     * List other services which refer to the service
+     * List other services which refer to or call the service
      * @param list
      */
     void listRefererServices(List<Service> list);

@@ -69,33 +69,6 @@ public interface Application extends Serializable {
     String getVersion();
 
     /**
-     * List available pages of the application according to current request environment
-     * {@link com.tdoer.bedrock.CloudEnvironment}.
-     * <br>
-     * Pages will be appended to the given list.
-     *
-     * @param list List to hold pages.
-     */
-    void listCurrentPages(List<Page> list);
-
-    /**
-     * List services the application needs to call in current environment {@link com.tdoer.bedrock.CloudEnvironment}.
-     * <br>
-     * Services will be appended to the given list.
-     *
-     * @param list List to hold services.
-     */
-    void listCurrentServices(List<Service> list);
-
-    /**
-     * Whether the application can access the service or not
-     *
-     * @param service
-     * @return
-     */
-    boolean isServiceAccessible(Service service);
-
-    /**
      * Get page of specific Id available in the application
      *
      * @param pageId
@@ -112,6 +85,39 @@ public interface Application extends Serializable {
     Page getPage(String pageCode) throws PageNotFoundException;
 
     /**
+     * List available pages of the application in current cloud environment
+     * {@link com.tdoer.bedrock.CloudEnvironment}.
+     * <br>
+     * Pages will be appended to the given list.
+     *
+     * @param list List to hold pages, cannot be <code>null</code>
+     */
+    void listCurrentPages(List<Page> list);
+
+    /**
+     * List the application's all enabled pages, including common and customized ones.
+     *
+     * @param list List to hold pages, cannot be <code>null</code>
+     */
+    void listAllPages(List<Page> list);
+
+    /**
+     * List services the application needs to call in current cloud environment
+     * {@link com.tdoer.bedrock.CloudEnvironment}.
+     *
+     * @param list List to hold services.
+     */
+    void listCurrentRefereeServices(List<Service> list);
+
+    /**
+     * Whether the application can access the service or not
+     *
+     * @param service
+     * @return
+     */
+    boolean isServiceAccessible(Service service);
+
+    /**
      * Get action of specific Id available in the application
      *
      * @param actionId
@@ -126,4 +132,5 @@ public interface Application extends Serializable {
      * @return
      */
     Action getAction(String actionCode) throws ActionNotFoundException;
+
 }
