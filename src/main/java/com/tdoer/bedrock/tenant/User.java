@@ -27,16 +27,20 @@ public interface User extends Serializable {
     /**
      * The user's ID
      *
-     * @return The user's ID
+     * @return The user's ID, cannot be <code>null</code>
      */
     Long getId();
 
+    /**
+     * The user's GUID
+     * @return The user's GUID, cannot be blank
+     */
     String getGuid();
 
     /**
-     * The user's tenant ID. The tenant rent products to its users.
+     * The Id of a tenant, to which the user belongs
      *
-     * @return The user's tenant ID, must not be blank
+     * @return Tenant Id, cannot be <code>null</code>
      */
     Long getTenantId();
 
@@ -50,7 +54,7 @@ public interface User extends Serializable {
     /**
      * The user's login password
      *
-     * @return Login password
+     * @return Login password, must not be blank
      */
     String getPassword();
 
@@ -64,14 +68,14 @@ public interface User extends Serializable {
     /**
      * The user's email, for example, "htinker@163.com"
      *
-     * @return User Email
+     * @return User Email, may be blank
      */
     String getEmail();
 
     /**
      * The user's mobile phone, for example, 13916723966
      *
-     * @return Mobile phone number
+     * @return Mobile phone number, must not be blank
      */
     String getPhone();
 
@@ -79,21 +83,21 @@ public interface User extends Serializable {
     /**
      * The user's status, for example, active, locked etc..
      *
-     * @return
+     * @return Account status, must not be <code>null</code>
      */
     AccountStatus getStatus();
 
     /**
      * Credential or password status, for example, initial, expired, active etc.
      *
-     * @return
+     * @return Credential status, must not be <code>null</code>
      */
     CredentialStatus getCredentialStatus();
 
     /**
      * User category, say, b-end or c-end
      *
-     * @return
+     * @return User category, must not be blank
      */
     String getCategory();
 
@@ -101,7 +105,7 @@ public interface User extends Serializable {
      * The user is real or fictional. When a user is not authenticated yet, the user may be fabricated,
      * played as a guest.
      *
-     * @return true if a
+     * @return true if it's a real user
      */
     boolean isReal();
 }

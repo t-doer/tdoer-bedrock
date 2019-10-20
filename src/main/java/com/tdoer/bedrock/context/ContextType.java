@@ -22,28 +22,65 @@ import java.io.Serializable;
  * @create 2017-09-19
  */
 public interface ContextType extends Serializable {
-
+    /**
+     * Context type
+     * @return Context type, must not be <code>null</code>
+     */
     Long getType();
 
+    /**
+     * Context name
+     * @return Context name, must not be blank
+     */
     String getName();
 
+    /**
+     * Context code
+     * @return Context code, must not be blank
+     */
     String getCode();
 
+    /**
+     * Context category
+     *
+     * @return Context category, must not be blank
+     */
     String getCategory();
 
+    /**
+     * Parent context type
+     * @return Parent context type or <code>null</code> if the context type is the root context type
+     */
     ContextType getParent();
 
+    /**
+     * Children context types
+     * @return Context types or <code>null</code> if the context type is the leaf node
+     */
     ContextType[] getChildren();
 
+    /**
+     * Root context type, must be "TENANT" context type
+     * @return Context type, must not be <code>null</code>
+     */
     ContextType getRoot();
 
+    /**
+     * Find context type of specific type
+     * @param contextType Context type, cannot be <code>null</code>
+     * @return Context type or <code>null</code> it not found
+     */
     ContextType find(Long contextType);
 
+    /**
+     * The path of the context
+     * @return Context path, must not be <code>null</code>
+     */
     ContextPath getContextPath();
 
     /**
-     * Is the root context type, that's "TENANT"?.
-     * @return
+     * Check if the context is the root context type, that's "TENANT"?.
+     * @return true if it's the  root context type
      */
     boolean isRoot();
 }

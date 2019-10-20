@@ -20,6 +20,11 @@ package com.tdoer.bedrock.context;
  * @create 2017-09-19
  */
 public interface ContextPathParser {
-
+    /**
+     * Parse context path string, say "1.1-2.1-3.1" into {@link ContextPath}
+     * @param contextPath Context path string, must not be <code>null</code>
+     * @return {@link ContextPath} if the context path string is of the format
+     * @throws InvalidContextPathException if the context path string is invalid
+     */
     ContextPath parse(String contextPath) throws InvalidContextPathException;
 }

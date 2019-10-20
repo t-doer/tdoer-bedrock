@@ -15,8 +15,6 @@
  */
 package com.tdoer.bedrock.context;
 
-import com.tdoer.bedrock.application.ApplicationInstallation;
-
 import java.util.List;
 /**
  * @Description
@@ -25,16 +23,61 @@ import java.util.List;
  */
 public interface ContextConfigCenter {
 
-    void listUserRoles(ContextPath contextPath, Long userId, List<ContextRole> list);
+    /**
+     * List user roles of specific user Id in specific tenant's specific context instance
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextPath Context path of context instance, cannot be <code>null</code>
+     * @param userId User Id, cannot be <code>null</code>
+     * @param list List to hold context roles, cannot be <code>null</code>
+     */
+    void listUserRoles(Long tenantId, ContextPath contextPath, Long userId, List<ContextRole> list);
 
-    void listPublicAuthorities(ContextPath contextPath, Long tenantId, List<PublicAuthority> list);
+    /**
+     * List public authorities in specific tenant's specific context instance
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextPath Context path of context instance, cannot be <code>null</code>
+     * @param list List to hold public authorities, cannot be <code>null</code>
+     */
+    void listPublicAuthorities(Long tenantId, ContextPath contextPath, List<PublicAuthority> list);
 
-    void listContextRoles(ContextPath contextPath, Long tenantId, List<ContextRole> list);
+    /**
+     * List context roles in specific tenant's specific context instance
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextPath Context path of context instance, cannot be <code>null</code>
+     * @param list List to hold context roles, cannot be <code>null</code>
+     */
+    void listContextRoles(Long tenantId, ContextPath contextPath, List<ContextRole> list);
 
-    ContextRole getContextRole(Long roleId, ContextPath contextPath, Long tenantId);
+    /**
+     * Get context role of specific role Id in specific tenant's specific context instance
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextPath Context path of context instance, cannot be <code>null</code>
+     * @param roleId Role Id, cannot be <code>null</code>
+     * @return Context role or <code>null</code>
+     */
+    ContextRole getContextRole(Long tenantId, ContextPath contextPath, Long roleId);
 
-    void listApplicationInstallation(String clientId, ContextPath contextPath, Long tenantId,
+    /**
+     * List application installations which are in specific client and specific tenant's
+     * specific context instance
+     *
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextPath Context path of context instance, cannot be <code>null</code>
+     * @param clientId Client Id, cannot be <code>null</code>
+     * @param list List to hold {@link ContextApplicationInstallation}, cannot be <code>null</code>
+     */
+    void listApplicationInstallation(Long tenantId, ContextPath contextPath, Long clientId,
                                      List<ContextApplicationInstallation> list);
 
-    ContextApplicationInstallation getApplicationInstallation(String clientId, ContextPath contextPath, Long tenantId, String applicationId);
+    /**
+     * Get application installation of specific application Id which is in specific client and
+     * specific tenant's specific context instance
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextPath Context path of context instance, cannot be <code>null</code>
+     * @param clientId Client Id, cannot be <code>null</code>
+     * @param applicationId Application Id, cannot be <code>null</code>
+     * @return Application installation or <code>null</code>
+     */
+    ContextApplicationInstallation getApplicationInstallation(Long tenantId, ContextPath contextPath, Long clientId,
+                                                              String applicationId);
 }

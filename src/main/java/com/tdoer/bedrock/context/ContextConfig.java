@@ -27,77 +27,83 @@ import java.util.Locale;
 public interface ContextConfig {
 
     /**
-     * List current user's roles in the context instance.
+     * List current user's roles in the context instance. Current user
+     * is the user who is sending the request, if the user dose not log
+     * in yet, current user is <code>null</code>.
      *
-     * @param list
+     * @param list List to hold context roles, cannot be <code>null</code>
      */
     void listCurrentUserRoles(List<ContextRole> list);
 
     /**
-     * List context roles of given user Id
+     * List context roles of specific user Id
      *
-     * @param userId
-     * @param list
+     * @param userId User Id, must not be <code>null</code>
+     * @param list List to hold context roles, cannot be <code>null</code>
      */
     void listUserRoles(Long userId, List<ContextRole> list);
 
 
     /**
-     * List available roles in current context instance
+     * List all enabled roles in current context instance, including
+     * system ones and custom ones
      *
-     * @param list
+     * @param list List to hold context roles, cannot be <code>null</code>
      */
     void listContextRoles(List<ContextRole> list);
 
     /**
-     * Get context role available in the context instance
+     * Get context role of specific role Id, which is available in the context instance
      *
-     * @param roleId
-     * @return
+     * @param roleId Role Id, cannot be <code>null</code>
+     * @return Context role if it exists and is enabled and belows to the context,
+     * otherwise return <code>null</code>
      */
     ContextRole getContextRole(Long roleId);
 
     /**
-     * Get context role available in the context instance.
+     * Get context role of specific role code, which is available in the context instance.
      *
-     * @param roleCode
-     * @return
+     * @param roleCode Role code, cannot be blank
+     * @return Context role if it exists and is enabled and belows to the context,
+     * otherwise return <code>null</code>
      */
     ContextRole getContextRole(String roleCode);
 
     /**
-     * List public authorities in current context instance which all users can access.
+     * List public authorities in current context instance which resources all users can access.
      *
-     * @param list
+     * @param list List to hold public authorities, cannot be <code>null</code>
      */
     void listPublicAuthorities(List<PublicAuthority> list);
 
     /**
-     * Check if the http request path's access is permitted in current context instance.
+     * Check if the user's request is permitted in the context instance according to
+     * user's role and public authorities
      *
-     * @param httpMethod
-     * @param path
-     * @return
+     * @param httpMethod Http method, cannot be blank
+     * @param URI Request URI, cannot be blank
+     * @return true if the request passes access checking
      */
-    boolean checkServiceMethodAccess(String httpMethod, String path);
+    boolean checkServiceMethodAccess(String httpMethod, String URI);
 
     /**
-     * List all applications installed in current contextPath instance
+     * List all applications installed in current context instance
      *
-     * @param list
+     * @param list List to hold {@link ContextApplicationInstallation}, cannot be <ode>null</ode>
      */
     void listApplicationInstallations(List<ContextApplicationInstallation> list);
 
     /**
-     * Get an application installed in current contextPath instance.
+     * Get an application installed in current context instance.
      *
-     * @param applicationId
-     * @return An application installation or null if not found
+     * @param applicationId Application Id, cannot be <code>null</code>
+     * @return An application installation or <code>null</code> if not found
      */
     ContextApplicationInstallation getApplicationInstallation(String applicationId);
 
     /**
-     * Check whether an application was installed and enabled in current context instance.
+     * Check if an application was installed and enabled in current context instance.
      *
      * @param application Application
      * @return true if the application is supported

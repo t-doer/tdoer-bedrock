@@ -15,34 +15,85 @@
  */
 package com.tdoer.bedrock.context;
 
+import org.springframework.util.Assert;
+
 import java.io.Serializable;
 /**
- * @Description
+ * @Description The path of context (context type or context instance). Context is a
+ * hierarchy tree. Context path consists of "level1 node -level2 node - leve3 node - ...",
+ * each node's path is of the format "type.instanceId", containing context type and instance
+ * information. The root node must be a tenant. So context path looks like this "1.1-2.1-3.1"
+ * If "instanceId" is zero, a context path must be a context type's path.
+ *
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
 public final class ContextPath implements Serializable {
 
-    private Integer type;
+    /**
+     * Context type
+     */
+    private Long type;
 
+    /**
+     * Instance Id, cant be <code>zero</code>
+     */
     private Long instanceId;
 
+    /**
+     * Parent node's context path
+     */
     private ContextPath parent;
 
-    public ContextPath(Integer type, Long instanceId) {
+    public ContextPath(Long type, Long instanceId) {
         this(type, instanceId, null);
     }
 
-    public ContextPath(Integer type, Long instanceId, ContextPath parent) {
+    public ContextPath(Long type, Long instanceId, ContextPath parent) {
+        Assert.notNull(type, "Context type cannot be null");
+        Assert.notNull(instanceId, "Instance Id cannot be null");
         this.type = type;
         this.instanceId = instanceId;
         this.parent = parent;
     }
 
+    /**
+     * Context type
+     * @return Context type, must not be <code>null</code>
+     */
+    public Long getType() {
+        return type;
+    }
+
+    /**
+     * Instance Id, if the path is a context type's path, instance Id is zero.
+     *
+     * @return Instance Id, must not be <code>null</code>
+     */
+    public Long getInstanceId() {
+        return instanceId;
+    }
+
+    /**
+     * Parent context's path
+     * @return Parent path or <code>null</code> if current node is the root node
+     */
+    public ContextPath getParent() {
+        return parent;
+    }
+
+    /**
+     * Current node's path value, say, "2.1"
+     * @return Path value, must not be blank
+     */
     public String getValue() {
         return type + "." + instanceId;
     }
 
+    /**
+     * Current node's absolute path value, say "1.1-2.1"
+     * @return Absolute path value, must not be blank
+     */
     public String getAbsoluteValue() {
         StringBuilder buffer = new StringBuilder();
         if (parent != null) {
@@ -54,14 +105,26 @@ public final class ContextPath implements Serializable {
         return buffer.toString();
     }
 
+    /**
+     * Set parent path
+     * @param parent Parent path, can be <code>null</code>
+     */
     public void setParentPath(ContextPath parent) {
         this.parent = parent;
     }
 
+    /**
+     * Get current node's parent node's path
+     * @return Parent path or <code>null</code> if current node is the root node
+     */
     public ContextPath getParentPath() {
         return parent;
     }
 
+    /**
+     * Get the root node's path, that's, "TENANT" node's path
+     * @return Root path, must not be <code>null</code>
+     */
     public ContextPath getRootPath() {
         ContextPath c = this;
         while (c.getParentPath() != null) {
@@ -70,22 +133,18 @@ public final class ContextPath implements Serializable {
         return c;
     }
 
+    /**
+     * Check if current node is the root node, that's, "TENANT" node
+     * @return
+     */
     public boolean isRootPath(){
         return (parent == null);
     }
 
-    public Integer getType() {
-        return type;
-    }
-
-    public Long getInstanceId() {
-        return instanceId;
-    }
-
-    public ContextPath getParent() {
-        return parent;
-    }
-
+    /**
+     * Clone the whole context path
+     * @return Context path with the same absolute path value
+     */
     public ContextPath clone() {
         if (parent != null) {
             return new ContextPath(type, instanceId, parent.clone());
@@ -96,24 +155,25 @@ public final class ContextPath implements Serializable {
 
     /**
      * The method is mainly used to search configurations for a context, if no next
-     * lookup any more, it will return itself. Take Context "22.1-23.1" for example,
-     * the method will return the contexts in sequence:
+     * lookup any more, it will return <code>null</code>. Take Context "22.1-23.1" for example,
+     * the method will return the context path in sequence if it's called recursively:
      * <ol>
      * <li>22.1-23.1</li>
      * <li>22.1-23.0</li>
      * <li>22.0-23.0</li>
+     * <li>null</li>
      * </ol>
      *
      * @return Next lookup context or itself if no more
      */
-    public ContextPath parentTemplate() {
+    public ContextPath nextLookup() {
         if (!instanceId.equals(0L)) {
             return new ContextPath(type, 0L, parent);
         } else {
             if (parent != null) {
-                return new ContextPath(type, instanceId, parent.parentTemplate());
+                return new ContextPath(type, instanceId, parent.nextLookup());
             } else {
-                return this;
+                return null;
             }
         }
     }
@@ -125,6 +185,12 @@ public final class ContextPath implements Serializable {
 
     @Override
     public boolean equals(Object rhs) {
+        if(rhs == null){
+            return false;
+        }
+        if(this == rhs){
+            return true;
+        }
         if (rhs instanceof ContextPath) {
             return (this.getAbsoluteValue().equals(((ContextPath) rhs).getAbsoluteValue()));
         }

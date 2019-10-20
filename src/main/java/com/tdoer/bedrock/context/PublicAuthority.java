@@ -15,7 +15,7 @@
  */
 package com.tdoer.bedrock.context;
 /**
- * @Description
+ * @Description Public authority
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */

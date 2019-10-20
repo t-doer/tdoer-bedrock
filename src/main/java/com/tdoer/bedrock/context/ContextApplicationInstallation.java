@@ -25,9 +25,24 @@ import com.tdoer.bedrock.context.ContextPath;
  */
 public interface ContextApplicationInstallation extends ApplicationInstallation {
 
+    /**
+     * The path of the context (context type or context instance) in which the
+     * application is installed
+     *
+     * @return Context path, must not be <code>null</code>
+     */
     ContextPath getContextPath();
 
+    /**
+     * The Id of the client in which the application is installed
+     * @return Client Id, must not be <code>null</code>
+     */
     Long getClientId();
 
+    /**
+     * The Id of the tenant in which the application is installed
+     *
+     * @return Tenant Id, must not be <code>null</code>, but may be zero
+     */
     Long getTenantId();
 }

@@ -25,20 +25,40 @@ import java.util.List;
  * @create 2017-09-19
  */
 public interface TenantClient {
+    /**
+     * Tenant who accesses a product's client
+     * @return Tenant, cannot be <code>null</code>
+     */
     Tenant getTenant();
 
+    /**
+     * A product's client
+     * @return Client, cannot be <code>null</code>
+     */
     Client getClient();
 
+    /**
+     * Tenant Id
+     * @return Tenant Id, cannot be <code>null</code>
+     */
     Long getTenantId();
 
+    /**
+     * Client Id
+     * @return Tenant Id, cannot be <code>null</code>
+     */
     Long getClientId();
 
     /**
      * Client secret
      *
-     * @return
+     * @return Client secret, cannot be null
      */
     String getSecret();
 
-    void listHosts(List<String> list);
+    /**
+     * List a client's access domains for the tenant
+     * @param list List to hold access domains, cannot be <code>null</code>
+     */
+    void listAccessDomains(List<String> list);
 }

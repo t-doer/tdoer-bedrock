@@ -20,5 +20,9 @@ package com.tdoer.bedrock.context;
  * @create 2017-09-19
  */
 public interface RoleAuthority extends GrantedResource {
+    /**
+     * The Id of role to which the resource granted
+     * @return Role Id, must not be <code>null</code>
+     */
     Long getRoleId();
 }

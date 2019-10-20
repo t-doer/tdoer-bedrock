@@ -20,5 +20,10 @@ package com.tdoer.bedrock.context;
  * @create 2019-10-17
  */
 public interface ContextInstallation {
+    /**
+     * The context type which is installed
+     *
+     * @return Context path of context type, must not be <code>null</code>
+     */
     ContextPath getContextPath();
 }

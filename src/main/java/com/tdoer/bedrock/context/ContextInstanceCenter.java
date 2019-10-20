@@ -20,5 +20,14 @@ package com.tdoer.bedrock.context;
  * @create 2017-09-19
  */
 public interface ContextInstanceCenter {
-    ContextInstance getContextInstance(ContextPath contextPath) throws ContextInstanceNotFoundException;
+
+    /**
+     * Get context instance of specific context path in specific tenant
+     *
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextPath Context path, cannot be <code>null</code>
+     * @return Context instance if it exists and is enabled
+     * @throws ContextInstanceNotFoundException if it is not found
+     */
+    ContextInstance getContextInstance(Long tenantId, ContextPath contextPath) throws ContextInstanceNotFoundException;
 }

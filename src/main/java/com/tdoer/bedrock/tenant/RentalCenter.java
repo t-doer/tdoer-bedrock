@@ -21,19 +21,65 @@ package com.tdoer.bedrock.tenant;
  * @create 2017-09-19
  */
 public interface RentalCenter {
+    /**
+     * Get tenant of specific tenant code
+     * @param tenantCode Tenant code, cannot be blank
+     * @return Tenant if found
+     * @throws TenantNotFoundException if not found
+     */
     Tenant getTenantByCode(String tenantCode) throws TenantNotFoundException;
 
+    /**
+     * Get tenant of specific tenant Id
+     * @param tenantId Tenant Id, cannot be blank
+     * @return Tenant if found
+     * @throws TenantNotFoundException if not found
+     */
     Tenant getTenantById(Long tenantId) throws TenantNotFoundException;
 
+    /**
+     * Get tenant of specific tenant GUID
+     * @param guid Tenant GUID, cannot be blank
+     * @return Tenant if found
+     * @throws TenantNotFoundException if not found
+     */
     Tenant getTenantByGUID(String guid) throws TenantNotFoundException;
 
+    /**
+     * Find product rental of tenant Id and product Id
+     *
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param productId Product Id, cannot be <code>null</code>
+     * @return Product rental or <code>null</code> if not found
+     */
     ProductRental getProductRendtal(Long tenantId, Long productId);
 
+    /**
+     * Find all rentals of a tenant
+     * @param tenantId Tenant Id, cannot be <code>nul</code>
+     * @return An array of product rental or <code>null</code>
+     */
     ProductRental[] getProductRentals(Long tenantId);
 
-    TenantClient getTenantClient(String host);
+    /**
+     * Find the tenant client of specific access domain
+     * @param accessDomain
+     * @return Tenant client or <code>null</code> if not found
+     */
+    TenantClient getTenantClient(String accessDomain);
 
+    /**
+     * Get tenant client of specific tenant and client
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param clientId Client Id, cannot be <code>null</code>
+     * @return
+     */
     TenantClient getTenantClient(Long tenantId, Long clientId);
 
+    /**
+     * Get all tenant clients of a tenant
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @return An array of tenant client or <code>null</code>
+     */
     TenantClient[] getTenantClients(Long tenantId);
 }

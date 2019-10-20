@@ -20,9 +20,23 @@ package com.tdoer.bedrock.context;
  * @create 2017-09-19
  */
 public interface RootContextType {
+    /**
+     * The root context, that's "TENANT" context type
+     * @return Context type, must not be <code>null</code>
+     */
     ContextType getRoot();
 
-    ContextType find(Integer type);
+    /**
+     * Find the context of specific type
+     * @param type Type value, cannot be <code>null</code>
+     * @return Context type or <code>null</code> if not found
+     */
+    ContextType find(Long type);
 
+    /**
+     * Find the context of specific context code
+     * @param code Context code, cannot be blank
+     * @return Context type or <code>null</code> if not found
+     */
     ContextType find(String code);
 }

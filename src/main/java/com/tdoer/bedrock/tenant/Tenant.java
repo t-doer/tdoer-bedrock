@@ -45,15 +45,14 @@ public interface Tenant extends ContextInstance, Serializable {
 
     /**
      * List the tenant's product rentals
-     *
-     * @return
+     * @param list List to hold product rentals, cannot be <code>null</code>
      */
     void listProductRentals(List<ProductRental> list);
 
     /**
      * List the tenant's clients
      *
-     * @param list
+     * @param list List to hold tenant clients, cannot be <code>null</code>
      */
     void listTenantClients(List<TenantClient> list);
 }

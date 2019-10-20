@@ -25,5 +25,10 @@ import java.io.Serializable;
  * @create 2017-09-19
  */
 public interface GrantedResource extends GrantedAuthority {
+    /**
+     * The granted resource
+     *
+     * @return The granted resource, must not be <code>null</code>
+     */
     Resource getResource();
 }

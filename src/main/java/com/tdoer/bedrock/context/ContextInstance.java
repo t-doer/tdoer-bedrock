@@ -27,80 +27,80 @@ public interface ContextInstance extends Serializable {
     /**
      * Context instance Id
      *
-     * @return
+     * @return Instance Id, must not be <code>null</code>
      */
     Long getId();
 
     /**
-     * Context instance guid
+     * Context instance guid, globally unique
      *
-     * @return
+     * @return Instance GUID, must not be blank
      */
     String getGuid();
 
     /**
-     * Context instance name
+     * Context instance name, unique in a tenant
      *
-     * @return
+     * @return Instance name, must not be blank
      */
     String getName();
 
     /**
-     * Organization Code or User Login Account
+     * Instance code, unique in a tenant
      *
-     * @return
+     * @return Instance code, must not be blank
      */
     String getCode();
 
     /**
-     * Get contextPath instance's detail information object's ID, say, tenant's Id, store's Id, userI's Id etc.
+     * Get instance's detail information object's ID, say, class's Id, user's Id etc.
      *
-     * @return
+     * @return associated detail object Id, may be <code>null</code>
      */
     Long getDetailObjectId();
 
     /**
      * Is the instance a tenant, the root context instance?
      *
-     * @return
+     * @return true if the instance is a tenant
      */
     boolean isTenant();
 
     /**
-     * Parent contextPath instance. If the instance is a tenant, its parent contextPath instance
-     * is null; if the instance is a user, its parent is a tenant; if the instance is a
-     * store, its parent is city.
-     * <p>
-     * The top parent is always the organization root, the organization node of a tenant.
+     * Parent context instance. If the instance is a tenant, its parent context instance
+     * is <code>null</code>
      *
-     * @return
+     * @return The context instance's parent instance, may be <code>null</code>
      */
     ContextInstance getParent();
 
     /**
-     * The top parent is always the organization root, the organization node of a tenant.
+     * The top parent of the instance, that's the tenant.
      *
      * @return
      */
     ContextInstance getTopParent();
 
     /**
-     * Context path to the contextPath instance, say, '1.1-20.2-30.3'.
+     * Context path to the context instance, say, '1.1-20.2-30.3', it's always
+     * globally unique.
      *
-     * @return
+     * @return Context path, must not be <code>null</code>
      */
     ContextPath getContextPath();
 
     /**
-     * Context type
-     * @return
+     * Context type of the context instance. An instance must below to only one
+     * context type.
+     *
+     * @return Context type, must not be <code>null</code>
      */
     ContextType getContextType();
 
     /**
-     * The instance's configurations, for example, available applications, contextPath roles etc.
+     * The instance's configurations, for example, available applications, context roles etc.
      *
-     * @return
+     * @return Context configuration, must not be <code>null</code>
      */
     ContextConfig getContextConfig();
 }
