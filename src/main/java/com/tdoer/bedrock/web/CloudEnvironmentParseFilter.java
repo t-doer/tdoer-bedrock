@@ -127,14 +127,14 @@ public class CloudEnvironmentParseFilter implements Filter, InitializingBean {
     }
 
     protected void setResponseHeader(HttpServletRequest request, HttpServletResponse response, CloudEnvironment environment) {
-        String tenantCode = WebUtil.findValueFromRequest(request, CloudConstants.TENANT_GUID);
-        String clientId = WebUtil.findValueFromRequest(request, CloudConstants.CLIENT_CODE);
+        String tenantCode = WebUtil.findValueFromRequest(request, PlatformConstants.TENANT_GUID);
+        String clientId = WebUtil.findValueFromRequest(request, PlatformConstants.CLIENT_CODE);
 
         if (!StringUtils.hasText(tenantCode) || !StringUtils.hasText(clientId)) {
-            WebUtil.addValueIntoResponseHeaderAndCookie(response, request, CloudConstants.CLIENT_CODE, environment.getClient().getCode());
-            WebUtil.addValueIntoResponseHeaderAndCookie(response, request, CloudConstants.TENANT_GUID, environment.getTenant().getCode());
+            WebUtil.addValueIntoResponseHeaderAndCookie(response, request, PlatformConstants.CLIENT_CODE, environment.getClient().getCode());
+            WebUtil.addValueIntoResponseHeaderAndCookie(response, request, PlatformConstants.TENANT_GUID, environment.getTenant().getCode());
         }
 
-        request.setAttribute(CloudConstants.ENVIRONMENT_DIGEST, environment.getDigest());
+        request.setAttribute(PlatformConstants.ENVIRONMENT_DIGEST, environment.getDigest());
     }
 }

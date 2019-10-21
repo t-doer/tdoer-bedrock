@@ -42,7 +42,7 @@ public class RequestCloudEnvironmentExtractor {
 
     protected EnvironmentDigest extractEnvironmentDigest(HttpServletRequest request) {
 
-        String digestString = WebUtil.findValueFromRequest(request, CloudConstants.ENVIRONMENT_DIGEST);
+        String digestString = WebUtil.findValueFromRequest(request, PlatformConstants.ENVIRONMENT_DIGEST);
         if (digestString != null) {
             return EnvironmentDigest.fromDigestString(digestString);
         }
@@ -54,8 +54,8 @@ public class RequestCloudEnvironmentExtractor {
 
         TenantClient tenantClient = null;
 
-        String tenantId = WebUtil.findValueFromRequest(request, CloudConstants.TENANT_GUID);
-        String clientId = WebUtil.findValueFromRequest(request, CloudConstants.CLIENT_CODE);
+        String tenantId = WebUtil.findValueFromRequest(request, PlatformConstants.TENANT_GUID);
+        String clientId = WebUtil.findValueFromRequest(request, PlatformConstants.CLIENT_CODE);
         if (StringUtils.hasText(clientId) && StringUtils.hasText(tenantId)) {
             logger.debug("Loading TenantClient by (tenantId, clientId) - ({}, {})", tenantId, clientId);
             tenantClient = Platform.getRentalCenter().getTenantClient(Long.parseLong(tenantId), Long.parseLong(clientId));
@@ -77,7 +77,7 @@ public class RequestCloudEnvironmentExtractor {
     }
 
     protected ContextPath extractContextPath(HttpServletRequest request) {
-        String cp = WebUtil.findValueFromRequest(request, CloudConstants.CONTEXT_PATH_PARAM);
+        String cp = WebUtil.findValueFromRequest(request, PlatformConstants.CONTEXT_PATH_PARAM);
         logger.debug("Found context path: {}", cp);
         if (StringUtils.hasText(cp)) {
             return Platform.getContextPathParser().parse(cp);
@@ -124,7 +124,7 @@ public class RequestCloudEnvironmentExtractor {
                 }
             }
 
-            String appCode = WebUtil.findValueFromRequest(request, CloudConstants.APPLICATION_CODE_PARAM);
+            String appCode = WebUtil.findValueFromRequest(request, PlatformConstants.APPLICATION_CODE_PARAM);
             if(!StringUtils.hasText(appCode)){
                 logger.debug("No application code found in request: {}", request.getRequestURL());
                 appCode = contextInstance.getContextConfig().getEntryApplicationCode();

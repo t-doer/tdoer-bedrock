@@ -13,22 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tdoer.bedrock.config;
-
-import com.tdoer.bedrock.CloudConfiguration;
-import org.springframework.context.annotation.Import;
-
-import java.lang.annotation.*;
+package com.tdoer.bedrock;
 
 /**
+ * @Description
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
+public interface PlatformConstants {
+    String CONTEXT_PATH_PARAM = "cp";
 
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Inherited
-@Import({CloudConfiguration.class})
-public @interface EnableCloudEnvironment {
+    String APPLICATION_CODE_PARAM = "appc";
+
+    String CLIENT_CODE = "_fw_client_code";
+
+    String TENANT_GUID = "_fw_tenant_guid";
+
+    String SERVICE_CODE = "_fw_service_code";
+
+    String ENVIRONMENT_DIGEST = "_fw_env_digest";
 }

@@ -33,9 +33,10 @@ import com.tdoer.bedrock.tenant.User;
  * @create 2019-10-17
  */
 public class Platform {
-    private static CloudConfiguration configuration;
+    private static PlatformConfiguration configuration;
 
-    static void setCloudConfiguration(CloudConfiguration cloudConfiguration){
+    // can only access in the same package
+    static void setCloudConfiguration(PlatformConfiguration cloudConfiguration){
         configuration = cloudConfiguration;
     }
 

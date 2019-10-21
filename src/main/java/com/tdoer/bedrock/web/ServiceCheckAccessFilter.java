@@ -15,7 +15,7 @@
  */
 package com.tdoer.bedrock.web;
 
-import com.tdoer.bedrock.CloudConstants;
+import com.tdoer.bedrock.PlatformConstants;
 import com.tdoer.bedrock.Platform;
 import com.tdoer.bedrock.application.Application;
 import com.tdoer.bedrock.product.Client;
@@ -60,7 +60,7 @@ public class ServiceCheckAccessFilter  implements Filter, InitializingBean {
         }
 
         if(service.getType() != ServiceType.GATEWAY){
-            String refererServiceCode = WebUtil.findValueFromRequest(request, CloudConstants.SERVICE_CODE);
+            String refererServiceCode = WebUtil.findValueFromRequest(request, PlatformConstants.SERVICE_CODE);
             if(StringUtils.hasText(refererServiceCode)){
                 Service referer = Platform.getServiceRepository().getService(refererServiceCode);
                 if(referer == null){

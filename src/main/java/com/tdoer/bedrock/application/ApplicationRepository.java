@@ -127,7 +127,7 @@ public interface ApplicationRepository {
     void listAllActions(Long pageId, List<Action> list);
 
     /**
-     * List the referee services which are referred to or called by specific application,
+     * List the Ids of referee services which are referred to or called by specific application,
      * and are available for current product, client, tenant, and context instance.
      *
      * @param applicationId Application Id, cannot be <code>null</code>
@@ -137,17 +137,16 @@ public interface ApplicationRepository {
      * @param contextPath Context path, cannot be <code>null</code>
      * @param list List to referee services, cannot be <code>null</code>
      */
-    void listCurrentRefereeServices(Long applicationId, Long productId, Long clientId, Long tenantId,
-                               ContextPath contextPath,
-                      List<Service> list);
+    void listCurrentRefereeServiceIds(Long applicationId, Long productId, Long clientId, Long tenantId,
+                               ContextPath contextPath, List<Long> list);
 
     /**
-     * List all available referee services of the application.
+     * List all common referee services of the application.
      *
      * @param applicationId Application Id, cannot be <code>null</code>
      * @param list List to referee services, cannot be <code>null</code>
      */
-    void listAllRefereeServices(Long applicationId, List<Service> list);
+    void listCommonRefereeServiceIds(Long applicationId, List<Long> list);
 
     /**
      * List the service methods which the action needs to call

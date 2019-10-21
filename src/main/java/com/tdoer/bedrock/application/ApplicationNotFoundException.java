@@ -16,7 +16,6 @@
 package com.tdoer.bedrock.application;
 
 import com.tdoer.bedrock.BedrockErrorCodes;
-import com.tdoer.bedrock.CloudConstants;
 import com.tdoer.springboot.error.ErrorCodeException;
 /**
  * @Description

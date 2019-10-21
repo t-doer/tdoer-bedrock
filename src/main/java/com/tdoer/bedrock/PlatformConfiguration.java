@@ -26,6 +26,7 @@ import com.tdoer.bedrock.service.ServiceRepository;
 import com.tdoer.bedrock.tenant.RentalCenter;
 import com.tdoer.bedrock.web.CloudEnvironmentParseFilterFactory;
 import com.tdoer.bedrock.web.RequestCloudEnvironmentExtractor;
+import com.tdoer.springboot.util.StatusCodeUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,7 +42,7 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
-public class CloudConfiguration implements BeanPostProcessor, ApplicationContextAware {
+public class PlatformConfiguration implements BeanPostProcessor, ApplicationContextAware {
     /* -------------------------------------------------
      * The beans below should be implemented and provided by
      * Bedrock Implementation
@@ -83,8 +84,11 @@ public class CloudConfiguration implements BeanPostProcessor, ApplicationContext
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        if(bean instanceof CloudConfiguration){
-            Platform.setCloudConfiguration((CloudConfiguration)bean);
+        if(bean instanceof PlatformConfiguration){
+            Platform.setCloudConfiguration((PlatformConfiguration)bean);
+
+            // Register status codes
+            StatusCodeUtil.registerStatusCodes(BedrockErrorCodes.class);
         }
         return bean;
     }
@@ -134,9 +138,4 @@ public class CloudConfiguration implements BeanPostProcessor, ApplicationContext
         return rentalCenter;
     }
 
-    @Bean
-    public CloudEnvironmentParseFilterFactory cloudEnvironmentParseFilterFactory(){
-        RequestCloudEnvironmentExtractor extractor = new RequestCloudEnvironmentExtractor();
-        return new CloudEnvironmentParseFilterFactory(extractor);
-    }
 }
