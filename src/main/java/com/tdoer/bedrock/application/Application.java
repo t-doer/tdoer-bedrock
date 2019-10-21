@@ -100,12 +100,12 @@ public interface Application extends Serializable {
     void listAllPages(List<Page> list);
 
     /**
-     * List services the application needs to call in current cloud environment
+     * List the Ids of services the application needs to call in current cloud environment
      * {@link com.tdoer.bedrock.CloudEnvironment}.
      *
-     * @param list List to hold services.
+     * @param list List to hold service Ids.
      */
-    void listCurrentRefereeServices(List<Service> list);
+    void listCurrentRefereeServiceIds(List<Long> list);
 
     /**
      * Check whether the application can access the service or not. If the service
@@ -115,21 +115,5 @@ public interface Application extends Serializable {
      * @return true if the service is accessible, otherwise false
      */
     boolean isServiceAccessible(Service service);
-
-    /**
-     * Get action of specific Id available in the application
-     *
-     * @param actionId Action Id, cannot be <code>null</code>
-     * @return {@link Action} if it exists in the application, otherwise return <code>null</code>
-     */
-    Action getAction(Long actionId);
-
-    /**
-     * Get action of specific code available in the application
-     *
-     * @param actionCode Action code, cannot be <code>null</code>
-     * @return {@link Action} if it exists in the application, otherwise return <code>null</code>
-     */
-    Action getAction(String actionCode);
 
 }

@@ -15,9 +15,7 @@
  */
 package com.tdoer.bedrock.service;
 
-import com.tdoer.bedrock.application.Application;
 import com.tdoer.bedrock.context.ContextPath;
-import com.tdoer.bedrock.product.Client;
 
 import java.util.List;
 

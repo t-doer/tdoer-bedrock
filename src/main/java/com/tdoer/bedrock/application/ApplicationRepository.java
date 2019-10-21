@@ -47,11 +47,12 @@ public interface ApplicationRepository {
     /**
      * Get page of specific Id
      *
+     * @param applicationId Application Id, cannot be null
      * @param pageId Page Id, cannot be null
      * @return Page if found
      * @throws PageNotFoundException if the page dose not exist or is disabled
      */
-    Page getPage(Long pageId) throws PageNotFoundException;
+    Page getPage(Long applicationId, Long pageId) throws PageNotFoundException;
 
     /**
      * Get page of specific page code in the application
@@ -84,13 +85,14 @@ public interface ApplicationRepository {
     void listAllPages(Long applicationId, List<Page> list);
 
     /**
-     * Get action of specific Id
+     * Get action of specific Id in a specific application's page
      *
+     * @
      * @param actionId Action Id, cannot be <code>null</code>
      * @return Action if found
      * @throws ActionNotFoundException if the action dose not exist or is disabled
      */
-    Action getAction(Long actionId) throws ActionNotFoundException;
+    Action getAction(Long pageId, Long actionId) throws ActionNotFoundException;
 
     /**
      * Get action of specific action code in the page
