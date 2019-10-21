@@ -36,7 +36,7 @@ public interface Service extends Serializable {
     /**
      * Service code
      *
-     * @return Service code, must not be <code>null</code>
+     * @return Service code, must not be blank
      */
     String getCode();
 
@@ -50,28 +50,28 @@ public interface Service extends Serializable {
     /**
      * Service provider's name
      *
-     * @return Service provider, must not be <code>null</code>
+     * @return Service provider, must not be blank
      */
     String getProvider();
 
     /**
      * Service name
      *
-     * @return Service name, must not be <code>null</code>
+     * @return Service name, must not be blank
      */
     String getName();
 
     /**
      * Service description
      *
-     * @return Service description, maybe be {@code Null}
+     * @return Service description, maybe be blank
      */
     String getDescription();
 
     /**
      * Service version
      *
-     * @return Service version, must not be <code>null</code>
+     * @return Service version, must not be blank
      */
     String getVersion();
 
