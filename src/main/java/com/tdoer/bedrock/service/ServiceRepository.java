@@ -82,11 +82,12 @@ public interface ServiceRepository {
     /**
      * Get the service method of specific id.
      *
+     * @param serviceId Service Id, cannot be <code>null</code>
      * @param methodId Method Id, cannot be <code>null</code>
      * @return {@link ServiceMethod}
      * @throws ServiceMethodNotFoundException if the service method dose not exist or is disabled.
      */
-    ServiceMethod getServiceMethod(Long methodId) throws ServiceMethodNotFoundException;
+    ServiceMethod getServiceMethod(Long serviceId, Long methodId) throws ServiceMethodNotFoundException;
 
     /**
      * List all service methods of specific service Id which are available for current environment.
