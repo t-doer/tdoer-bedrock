@@ -45,13 +45,6 @@ public interface ApplicationRepository {
     Application getApplication(String applicationCode) throws ApplicationNotFoundException;
 
     /**
-     * List all available applications in the repository.
-     *
-     * @param list List to hold applications, cannot be <code>null</code>
-     */
-    void listApplications(List<Application> list);
-
-    /**
      * Get page of specific Id
      *
      * @param pageId Page Id, cannot be null

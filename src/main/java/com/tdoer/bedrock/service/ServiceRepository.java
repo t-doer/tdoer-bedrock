@@ -48,13 +48,6 @@ public interface ServiceRepository {
     Service getService(String serviceCode) throws ServiceNotFoundException;
 
     /**
-     * List all available services in the repository.
-     *
-     * @param list List to hold services, cannot be <code>null</code>
-     */
-    void listAllServices(List<Service> list);
-
-    /**
      * List a service's all referer clients.
      *
      * @param serviceId Service Id, cannot be <code>null</code>
