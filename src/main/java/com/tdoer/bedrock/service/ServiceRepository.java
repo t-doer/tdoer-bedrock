@@ -61,7 +61,7 @@ public interface ServiceRepository {
      * @param serviceId Service Id, cannot be <code>null</code>
      * @param list List to hold application Ids, cannot be <code>null</code>
      */
-    void listRefererApplications(Long serviceId, List<Long> list);
+    void listRefererApplicationIds(Long serviceId, List<Long> list);
 
     /**
      * List a service's all referer services.
@@ -69,7 +69,7 @@ public interface ServiceRepository {
      * @param serviceId Service Id, cannot be <code>null</code>
      * @param list List to hold service Ids, cannot be <code>null</code>
      */
-    void listRefererServices(Long serviceId, List<Long> list);
+    void listRefererServiceIds(Long serviceId, List<Long> list);
 
     /**
      * List a service's all referee service Ids.
@@ -77,7 +77,7 @@ public interface ServiceRepository {
      * @param serviceId Service Id, cannot be <code>null</code>
      * @param list List to hold service Ids, cannot be <code>null</code>
      */
-    void listRefereeServices(Long serviceId, List<Long> list);
+    void listRefereeServiceIds(Long serviceId, List<Long> list);
 
     /**
      * Get the service method of specific id.

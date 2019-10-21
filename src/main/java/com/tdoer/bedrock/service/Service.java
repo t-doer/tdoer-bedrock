@@ -122,7 +122,7 @@ public interface Service extends Serializable {
      * List the Ids of other services to which the service refers
      * @param list List to hold service Ids, cannot be <code>null</code>
      */
-    void listRefereeServices(List<Long> list);
+    void listRefereeServiceIds(List<Long> list);
 
     /**
      * Check if the service permits the access from the referer service?
