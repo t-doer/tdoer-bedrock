@@ -48,36 +48,36 @@ public interface ServiceRepository {
     Service getService(String serviceCode) throws ServiceNotFoundException;
 
     /**
-     * List a service's all referer clients.
+     * List a service's all referer client Ids.
      *
      * @param serviceId Service Id, cannot be <code>null</code>
-     * @param list List to hold clients, cannot be <code>null</code>
+     * @param list List to hold client Ids, cannot be <code>null</code>
      */
-    void listRefererClients(Long serviceId, List<Client> list);
+    void listRefererClientIds(Long serviceId, List<Long> list);
 
     /**
-     * List a service's all referer applications
+     * List a service's all referer application Ids
      *
      * @param serviceId Service Id, cannot be <code>null</code>
-     * @param list List to hold applications, cannot be <code>null</code>
+     * @param list List to hold application Ids, cannot be <code>null</code>
      */
-    void listRefererApplications(Long serviceId, List<Application> list);
+    void listRefererApplications(Long serviceId, List<Long> list);
 
     /**
      * List a service's all referer services.
      *
      * @param serviceId Service Id, cannot be <code>null</code>
-     * @param list List to hold services, cannot be <code>null</code>
+     * @param list List to hold service Ids, cannot be <code>null</code>
      */
-    void listRefererServices(Long serviceId, List<Service> list);
+    void listRefererServices(Long serviceId, List<Long> list);
 
     /**
-     * List a service's all referee services.
+     * List a service's all referee service Ids.
      *
      * @param serviceId Service Id, cannot be <code>null</code>
-     * @param list List to hold services, cannot be <code>null</code>
+     * @param list List to hold service Ids, cannot be <code>null</code>
      */
-    void listRefereeServices(Long serviceId, List<Service> list);
+    void listRefereeServices(Long serviceId, List<Long> list);
 
     /**
      * Get the service method of specific id.

@@ -100,29 +100,29 @@ public interface Service extends Serializable {
     ServiceMethod getMethod(Long methodId);
 
     /**
-     * List the clients which refer to or call the service
+     * List the Ids of clients which refer to or call the service
      *
-     * @param list List to hold clients, cannot be <code>null</code>
+     * @param list List to hold client Ids, cannot be <code>null</code>
      */
-    void listRefererClients(List<Client> list);
+    void listRefererClientIds(List<Long> list);
 
     /**
-     * List applications which refer to or call the service
-     * @param list List to hold applications, cannot be <code>null</code>
+     * List the Ids of applications which refer to or call the service
+     * @param list List to hold application Ids, cannot be <code>null</code>
      */
-    void listRefererApplications(List<Application> list);
+    void listRefererApplicationIds(List<Long> list);
 
     /**
-     * List other services which refer to or call the service
-     * @param list List to hold service, cannot be <code>null</code>
+     * List the Ids of other services which refer to or call the service
+     * @param list List to hold service Ids, cannot be <code>null</code>
      */
-    void listRefererServices(List<Service> list);
+    void listRefererServiceIds(List<Long> list);
 
     /**
-     * List other services to which the service refers
-     * @param list List to hold service, cannot be <code>null</code>
+     * List the Ids of other services to which the service refers
+     * @param list List to hold service Ids, cannot be <code>null</code>
      */
-    void listRefereeServices(List<Service> list);
+    void listRefereeServices(List<Long> list);
 
     /**
      * Check if the service permits the access from the referer service?
