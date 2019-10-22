@@ -15,6 +15,8 @@
  */
 package com.tdoer.bedrock.tenant;
 
+import java.util.List;
+
 /**
  * @Description
  * @author Htinker Hu (htinker@163.com)
@@ -55,11 +57,11 @@ public interface RentalCenter {
     ProductRental getProductRendtal(Long tenantId, Long productId);
 
     /**
-     * Find all rentals of a tenant
+     * List all product rentals of a tenant
      * @param tenantId Tenant Id, cannot be <code>nul</code>
-     * @return An array of product rental or <code>null</code>
+     * @return List of product rental or <code>null</code>
      */
-    ProductRental[] getProductRentals(Long tenantId);
+    void listProductRentals(Long tenantId, List<ProductRental> list);
 
     /**
      * Find the tenant client of specific access domain
@@ -79,7 +81,7 @@ public interface RentalCenter {
     /**
      * Get all tenant clients of a tenant
      * @param tenantId Tenant Id, cannot be <code>null</code>
-     * @return An array of tenant client or <code>null</code>
+     * @return List of tenant client or <code>null</code>
      */
-    TenantClient[] getTenantClients(Long tenantId);
+    void listTenantClients(Long tenantId, List<TenantClient> list);
 }
