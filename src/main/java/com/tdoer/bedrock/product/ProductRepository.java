@@ -25,9 +25,9 @@ import java.util.List;
  */
 public interface ProductRepository {
     /**
-     * Get product of specific ID
+     * Get product of specific Id
      *
-     * @param productId Product ID, cannot be <code>null</code>
+     * @param productId Product Id, cannot be <code>null</code>
      * @return Product if found
      * @throws ProductNotFoundException if the product dose not exist or is disabled
      */
@@ -49,25 +49,27 @@ public interface ProductRepository {
     void listProducts(List<Product> list);
 
     /**
-     * Get client of specific ID
-     * @param clientId Client ID, cannot be <code>null</code>
+     * Get specific client of specific product
+     * @param productId Product Id, cannot be <code>null</code>
+     * @param clientId Client Id, cannot be <code>null</code>
      * @return Client if found
      * @throws ClientNotFoundException if the client dose not exist or is disabled
      */
-    Client getClient(Long clientId) throws ClientNotFoundException;
+    Client getClient(Long productId, Long clientId) throws ClientNotFoundException;
 
     /**
-     * Get client of specific client code
+     * Get specific client of specific product
+     * @param productId Product Id, cannot be <code>null</code>
      * @param clientCode Client code, cannot be <code>null</code>
      * @return Client if found
      * @throws ClientNotFoundException if the client dose not exist or is disabled
      */
-    Client getClient(String clientCode) throws ClientNotFoundException;
+    Client getClient(Long productId, String clientCode) throws ClientNotFoundException;
 
     /**
      * Get all client of specific product
      *
-     * @param productId Product ID, cannot be <code>null</code>
+     * @param productId Product Id, cannot be <code>null</code>
      * @return A product's all enabled clients
      */
     Client[] getClients(Long productId);
