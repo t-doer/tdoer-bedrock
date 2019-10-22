@@ -20,12 +20,9 @@ import com.tdoer.bedrock.context.ContextConfigCenter;
 import com.tdoer.bedrock.context.ContextInstanceCenter;
 import com.tdoer.bedrock.context.ContextPathParser;
 import com.tdoer.bedrock.context.RootContextType;
-import com.tdoer.bedrock.product.ClientConfigCenter;
 import com.tdoer.bedrock.product.ProductRepository;
 import com.tdoer.bedrock.service.ServiceRepository;
 import com.tdoer.bedrock.tenant.RentalCenter;
-import com.tdoer.bedrock.web.CloudEnvironmentParseFilterFactory;
-import com.tdoer.bedrock.web.RequestCloudEnvironmentExtractor;
 import com.tdoer.springboot.util.StatusCodeUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +30,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -67,9 +63,6 @@ public class PlatformConfiguration implements BeanPostProcessor, ApplicationCont
 
     @Autowired
     private ProductRepository productRepository;
-
-    @Autowired
-    private ClientConfigCenter clientConfigCenter;
 
     @Autowired
     private RentalCenter rentalCenter;
@@ -128,10 +121,6 @@ public class PlatformConfiguration implements BeanPostProcessor, ApplicationCont
 
     public ProductRepository productRepository(){
         return productRepository;
-    }
-
-    public ClientConfigCenter clientConfigCenter(){
-        return clientConfigCenter;
     }
 
     public RentalCenter rentalCenter(){

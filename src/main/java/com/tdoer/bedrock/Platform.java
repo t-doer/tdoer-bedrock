@@ -20,7 +20,6 @@ import com.tdoer.bedrock.context.ContextConfigCenter;
 import com.tdoer.bedrock.context.ContextInstanceCenter;
 import com.tdoer.bedrock.context.ContextPathParser;
 import com.tdoer.bedrock.context.RootContextType;
-import com.tdoer.bedrock.product.ClientConfigCenter;
 import com.tdoer.bedrock.product.ProductRepository;
 import com.tdoer.bedrock.security.AuthenticationUtil;
 import com.tdoer.bedrock.service.Service;
@@ -69,10 +68,6 @@ public class Platform {
 
     public static ProductRepository getProductRepository(){
         return configuration.productRepository();
-    }
-
-    public static ClientConfigCenter getClientConfigCenter(){
-        return configuration.clientConfigCenter();
     }
 
     public static RentalCenter getRentalCenter(){

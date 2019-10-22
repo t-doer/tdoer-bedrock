@@ -46,3 +46,8 @@ T-Doer Bedrock SaaS Framework
 
 
 #### ContextConfig
+
+## Todo
+
+- CacheManager messages
+- ExtensionDomains, set status according to init values
