@@ -67,7 +67,7 @@ public interface ProductRepository {
      * @param productId Product Id, cannot be <code>null</code>
      * @param list List to hold clients, cannot be <code>null</code>
      */
-    void getClients(Long productId, List<Client> list);
+    void listClients(Long productId, List<Client> list);
 
     /**
      * The application installation of specific application in the tenant's client
