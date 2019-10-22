@@ -77,6 +77,14 @@ public interface ApplicationRepository {
                    List<Page> list);
 
     /**
+     * List an application's common pages only, excluding customized ones.
+     *
+     * @param applicationId Application Id, cannot be <code>null</code>
+     * @param list List to hold pages, cannot be <code>null</code>
+     */
+    void listCommonPages(Long applicationId, List<Page> list);
+
+    /**
      * List an application's all available pages, including common and customized ones.
      *
      * @param applicationId Application Id, cannot be <code>null</code>
@@ -119,6 +127,14 @@ public interface ApplicationRepository {
                      ContextPath contextPath, List<Action> list);
 
     /**
+     * List common actions of a page only, excluding customized ones
+     *
+     * @param pageId Page Id, cannot be <code>null</code>
+     * @param list List to hold pages, cannot be <code>null</code>
+     */
+    void listCommonActions(Long pageId, List<Action> list);
+
+    /**
      * List all available actions of a page, including common and customized ones
      *
      * @param pageId Page Id, cannot be <code>null</code>
@@ -141,12 +157,20 @@ public interface ApplicationRepository {
                                ContextPath contextPath, List<Long> list);
 
     /**
-     * List all common referee services of the application.
+     * List all common referee services of the application only, excluding customized ones.
      *
      * @param applicationId Application Id, cannot be <code>null</code>
      * @param list List to referee services, cannot be <code>null</code>
      */
     void listCommonRefereeServiceIds(Long applicationId, List<Long> list);
+
+    /**
+     * List all referee services of the application only, including common ones and  customized ones.
+     *
+     * @param applicationId Application Id, cannot be <code>null</code>
+     * @param list List to referee services, cannot be <code>null</code>
+     */
+    void listAllRefereeServiceIds(Long applicationId, List<Long> list);
 
     /**
      * List the service methods which the action needs to call

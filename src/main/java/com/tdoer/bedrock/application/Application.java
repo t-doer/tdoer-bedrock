@@ -93,6 +93,13 @@ public interface Application extends Serializable {
     void listCurrentPages(List<Page> list);
 
     /**
+     * List the application's common pages, excluding customized ones.
+     *
+     * @param list List to hold pages, cannot be <code>null</code>
+     */
+    void listCommonPages(List<Page> list);
+
+    /**
      * List the application's all enabled pages, including common and customized ones.
      *
      * @param list List to hold pages, cannot be <code>null</code>
@@ -103,10 +110,24 @@ public interface Application extends Serializable {
      * List the Ids of services the application needs to call in current cloud environment
      * {@link com.tdoer.bedrock.CloudEnvironment}.
      *
-     * @param list List to hold service Ids.
+     * @param list List to hold service Ids, cannot be <code>null</code>.
      */
     void listCurrentRefereeServiceIds(List<Long> list);
 
+    /**
+     * List the Ids of services the application commonly needs to call.
+     *
+     * @param list List to hold service Ids, cannot be <code>null</code>.
+     */
+    void listCommonRefereeServiceIds(List<Long> list);
+
+    /**
+     * List the Ids of all services the application totally needs to call,
+     * including common ones and cutomized ones.
+     *
+     * @param list List to hold service Ids, cannot be <code>null</code>.
+     */
+    void listAllRefereeServiceIds(List<Long> list);
     /**
      * Check whether the application can access the service or not. If the service
      * is installed for the tenant's client, it's accessible.

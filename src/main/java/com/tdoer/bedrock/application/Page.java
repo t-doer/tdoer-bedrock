@@ -78,6 +78,13 @@ public interface Page extends ApplicationResource {
     void listCurrentActions(List<Action> list);
 
     /**
+     * List the page's common actions, excluding customized ones.
+     *
+     * @param list List to hold actions, cannot be <code>null</code>
+     */
+    void listCommonActions(List<Action> list);
+
+    /**
      * List the page's all enabled actions, including common and customized ones.
      *
      * @param list List to hold actions, cannot be <code>null</code>
