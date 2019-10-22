@@ -21,6 +21,13 @@ package com.tdoer.bedrock.application;
  */
 public interface ApplicationInstallation {
     /**
+     * The Id of the installed application
+     *
+     * @return Application Id, must not be <code>null</code>
+     */
+    Long getApplicationId();
+
+    /**
      * The installed application
      *
      * @return the installed application, it must not be <code>null</code>

@@ -21,8 +21,15 @@ package com.tdoer.bedrock.service;
  */
 public interface ServiceInstallation {
     /**
+     * The Id of installed service
+     *
+     * @return Application Id, must not be <code>null</code>
+     */
+    Long getServiceId();
+
+    /**
      * Get the installed service
-     * @return The installed service
+     * @return The installed service, must not be <code>null</code>
      */
     Service getService();
 }
