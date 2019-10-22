@@ -62,12 +62,12 @@ public interface ProductRepository {
     Client getClient(Long productId, String clientCode) throws ClientNotFoundException;
 
     /**
-     * Get all client of specific product
+     * List all client of specific product
      *
      * @param productId Product Id, cannot be <code>null</code>
-     * @return A product's all enabled clients
+     * @param list List to hold clients, cannot be <code>null</code>
      */
-    Client[] getClients(Long productId);
+    void getClients(Long productId, List<Client> list);
 
     /**
      * The application installation of specific application in the tenant's client
