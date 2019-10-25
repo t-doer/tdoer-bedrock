@@ -16,6 +16,7 @@
 package com.tdoer.bedrock.context;
 
 import com.tdoer.bedrock.application.Application;
+import com.tdoer.bedrock.service.ServiceMethod;
 
 import java.util.List;
 import java.util.Locale;
@@ -71,23 +72,6 @@ public interface ContextConfig {
     ContextRole getContextRole(String roleCode);
 
     /**
-     * List public authorities in current context instance which resources all users can access.
-     *
-     * @param list List to hold public authorities, cannot be <code>null</code>
-     */
-    void listPublicAuthorities(List<PublicAuthority> list);
-
-    /**
-     * Check if the user's request is permitted in the context instance according to
-     * user's role and public authorities
-     *
-     * @param httpMethod Http method, cannot be blank
-     * @param URI Request URI, cannot be blank
-     * @return true if the request passes access checking
-     */
-    boolean checkServiceMethodAccess(String httpMethod, String URI);
-
-    /**
      * List all applications installed in current context instance
      *
      * @param list List to hold {@link ContextApplicationInstallation}, cannot be <ode>null</ode>
@@ -109,6 +93,30 @@ public interface ContextConfig {
      * @return true if the application is supported
      */
     boolean supportApplication(Application application);
+
+    /**
+     * List public client resources in current context instance which resources all users can access.
+     *
+     * @param list List to hold public authorities, cannot be <code>null</code>
+     */
+    void listPublicResources(List<ClientResource> list);
+
+    /**
+     * List public service methods which are associated with public resources.
+     *
+     * @param list List to hold pubic service methods, cannot be <code>null</code>
+     */
+    void listPublicMethods(List<ServiceMethod> list);
+
+    /**
+     * Check if the user's request is permitted in the context instance according to
+     * user's role and public authorities
+     *
+     * @param httpMethod Http method, cannot be blank
+     * @param URI Request URI, cannot be blank
+     * @return true if the request passes access checking
+     */
+    boolean checkServiceMethodAccess(String httpMethod, String URI);
 
     /**
      * Default entry application code

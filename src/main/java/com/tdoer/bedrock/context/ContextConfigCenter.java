@@ -33,14 +33,6 @@ public interface ContextConfigCenter {
     void listUserRoles(Long tenantId, ContextPath contextPath, Long userId, List<ContextRole> list);
 
     /**
-     * List public authorities in specific tenant's specific context instance
-     * @param tenantId Tenant Id, cannot be <code>null</code>
-     * @param contextPath Context path of context instance, cannot be <code>null</code>
-     * @param list List to hold public authorities, cannot be <code>null</code>
-     */
-    void listPublicAuthorities(Long tenantId, ContextPath contextPath, List<PublicAuthority> list);
-
-    /**
      * List context roles in specific tenant's specific context instance
      * @param tenantId Tenant Id, cannot be <code>null</code>
      * @param contextPath Context path of context instance, cannot be <code>null</code>
@@ -69,7 +61,7 @@ public interface ContextConfigCenter {
     void listApplicationInstallation(Long tenantId, ContextPath contextPath, Long clientId,
                                      List<ContextApplicationInstallation> list);
 
-    /**
+     /**
      * Get application installation of specific application Id which is in specific client and
      * specific tenant's specific context instance
      * @param tenantId Tenant Id, cannot be <code>null</code>
@@ -80,4 +72,21 @@ public interface ContextConfigCenter {
      */
     ContextApplicationInstallation getApplicationInstallation(Long tenantId, ContextPath contextPath, Long clientId,
                                                               String applicationId);
+
+    /**
+     * List public authorities in specific tenant's specific context instance
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextPath Context path of context instance, cannot be <code>null</code>
+     * @param list List to hold public client resources, cannot be <code>null</code>
+     */
+    void listPublicResources(Long tenantId, ContextPath contextPath, List<ClientResource> list);
+
+    /**
+     * List public service methods in specific tenant's specific context instance
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextPath Context path of context instance, cannot be <code>null</code
+     * @param list List to hold public service methods, cannot be <code>null</code>
+     */
+    void listPublicMethods(Long tenantId, ContextPath contextPath, List<ClientResource> list);
+
 }

@@ -15,6 +15,7 @@
  */
 package com.tdoer.bedrock.context;
 
+import com.tdoer.bedrock.service.ServiceMethod;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.io.Serializable;
@@ -61,17 +62,16 @@ public interface ContextRole extends GrantedAuthority, Serializable {
     /**
      * List front-end resources which are authorized to the context role,
      * such like page, action and navigation etc.
-     * @param list List to hold role authorities, cannot be <code>null</code>
+     * @param list List to hold client resource, cannot be <code>null</code>
      */
-    void listFrontendResource(List<RoleAuthority> list);
+    void listClientResources(List<ClientResource> list);
 
     /**
-     * List back-end resources, mainly service methods which are authorized to
-     * the context role.
+     * List back-end service methods which are authorized to the context role.
      *
-     * @param list
+     * @param list List to hold service methods, cannot be <code>null</code>
      */
-    void listServiceMethods(List<RoleAuthority> list);
+    void listServiceMethods(List<ServiceMethod> list);
 
     /**
      * Check if the role permits the request

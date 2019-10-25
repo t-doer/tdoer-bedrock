@@ -79,8 +79,10 @@ public interface ContextType extends Serializable {
     ContextPath getContextPath();
 
     /**
-     * Check if the context is the root context type, that's "TENANT"?.
-     * @return true if it's the  root context type
+     * Check if the context is "TENANT" context type. "TENANT" context type is
+     * the root context type, is the top parent of all other context types.
+     * @return true if it's "TENANT" context type
      */
-    boolean isRoot();
+    boolean isTenant();
+
 }

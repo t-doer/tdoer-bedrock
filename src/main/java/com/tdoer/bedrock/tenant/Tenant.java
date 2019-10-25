@@ -17,6 +17,7 @@ package com.tdoer.bedrock.tenant;
 
 import com.tdoer.bedrock.context.ContextInstance;
 import com.tdoer.bedrock.context.ContextPath;
+import com.tdoer.bedrock.context.ContextType;
 
 import java.io.Serializable;
 import java.util.List;
@@ -55,4 +56,46 @@ public interface Tenant extends ContextInstance, Serializable {
      * @param list List to hold tenant clients, cannot be <code>null</code>
      */
     void listTenantClients(List<TenantClient> list);
+
+    /**
+     * List all context types defined by the tenant.
+     *
+     * Note the list should not include "TENANT" context type which is
+     * the root context type for all.
+     *
+     * @param list List to hold a tenant's context types.
+     */
+    void listContextTypes(List<ContextType> list);
+
+    /**
+     * List context types of specific category defined by the tenant.
+     *
+     * @param category Context category
+     * @param list List to hold context types, cannot be <code>null</code>
+     */
+    void listContextTypes(String category, List<ContextType> list);
+
+    /**
+     * Get context instance by GUID
+     *
+     * @param guid Context instance GUID, cannot be blank
+     * @return Context instance or <code>null</code>
+     */
+    ContextInstance getContextInstance(String guid);
+
+    /**
+     * Get context instance by context path
+     *
+     * @param contextPath Context path, cannot be <code>null</code>
+     * @return Context instance or <code>null</code>
+     */
+    ContextInstance getContextInstance(ContextPath contextPath);
+
+    /**
+     * Get context instance by Id
+     *
+     * @param instanceId Context instance Id, cannot be <code>null</code>
+     * @return Context instance or <code>null</code>
+     */
+    ContextInstance getContextInstance(Long instanceId);
 }

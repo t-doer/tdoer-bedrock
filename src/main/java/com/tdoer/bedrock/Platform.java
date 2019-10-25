@@ -19,7 +19,6 @@ import com.tdoer.bedrock.application.ApplicationRepository;
 import com.tdoer.bedrock.context.ContextConfigCenter;
 import com.tdoer.bedrock.context.ContextInstanceCenter;
 import com.tdoer.bedrock.context.ContextPathParser;
-import com.tdoer.bedrock.context.RootContextType;
 import com.tdoer.bedrock.product.ProductRepository;
 import com.tdoer.bedrock.security.AuthenticationUtil;
 import com.tdoer.bedrock.service.Service;
@@ -42,10 +41,6 @@ public class Platform {
     // ------------------------------------------------
     // From configuration
     // ------------------------------------------------
-    public static RootContextType getRootContextType(){
-        return configuration.rootContextType();
-    }
-
     public static ContextPathParser getContextPathParser(){
         return configuration.contextPathParser();
     }

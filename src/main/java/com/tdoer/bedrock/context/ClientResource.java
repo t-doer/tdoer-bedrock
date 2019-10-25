@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2019 T-Doer (tdoer.com).
+ * Copyright 2019 T-Doer (tdoer.com).
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,33 @@
 package com.tdoer.bedrock.context;
 
 import com.tdoer.bedrock.resource.Resource;
-import org.springframework.security.core.GrantedAuthority;
 
-import java.io.Serializable;
 /**
- * @Description
  * @author Htinker Hu (htinker@163.com)
- * @create 2017-09-19
+ * @create 2019-10-25
  */
-public interface GrantedResource extends GrantedAuthority {
+public interface ClientResource {
     /**
-     * The granted resource
-     *
-     * @return The granted resource, must not be <code>null</code>
+     * The Id of the tenant to which the resource belongs to
+     * @return Tenant Id, cannot be <code>null</code>
+     */
+    Long getTenantId();
+
+    /**
+     * The context path of context in which the resource is defined
+     * @return Context path cannot be null
+     */
+    ContextPath getContextPath();
+
+    /**
+     * The Id of the client of which the resource belongs to
+     * @return Client Id, cannot be <code>null</code>
+     */
+    Long getClientId();
+
+    /**
+     * The resource defined or installed in the context
+     * @return Resource, cannot be <code>null</code>
      */
     Resource getResource();
 }

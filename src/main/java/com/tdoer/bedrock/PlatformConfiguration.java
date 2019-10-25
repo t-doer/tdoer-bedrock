@@ -19,7 +19,6 @@ import com.tdoer.bedrock.application.ApplicationRepository;
 import com.tdoer.bedrock.context.ContextConfigCenter;
 import com.tdoer.bedrock.context.ContextInstanceCenter;
 import com.tdoer.bedrock.context.ContextPathParser;
-import com.tdoer.bedrock.context.RootContextType;
 import com.tdoer.bedrock.product.ProductRepository;
 import com.tdoer.bedrock.service.ServiceRepository;
 import com.tdoer.bedrock.tenant.RentalCenter;
@@ -48,9 +47,6 @@ public class PlatformConfiguration implements BeanPostProcessor, ApplicationCont
 
     @Autowired
     private ApplicationRepository applicationRepository;
-
-    @Autowired
-    private RootContextType rootContextType;
 
     @Autowired
     private ContextPathParser contextPathParser;
@@ -93,10 +89,6 @@ public class PlatformConfiguration implements BeanPostProcessor, ApplicationCont
 
     public String getServiceCode(){
         return serviceCode;
-    }
-
-    public RootContextType rootContextType(){
-        return rootContextType;
     }
 
     public ContextPathParser contextPathParser(){
