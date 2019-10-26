@@ -76,6 +76,22 @@ public interface Tenant extends ContextInstance, Serializable {
     void listContextTypes(String category, List<ContextType> list);
 
     /**
+     * Get specific context type available for the tenant
+     *
+     * @param contextType Context type, cannot be <code>null</code>
+     * @return Context type or <code>null</code>
+     */
+    ContextType getContextType(Long contextType);
+
+    /**
+     * Get specific context type available for the tenant
+     *
+     * @param contextCode Context code, cannot be blank
+     * @return Context type or <code>null</code>
+     */
+    ContextType getContextType(String contextCode);
+
+    /**
      * Get context instance by GUID
      *
      * @param guid Context instance GUID, cannot be blank

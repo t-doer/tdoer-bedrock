@@ -32,6 +32,12 @@ public interface ContextInstance extends Serializable {
     Long getId();
 
     /**
+     * The Id of tenant to which the context instance belongs
+     * @return Tenant Id, must not be <code>null</code>
+     */
+    Long getTenantId();
+
+    /**
      * Context instance guid, globally unique
      *
      * @return Instance GUID, must not be blank

@@ -16,55 +16,69 @@
 package com.tdoer.bedrock;
 
 import com.tdoer.bedrock.application.ApplicationRepository;
-import com.tdoer.bedrock.context.ContextConfigCenter;
-import com.tdoer.bedrock.context.ContextInstanceCenter;
+import com.tdoer.bedrock.context.ContextCenter;
 import com.tdoer.bedrock.context.ContextPathParser;
 import com.tdoer.bedrock.product.ProductRepository;
 import com.tdoer.bedrock.service.ServiceRepository;
 import com.tdoer.bedrock.tenant.RentalCenter;
 import com.tdoer.springboot.util.StatusCodeUtil;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * Platform configuration needs Bedrock Implementation to provide below beans:
+ * <p>
+ *     <ol>
+ *         <li>com.tdoer.bedrock.application.ApplicationRepository</li>
+ *         <li>com.tdoer.bedrock.context.ContextCenter</li>
+ *         <li>com.tdoer.bedrock.context.ContextPathParser</li>
+ *         <li>com.tdoer.bedrock.product.ProductRepository</li>
+ *         <li>com.tdoer.bedrock.service.ServiceRepository</li>
+ *         <li>com.tdoer.bedrock.tenant.RentalCenter</li>
+ *     </ol>
+ * </p>
+ *
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
 
 @Configuration
-public class PlatformConfiguration implements BeanPostProcessor, ApplicationContextAware {
+public class PlatformConfiguration implements BeanPostProcessor {
+
     /* -------------------------------------------------
      * The beans below should be implemented and provided by
      * Bedrock Implementation
      */
-    @Autowired
     private ServiceRepository serviceRepository;
 
-    @Autowired
     private ApplicationRepository applicationRepository;
 
-    @Autowired
-    private ContextPathParser contextPathParser;
-
-    @Autowired
-    private ContextConfigCenter contextConfigCenter;
-
-    @Autowired
-    private ContextInstanceCenter contextInstanceCenter;
-
-    @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
+    private ContextPathParser contextPathParser;
+
+    private ContextCenter contextCenter;
+
     private RentalCenter rentalCenter;
 
     @Value("${spring.application.name}")
     private String serviceCode;
+
+    public PlatformConfiguration(ServiceRepository serviceRepository,
+                                 ApplicationRepository applicationRepository,
+                                 ProductRepository productRepository,
+                                 ContextPathParser contextPathParser,
+                                 ContextCenter contextCenter,
+                                 RentalCenter rentalCenter) {
+        this.serviceRepository = serviceRepository;
+        this.applicationRepository = applicationRepository;
+        this.productRepository = productRepository;
+        this.contextPathParser = contextPathParser;
+        this.contextCenter = contextCenter;
+        this.rentalCenter = rentalCenter;
+    }
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -82,40 +96,31 @@ public class PlatformConfiguration implements BeanPostProcessor, ApplicationCont
         return bean;
     }
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-
-    }
-
     public String getServiceCode(){
         return serviceCode;
     }
 
-    public ContextPathParser contextPathParser(){
+    public ContextPathParser getContextPathParser(){
         return contextPathParser;
     }
 
-    public ContextConfigCenter contextConfigCenter(){
-        return contextConfigCenter;
+    public ContextCenter getContextCenter(){
+        return contextCenter;
     }
 
-    public ContextInstanceCenter contextInstanceCenter(){
-        return contextInstanceCenter;
-    }
-
-    public ServiceRepository serviceRepository(){
+    public ServiceRepository getServiceRepository(){
         return serviceRepository;
     }
 
-    public ApplicationRepository applicationRepository(){
+    public ApplicationRepository getApplicationRepository(){
         return applicationRepository;
     }
 
-    public ProductRepository productRepository(){
+    public ProductRepository getProductRepository(){
         return productRepository;
     }
 
-    public RentalCenter rentalCenter(){
+    public RentalCenter getRentalCenter(){
         return rentalCenter;
     }
 

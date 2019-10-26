@@ -16,8 +16,7 @@
 package com.tdoer.bedrock;
 
 import com.tdoer.bedrock.application.ApplicationRepository;
-import com.tdoer.bedrock.context.ContextConfigCenter;
-import com.tdoer.bedrock.context.ContextInstanceCenter;
+import com.tdoer.bedrock.context.ContextCenter;
 import com.tdoer.bedrock.context.ContextPathParser;
 import com.tdoer.bedrock.product.ProductRepository;
 import com.tdoer.bedrock.security.AuthenticationUtil;
@@ -42,31 +41,27 @@ public class Platform {
     // From configuration
     // ------------------------------------------------
     public static ContextPathParser getContextPathParser(){
-        return configuration.contextPathParser();
+        return configuration.getContextPathParser();
     }
 
-    public static ContextConfigCenter getContextConfigCenter(){
-        return configuration.contextConfigCenter();
-    }
-
-    public static ContextInstanceCenter getContextInstanceCenter(){
-        return configuration.contextInstanceCenter();
+    public static ContextCenter getContextCenter(){
+        return configuration.getContextCenter();
     }
 
     public static ServiceRepository getServiceRepository(){
-        return configuration.serviceRepository();
+        return configuration.getServiceRepository();
     }
 
     public static ApplicationRepository getApplicationRepository(){
-        return configuration.applicationRepository();
+        return configuration.getApplicationRepository();
     }
 
     public static ProductRepository getProductRepository(){
-        return configuration.productRepository();
+        return configuration.getProductRepository();
     }
 
     public static RentalCenter getRentalCenter(){
-        return configuration.rentalCenter();
+        return configuration.getRentalCenter();
     }
 
     public static Service getCurrentService(){
@@ -84,4 +79,5 @@ public class Platform {
     public static User getCurrentUser(){
         return AuthenticationUtil.getUser();
     }
+
 }

@@ -66,13 +66,6 @@ public interface ContextType extends Serializable {
     ContextType getRoot();
 
     /**
-     * Find context type of specific type
-     * @param contextType Context type, cannot be <code>null</code>
-     * @return Context type or <code>null</code> it not found
-     */
-    ContextType find(Long contextType);
-
-    /**
      * The path of the context
      * @return Context path, must not be <code>null</code>
      */

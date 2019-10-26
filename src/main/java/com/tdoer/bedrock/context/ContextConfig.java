@@ -84,7 +84,15 @@ public interface ContextConfig {
      * @param applicationId Application Id, cannot be <code>null</code>
      * @return An application installation or <code>null</code> if not found
      */
-    ContextApplicationInstallation getApplicationInstallation(String applicationId);
+    ContextApplicationInstallation getApplicationInstallation(Long applicationId);
+
+    /**
+     * Get an application installed in current client and current context instance
+     *
+     * @param applicationCode Application code, cannot be blank
+     * @return An application installation or <code>null</code> if not found
+     */
+    ContextApplicationInstallation getApplicationInstallation(String applicationCode);
 
     /**
      * Check if an application was installed and enabled in current client and
@@ -119,7 +127,7 @@ public interface ContextConfig {
      * @param URI Request URI, cannot be blank
      * @return true if the request passes access checking
      */
-    boolean checkServiceMethodAccess(String httpMethod, String URI);
+    boolean permitServiceMethodAccess(String httpMethod, String URI);
 
     /**
      * Default entry application code in current client and current context instance

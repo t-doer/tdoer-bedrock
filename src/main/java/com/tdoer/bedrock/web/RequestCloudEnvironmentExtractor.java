@@ -114,7 +114,7 @@ public class RequestCloudEnvironmentExtractor {
                 contextInstance = tenantClient.getTenant();
                 logger.debug("No context path extracted from request, use tenant as default context instance: {}", contextInstance);
             } else {
-                contextInstance = Platform.getContextInstanceCenter().getContextInstance(tenantClient.getTenantId(),
+                contextInstance = Platform.getContextCenter().getContextInstance(tenantClient.getTenantId(),
                         contextPath);
                 if (contextInstance == null) {
                     throw new InvalidRequestException(BedrockErrorCodes.NO_CONTEXT_INSTANCE, contextPath);
@@ -157,7 +157,7 @@ public class RequestCloudEnvironmentExtractor {
                     tenantClient.getClient().getProductId());
             ContextPath contextPath = Platform.getContextPathParser().parse(digest.getContextPath());
             ContextInstance contextInstance =
-                    Platform.getContextInstanceCenter().getContextInstance(digest.getTenantId(), contextPath);
+                    Platform.getContextCenter().getContextInstance(digest.getTenantId(), contextPath);
             Application application = Platform.getApplicationRepository().getApplication(digest.getApplicationId());
             Locale language = LocaleUtil.getLocale(digest.getLanguage());
             return new CloudEnvironment(productRental, tenantClient, contextInstance, application, language);
