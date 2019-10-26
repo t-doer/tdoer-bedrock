@@ -53,40 +53,42 @@ public interface ContextConfigCenter {
      * List application installations which are in specific client and specific tenant's
      * specific context instance
      *
+     * @param clientId Client Id, cannot be <code>null</code>
      * @param tenantId Tenant Id, cannot be <code>null</code>
      * @param contextPath Context path of context instance, cannot be <code>null</code>
-     * @param clientId Client Id, cannot be <code>null</code>
      * @param list List to hold {@link ContextApplicationInstallation}, cannot be <code>null</code>
      */
-    void listApplicationInstallation(Long tenantId, ContextPath contextPath, Long clientId,
+    void listApplicationInstallation(Long clientId, Long tenantId, ContextPath contextPath,
                                      List<ContextApplicationInstallation> list);
 
      /**
      * Get application installation of specific application Id which is in specific client and
-     * specific tenant's specific context instance
-     * @param tenantId Tenant Id, cannot be <code>null</code>
-     * @param contextPath Context path of context instance, cannot be <code>null</code>
-     * @param clientId Client Id, cannot be <code>null</code>
+     * specific tenant's specific context instance* @param clientId Client Id, cannot be <code>null</code>
+      * @param clientId Client Id, cannot be <code>null</code>
+      * @param tenantId Tenant Id, cannot be <code>null</code>
+      * @param contextPath Context path of context instance, cannot be <code>null</code>
      * @param applicationId Application Id, cannot be <code>null</code>
      * @return Application installation or <code>null</code>
      */
-    ContextApplicationInstallation getApplicationInstallation(Long tenantId, ContextPath contextPath, Long clientId,
+    ContextApplicationInstallation getApplicationInstallation(Long clientId, Long tenantId, ContextPath contextPath,
                                                               String applicationId);
 
     /**
      * List public authorities in specific tenant's specific context instance
+     * @param clientId Client Id, cannot be <code>null</code>
      * @param tenantId Tenant Id, cannot be <code>null</code>
      * @param contextPath Context path of context instance, cannot be <code>null</code>
      * @param list List to hold public client resources, cannot be <code>null</code>
      */
-    void listPublicResources(Long tenantId, ContextPath contextPath, List<ClientResource> list);
+    void listPublicResources(Long clientId, Long tenantId, ContextPath contextPath, List<ClientResource> list);
 
     /**
      * List public service methods in specific tenant's specific context instance
+     * @param clientId Client Id, cannot be <code>null</code>
      * @param tenantId Tenant Id, cannot be <code>null</code>
      * @param contextPath Context path of context instance, cannot be <code>null</code
      * @param list List to hold public service methods, cannot be <code>null</code>
      */
-    void listPublicMethods(Long tenantId, ContextPath contextPath, List<ClientResource> list);
+    void listPublicMethods(Long clientId, Long tenantId, ContextPath contextPath, List<ClientResource> list);
 
 }

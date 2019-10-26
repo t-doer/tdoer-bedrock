@@ -72,14 +72,14 @@ public interface ContextConfig {
     ContextRole getContextRole(String roleCode);
 
     /**
-     * List all applications installed in current context instance
+     * List all applications installed in current client and current context instance
      *
      * @param list List to hold {@link ContextApplicationInstallation}, cannot be <ode>null</ode>
      */
     void listApplicationInstallations(List<ContextApplicationInstallation> list);
 
     /**
-     * Get an application installed in current context instance.
+     * Get an application installed in current client and current context instance
      *
      * @param applicationId Application Id, cannot be <code>null</code>
      * @return An application installation or <code>null</code> if not found
@@ -87,7 +87,8 @@ public interface ContextConfig {
     ContextApplicationInstallation getApplicationInstallation(String applicationId);
 
     /**
-     * Check if an application was installed and enabled in current context instance.
+     * Check if an application was installed and enabled in current client and
+     * current context instance.
      *
      * @param application Application
      * @return true if the application is supported
@@ -95,22 +96,24 @@ public interface ContextConfig {
     boolean supportApplication(Application application);
 
     /**
-     * List public client resources in current context instance which resources all users can access.
+     * List public resources in current client and current context instance
+     * which resources all users can access.
      *
      * @param list List to hold public authorities, cannot be <code>null</code>
      */
     void listPublicResources(List<ClientResource> list);
 
     /**
-     * List public service methods which are associated with public resources.
+     * List public service methods which are associated with public resources
+     * in current client and current context instance
      *
      * @param list List to hold pubic service methods, cannot be <code>null</code>
      */
     void listPublicMethods(List<ServiceMethod> list);
 
     /**
-     * Check if the user's request is permitted in the context instance according to
-     * user's role and public authorities
+     * Check if the user's request is permitted in current client and current context instance
+     * according to user's role and public authorities
      *
      * @param httpMethod Http method, cannot be blank
      * @param URI Request URI, cannot be blank
@@ -119,19 +122,19 @@ public interface ContextConfig {
     boolean checkServiceMethodAccess(String httpMethod, String URI);
 
     /**
-     * Default entry application code
+     * Default entry application code in current client and current context instance
      * @return Application code, it must not be blank
      */
     String getEntryApplicationCode();
 
     /**
-     * Default entry nav item
+     * Default entry nav item in current client and current context instance
      * @return Navigation item's node Id, it must not be blank
      */
     String getEntryNavItem();
 
     /**
-     * Default entry language
+     * Default entry language in current client and current context instance
      *
      * @return Language, it must not be <code>null</code>
      */
