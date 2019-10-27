@@ -23,15 +23,15 @@ import com.tdoer.springboot.error.ErrorCodeException;
  * @create 2017-09-19
  */
 public class ContextInstanceNotFoundException extends ErrorCodeException {
-    private ContextPath contextPath;
+    private Object identifier;
 
-    public ContextInstanceNotFoundException(ContextPath contextPath) {
-        super(BedrockErrorCodes.NO_CONTEXT_INSTANCE, new Object[]{contextPath});
-        this.contextPath = contextPath;
+    public ContextInstanceNotFoundException(Object identifier) {
+        super(BedrockErrorCodes.NO_CONTEXT_INSTANCE, identifier);
+        this.identifier = identifier;
     }
 
-    public ContextPath getContextPath() {
-        return contextPath;
+    public Object getIdentifier() {
+        return identifier;
     }
 
 }
