@@ -19,6 +19,7 @@ import com.tdoer.bedrock.application.Application;
 import com.tdoer.bedrock.context.ContextConfig;
 import com.tdoer.bedrock.context.ContextInstance;
 import com.tdoer.bedrock.context.ContextPath;
+import com.tdoer.bedrock.context.ContextType;
 import com.tdoer.bedrock.product.Client;
 import com.tdoer.bedrock.product.ClientConfig;
 import com.tdoer.bedrock.product.Product;
@@ -138,6 +139,10 @@ public class CloudEnvironment {
         return contextInstance.getContextPath();
     }
 
+    public ContextType getRootContextType(){
+        return tenant.getContextType();
+    }
+
     public Long getTenantId() {
         return tenant.getId();
     }
@@ -145,6 +150,7 @@ public class CloudEnvironment {
     public Long getClientId() {
         return tenantClient.getClientId();
     }
+
     public Long getProductId() {
         return productRental.getProductId();
     }

@@ -78,4 +78,17 @@ public interface ContextType extends Serializable {
      */
     boolean isTenant();
 
+    /**
+     * Search specific context type from the context type itself and it descendants
+     * @param contextType Context type, cannot be <code>null</code>
+     * @return Context type or <code>null</code>
+     */
+    ContextType search(Long contextType);
+
+    /**
+     * Search specific context type from the context type itself and it descendants
+     * @param contextCode Context code, cannot be blank
+     * @return Context type or <code>null</code>
+     */
+    ContextType search(String contextCode);
 }

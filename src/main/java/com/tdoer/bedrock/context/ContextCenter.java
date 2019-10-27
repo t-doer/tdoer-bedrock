@@ -34,17 +34,6 @@ public interface ContextCenter {
     ContextType getRootContextType(Long tenantId);
 
     /**
-     * List all context types defined by the tenant.
-     *
-     * Note the list should not include "TENANT" context type which is
-     * the root context type for all.
-     *
-     * @param tenantId Tenant Id, cannot be <code>null</code>
-     * @param list List to hold a tenant's context types.
-     */
-    void listContextTypes(Long tenantId, List<ContextType> list);
-
-    /**
      * Get specific context type available for specific tenant
      *
      * @param tenantId Tenant Id, cannot be <code>null</code>
@@ -65,7 +54,7 @@ public interface ContextCenter {
     /**
      * Get context instance of specific context path in specific tenant
      *
-     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param tenantId Tenant Id, cannot be <code>null</code>K
      * @param contextPath Context path, cannot be <code>null</code>
      * @return Context instance if it exists and is enabled
      * @throws ContextInstanceNotFoundException if it is not found
@@ -73,7 +62,7 @@ public interface ContextCenter {
     ContextInstance getContextInstance(Long tenantId, ContextPath contextPath) throws ContextInstanceNotFoundException;
 
     /**
-     * Get context instance of specific context path in specific tenant
+     * Get context instance of specific context path in specific tenantK
      *
      * @param tenantId Tenant Id, cannot be <code>null</code>
      * @param guid Context instance GUID, cannot be blank
