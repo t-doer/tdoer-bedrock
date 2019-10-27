@@ -31,4 +31,10 @@ public interface ClientResource extends Resource {
     default ResourceCategory getCategory() {
         return ResourceCategory.CLIENT;
     }
+
+    /**
+     * The Id of the client in which the resource is defined
+     * @return Client Id, must not be <code>null</code>
+     */
+    Long getClientId();
 }

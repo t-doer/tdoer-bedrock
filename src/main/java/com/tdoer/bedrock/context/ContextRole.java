@@ -15,6 +15,7 @@
  */
 package com.tdoer.bedrock.context;
 
+import com.tdoer.bedrock.product.ClientResource;
 import com.tdoer.bedrock.service.ServiceMethod;
 import org.springframework.security.core.GrantedAuthority;
 

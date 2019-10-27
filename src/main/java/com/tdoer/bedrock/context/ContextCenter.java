@@ -15,9 +15,9 @@
  */
 package com.tdoer.bedrock.context;
 
+import com.tdoer.bedrock.product.ClientResource;
 import com.tdoer.bedrock.service.ServiceMethod;
 
-import javax.naming.Context;
 import java.util.List;
 /**
  * @Description
@@ -82,6 +82,24 @@ public interface ContextCenter {
     ContextInstance getContextInstance(Long tenantId, Long instanceId) throws ContextInstanceNotFoundException;
 
     /**
+     * Get specific role defined in a tenant' context
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextPath Context path of context instance, cannot be <code>null</code>
+     * @param roleId Role Id, cannot be <code>null</code>
+     * @return Context role or <code>null</code>
+     */
+    ContextRole getContextRole(Long tenantId, ContextPath contextPath, Long roleId);
+
+    /**
+     * Get specific role defined in a tenant' context
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextPath Context path of context instance, cannot be <code>null</code>
+     * @param roleCode Role code, cannot be blank
+     * @return Context role or <code>null</code>
+     */
+    ContextRole getContextRole(Long tenantId, ContextPath contextPath, String roleCode);
+
+    /**
      * List user roles of specific user Id in specific tenant's specific context instance
      * @param tenantId Tenant Id, cannot be <code>null</code>
      * @param contextPath Context path of context instance, cannot be <code>null</code>
@@ -130,23 +148,23 @@ public interface ContextCenter {
 
     /**
      * List resource authorities of specific role in specific tenant's specific context instance
-     * @param roleId Role Id, cannot be <code>null</code>
      * @param clientId Client Id, cannot be <code>null</code>
      * @param tenantId Tenant Id, cannot be <code>null</code>
      * @param contextPath Context path of context instance, cannot be <code>null</code>
+     * @param roleId Role Id, cannot be <code>null</code>
      * @param list List to hold public client resources, cannot be <code>null</code>
      */
-    void listRoleResources(Long roleId, Long clientId, Long tenantId, ContextPath contextPath,
+    void listRoleResources(Long clientId, Long tenantId, ContextPath contextPath, Long roleId,
                            List<ClientResource> list);
 
     /**
      * List service method authorities of specific role in specific tenant's specific context instance
-     * @param roleId Role Id, cannot be <code>null</code>
      * @param clientId Client Id, cannot be <code>null</code>
      * @param tenantId Tenant Id, cannot be <code>null</code>
      * @param contextPath Context path of context instance, cannot be <code>null</code
+     * @param roleId Role Id, cannot be <code>null</code>
      * @param list List to hold public service methods, cannot be <code>null</code>
      */
-    void listRoleMethods(Long roleId, Long clientId, Long tenantId, ContextPath contextPath,
-                           List<ServiceMethod> list);
+    void listRoleMethods(Long clientId, Long tenantId, ContextPath contextPath, Long roleId,
+                         List<ServiceMethod> list);
 }
