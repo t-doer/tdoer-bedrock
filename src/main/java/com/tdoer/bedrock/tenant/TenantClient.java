@@ -26,6 +26,12 @@ import java.util.List;
  */
 public interface TenantClient {
     /**
+     * Tenant client's GUID
+     * @return Tenant client's GUID, cannot be <code>null</code>
+     */
+    String getGuid();
+
+    /**
      * Tenant who accesses a product's client
      * @return Tenant, cannot be <code>null</code>
      */
