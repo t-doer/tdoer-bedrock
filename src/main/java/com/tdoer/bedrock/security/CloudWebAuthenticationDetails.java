@@ -40,7 +40,7 @@ public class CloudWebAuthenticationDetails implements CloudAuthenticationDetails
     private final String sessionId;
     private final String userAgent;
     private final Long tenantId;
-    private final Long clientId;
+    private final String clientId;
 
     // ~ Constructors
     // ===================================================================================================
@@ -60,7 +60,7 @@ public class CloudWebAuthenticationDetails implements CloudAuthenticationDetails
 
         CloudEnvironment env = CloudEnvironmentHolder.getEnvironment();
         this.tenantId = env.getTenantId();
-        this.clientId = env.getClientId();
+        this.clientId = env.getTenantClient().getGuid();
     }
 
     /**
@@ -70,7 +70,7 @@ public class CloudWebAuthenticationDetails implements CloudAuthenticationDetails
      * @param sessionId     session id
      */
     private CloudWebAuthenticationDetails(final String remoteAddress, final int remotePort, final String userAgent,
-                                          final String sessionId, final Long tenantId, final Long clientId) {
+                                          final String sessionId, final Long tenantId, final String clientId) {
         this.remoteAddress = remoteAddress;
         this.remotePort = remotePort;
         this.userAgent = userAgent;
@@ -198,7 +198,7 @@ public class CloudWebAuthenticationDetails implements CloudAuthenticationDetails
         return userAgent;
     }
 
-    public Long getClientId() {
+    public String getClientId() {
         return clientId;
     }
 

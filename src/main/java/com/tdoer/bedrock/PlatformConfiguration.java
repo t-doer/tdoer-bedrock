@@ -88,7 +88,7 @@ public class PlatformConfiguration implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         if(bean instanceof PlatformConfiguration){
-            Platform.setCloudConfiguration((PlatformConfiguration)bean);
+            Platform.setPlatformConfiguration((PlatformConfiguration)bean);
 
             // Register status codes
             StatusCodeUtil.registerStatusCodes(BedrockErrorCodes.class);

@@ -1,4 +1,7 @@
-T-Doer Bedrock SaaS Framework
+# T-Doer Bedrock SaaS Framework
+
+The project is an implementation of **T-Doer Bedrock SaaS Framework Specification**. It provides main data models and
+ interfaces, web filters and API entrance "com.tdoer.bedrock.Platform". 
 
 ## Core Concepts
 

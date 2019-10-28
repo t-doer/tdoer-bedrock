@@ -37,12 +37,29 @@ public interface CloudAuthenticationDetails extends Serializable {
      */
     String getSessionId();
 
+    /**
+     * Remote TCP port
+     *
+     * @return
+     */
     int getRemotePort();
 
+    /**
+     * User agent
+     *
+     * @return User agent, must not be blank
+     */
     String getUserAgent();
 
-    Long getClientId();
+    /**
+     * The guid of tenant client
+     * @return Tenant client's GUID, must not blank
+     */
+    String getClientId();
 
+    /**
+     * Tenant Id
+     * @return Tenant Id, must not be <code>null</code>
+     */
     Long getTenantId();
-
 }

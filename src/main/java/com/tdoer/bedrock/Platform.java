@@ -24,6 +24,9 @@ import com.tdoer.bedrock.service.Service;
 import com.tdoer.bedrock.service.ServiceRepository;
 import com.tdoer.bedrock.tenant.RentalCenter;
 import com.tdoer.bedrock.tenant.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
 
 /**
  * @author Htinker Hu (htinker@163.com)
@@ -32,9 +35,20 @@ import com.tdoer.bedrock.tenant.User;
 public class Platform {
     private static PlatformConfiguration configuration;
 
-    // can only access in the same package
-    static void setCloudConfiguration(PlatformConfiguration cloudConfiguration){
-        configuration = cloudConfiguration;
+    private static Logger logger = LoggerFactory.getLogger(Platform.class);
+
+    /**
+     * Set configuration into the platform. Platform's cloud configuration can
+     * only be set once right after {@link PlatformConfiguration} is initialized
+     * which will be auto loaded by Spring Boot framework.
+     *
+     * @param platformConfiguration Platform configuration, cannot be <code>null</code>
+     */
+    static void setPlatformConfiguration(PlatformConfiguration platformConfiguration){
+        Assert.notNull(platformConfiguration, "Platform configuration cannot be null");
+        Assert.isTrue(configuration == null, "Platform configuration already existed, cannot be set any more");
+        configuration = platformConfiguration;
+        logger.info("Platform configuration is set");
     }
 
     // ------------------------------------------------
