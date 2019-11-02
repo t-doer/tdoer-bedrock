@@ -1,54 +1,22 @@
-# T-Doer Bedrock SaaS Framework
+# T-Doer Bedrock SaaS Framework Specification
 
-The project is an implementation of **T-Doer Bedrock SaaS Framework Specification**. It provides main data models and
- interfaces, web filters and API entrance "com.tdoer.bedrock.Platform". 
+The project is an implementation of **T-Doer Bedrock SaaS Framework Specification**. It provides 
+main data models and interfaces, web filters and API entrance "com.tdoer.bedrock.Platform". The 
+specification needs its implementation to provider the service providers below:
+
+- com.tdoer.bedrock.application.ApplicationRepository
+- com.tdoer.bedrock.context.ContextCenter
+- com.tdoer.bedrock.context.ContextPathParser
+- com.tdoer.bedrock.product.ProductRepository
+- com.tdoer.bedrock.service.ServiceRepository
+- com.tdoer.bedrock.tenant.RentalCenter
+
+T-Doer provides the specification's default implementation, 
+[T-Doer Bedrock SaaS Framework Implementation](https://github.com/t-doer/tdoer-bedrock-impl).
 
 ## Core Concepts
 
-#### Tenant
-
-- Tenant rents `products` to service its `users`.
-- Tenant pays for SaaS products.
-- Each tenant has a unique identifier.
-- Product data is isolated logically or physically for each tenant.
-
-#### Product
-
-- Product is an `application` suit, consisting of applications.
-- Product has one or more `clients` or terminals, for example, web browser, APP etc..
-- Product has one or more `context instances` of `context types`, in which user plays applications.
-
-#### Application
-
-- Application is a relatively independent, self-contained tool, with which user can finish something.
-- Application provides `pages` for clients.
-- A page will have one or more `actions` so that user can manipulate.
-- Both page and action associats with backend `service methods`.
-- Page and action is called front-end access control item, and service method is called back-end access control item.
-
-#### Client
-
-- Client is a product's terminal, from which user accesses product's applications.
-- A client of a product may only expose some applications of a product to users.
-- A client organizes applications' pages with `navigation`, so that user can use product conveniently.
-
-#### Context Instance
-
-- Context instance of a context type is a background where user plays applications, say, XXX Office, YYY Club etc..
-- Context type is a kind of context instances, for example, Office, Club etc..
-- User owns context roles to in a context instance.
-- User always play product applications in context instances.
-- Each context instance has a unique `context path` to locate.
-- The top context instance is always tenant.
-- User's access control is based on user's context roles in context path.
-
-#### ProductRental
-
-
-#### ProductConfig
-
-
-#### ContextConfig
+Please see T-Doer documents.
 
 ## Todo
 

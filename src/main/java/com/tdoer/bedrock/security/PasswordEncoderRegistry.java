@@ -22,7 +22,9 @@ import org.springframework.util.Assert;
 import java.util.HashMap;
 
 /**
- * @Description
+ * Password encoder registry holds a default password encoder and client category-based
+ * password encoders.
+ *
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
@@ -32,13 +34,21 @@ public class PasswordEncoderRegistry {
     protected PasswordEncoder defaultPasswordEncoder;
 
     public PasswordEncoderRegistry(PasswordEncoder defaultPasswordEncoder) {
-        Assert.notNull(defaultPasswordEncoder, "Default PasswordEncoder cannot be null");
+        Assert.notNull(defaultPasswordEncoder, "Default password encoder cannot be null");
 
         mapper = new HashMap<>();
         this.defaultPasswordEncoder = defaultPasswordEncoder;
     }
 
+    /**
+     * Get password encoder for specific client category, if not found, default password
+     * encoder will be returned.
+     *
+     * @param clientCategory Client category, cannot be <code>null</code>
+     * @return Password encoder, must not be <code>null</code>
+     */
     public PasswordEncoder getPasswordEncoder(ClientCategory clientCategory) {
+        Assert.notNull(clientCategory, "Client category cannot be null");
         PasswordEncoder ret = mapper.get(clientCategory);
         if (ret == null) {
             ret = defaultPasswordEncoder;
@@ -47,6 +57,12 @@ public class PasswordEncoderRegistry {
         return ret;
     }
 
+    /**
+     * Register password encoder for specific client category.
+     *
+     * @param clientCategory Client category, cannot be <code>null</code>
+     * @param passwordEncoder Password encoder, cannot be <code>null</code>
+     */
     public void register(ClientCategory clientCategory, PasswordEncoder passwordEncoder) {
         Assert.notNull(clientCategory, "ClientCategory can't not be null");
         Assert.notNull(passwordEncoder, "PasswordEncoder can't be null");

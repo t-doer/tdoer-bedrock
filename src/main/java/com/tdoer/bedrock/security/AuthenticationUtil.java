@@ -22,7 +22,8 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 /**
- * @Description
+ * A utility class to get user details or user from {@link SecurityContextHolder}.
+ *
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
@@ -30,11 +31,12 @@ public class AuthenticationUtil {
     static Logger logger = LoggerFactory.getLogger(AuthenticationUtil.class);
 
     /**
-     * Get current session's UserDetails from security context, if a user is not authenticated, return null
+     * Get current session's UserDetails from security context
      *
-     * @return UserDetails or null
+     * @return User details if the user is authenticated
+     * @throws UnauthorizedUserException if the user is not authenticated
      */
-    public static UserDetails getUserDetails() {
+    public static UserDetails getUserDetails() throws UnauthorizedUserException{
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             throw new UnauthorizedUserException();
@@ -44,9 +46,9 @@ public class AuthenticationUtil {
     }
 
     /**
-     * Get current session's User from security context, if a a user is not authenticated, return null
+     * Get current session's User from security context
      *
-     * @return User or null
+     * @return User or <code>null</code>
      */
     public static User getUser() {
         UserDetails ud = null;
