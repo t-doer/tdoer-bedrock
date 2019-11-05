@@ -28,6 +28,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 /**
  * @author Htinker Hu (htinker@163.com)
  * @create 2019-10-17
@@ -82,6 +85,14 @@ public class Platform {
         return getServiceRepository().getService(configuration.getServiceCode());
     }
 
+    public static Charset getDefaultCharset(){
+        return StandardCharsets.UTF_8;
+    }
+
+    public static String getDefaultEncoding(){
+        return getDefaultCharset().name();
+    }
+
     // -----------------------------------------------
     // From parser filter
     // -----------------------------------------------
@@ -93,5 +104,4 @@ public class Platform {
     public static User getCurrentUser(){
         return AuthenticationUtil.getUser();
     }
-
 }

@@ -87,7 +87,7 @@ public interface BedrockErrorCodes extends com.tdoer.springboot.http.StatusCodes
     @ReasonPhrase("No context instance found for the context path: {0}")
     int NO_CONTEXT_INSTANCE = 40020;
 
-    @ReasonPhrase("Illegal context path request: {0}")
+    @ReasonPhrase("Invalid context path: {0}")
     int INVALID_CONTEXT_PATH = 40021;
 
     @ReasonPhrase("No application Id found in request: {0}")
@@ -107,6 +107,18 @@ public interface BedrockErrorCodes extends com.tdoer.springboot.http.StatusCodes
 
     @ReasonPhrase("Application ({0}) is not supported by the context instance ({1})")
     int APPLICATION_NOT_SUPPORTED_BY_CONTEXT_INSTANCE = 40027;
+
+    @ReasonPhrase("Service ({0}) dose not permit the access request from the client ({1})")
+    int SERVICE_NOT_PERMIT_CLIENT_ACCESS = 40028;
+
+    @ReasonPhrase("Service ({0}) dose not permit the access request from the application ({1})")
+    int SERVICE_NOT_PERMIT_APPLICATION_ACCESS = 40029;
+
+    @ReasonPhrase("Unknown service type ({0})")
+    int UNKNOWN_SERVICE_TYPE = 40030;
+
+    @ReasonPhrase("Context instance's context path ({0}) dose not match request's context path: {1}")
+    int CONTEXT_PATH_NOT_MATCH = 40031;
 
     /* ----------------------------------------------------
      * Server-side error codes: 50001 ~ 50100

@@ -15,7 +15,11 @@
  */
 package com.tdoer.bedrock;
 
+import com.tdoer.security.crypto.Base64;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * @Description
@@ -85,27 +89,37 @@ public class EnvironmentDigest {
     }
 
     public static EnvironmentDigest fromDigestString(String digestStr) {
-        String[] arr = StringUtils.delimitedListToStringArray(digestStr, "|");
-        int i = 0;
-        EnvironmentDigest digest = new EnvironmentDigest();
-        digest.setTenantId(Long.parseLong(arr[i++]));
-        digest.setProductId(Long.parseLong(arr[i++]));
-        digest.setClientId(Long.parseLong(arr[i++]));
-        digest.setContextPath(arr[i++]);
-        digest.setApplicationId(Long.parseLong(arr[i++]));
-        digest.setLanguage(arr[i++]);
-        return digest;
+        Assert.hasText(digestStr, "Digest string cannot be blank");
+        try{
+            digestStr = Base64.decode(digestStr, Platform.getDefaultEncoding());
+            String[] arr = StringUtils.delimitedListToStringArray(digestStr, "|");
+            int i = 0;
+            EnvironmentDigest digest = new EnvironmentDigest();
+            digest.setTenantId(Long.parseLong(arr[i++]));
+            digest.setProductId(Long.parseLong(arr[i++]));
+            digest.setClientId(Long.parseLong(arr[i++]));
+            digest.setContextPath(arr[i++]);
+            digest.setApplicationId(Long.parseLong(arr[i++]));
+            digest.setLanguage(arr[i++]);
+            return digest;
+        }catch (UnsupportedEncodingException uee){
+            return null;
+        }
     }
 
     public String toDigestString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(tenantId).append("|");
-        sb.append(productId).append("|");
-        sb.append(clientId).append("|");
-        sb.append(contextPath).append("|");
-        sb.append(applicationId).append("|");
-        sb.append(language);
-        return sb.toString();
+        try{
+            StringBuilder sb = new StringBuilder();
+            sb.append(tenantId).append("|");
+            sb.append(productId).append("|");
+            sb.append(clientId).append("|");
+            sb.append(contextPath).append("|");
+            sb.append(applicationId).append("|");
+            sb.append(language);
+            return Base64.encode(sb.toString(), Platform.getDefaultEncoding());
+        }catch (UnsupportedEncodingException uee){
+            return null;
+        }
     }
 
     @Override

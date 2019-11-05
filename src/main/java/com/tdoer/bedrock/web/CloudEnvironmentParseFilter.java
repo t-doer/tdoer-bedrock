@@ -18,6 +18,7 @@ package com.tdoer.bedrock.web;
 import com.tdoer.bedrock.*;
 import com.tdoer.bedrock.product.ClientConfig;
 import com.tdoer.bedrock.tenant.ProductRental;
+import com.tdoer.springboot.http.StatusCodes;
 import com.tdoer.springboot.util.WebUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,6 @@ import java.io.IOException;
 public class CloudEnvironmentParseFilter implements Filter, InitializingBean {
 
     private final static Logger logger = LoggerFactory.getLogger(CloudEnvironmentParseFilter.class);
-
 
     protected RequestCloudEnvironmentExtractor extractor;
 
@@ -64,27 +64,28 @@ public class CloudEnvironmentParseFilter implements Filter, InitializingBean {
         try {
             logger.debug("Parsing cloud environment for the request: {}", request.getRequestURL());
             environment = parseEnvironment(request, response);
-            logger.info("Parsed out cloud environment {} for the request: {}", environment, request.getRequestURL());
+            logger.debug("Parsed out cloud environment {} for the request: {}", environment, request.getRequestURL());
 
-            // Set to environment holder for later use
-            CloudEnvironmentHolder.setEnvironment(environment);
-            logger.debug("Parsed and attached new environment ({}) for the request: {}", environment, request.getRequestURL());
+            boolean valid = false;
+            if(environment != null){
+                logger.debug("Verifying cloud environment {} for the request: {}", environment, request.getRequestURL());
+                valid = verifyEnvironment(environment);
+                logger.debug("Verified cloud environment {} for the request: {}", environment, request.getRequestURL());
+            }
 
-            logger.debug("Verifying cloud environment {} for the request: {}", environment, request.getRequestURL());
-            verifyEnvironment(environment);
-            logger.debug("Verified cloud environment {} for the request: {}", environment, request.getRequestURL());
+            logger.info("Cloud environment {} for the request ({}) is valid: {}", environment,
+                    request.getRequestURL(), valid);
 
-
-            setResponseHeader(request, response, environment);
-
-            chain.doFilter(request, response);
-
-        } catch (InvalidRequestException ire) {
-            // todo, response error
-            ire.printStackTrace();
-        } catch (Throwable t) {
-            // todo, response error
-            t.printStackTrace();
+            if(valid){
+                // Set to environment holder for later use
+                CloudEnvironmentHolder.setEnvironment(environment);
+                // go on
+                chain.doFilter(request, response);
+            }else{
+                logger.error("Request ({}) is denied because of invalid cloud environment {}",
+                        request.getRequestURL(), environment);
+                response.setStatus(StatusCodes.FORBIDDEN);
+            }
         } finally {
             logger.debug("Processed request: {}", request.getRequestURL());
         }
@@ -102,39 +103,37 @@ public class CloudEnvironmentParseFilter implements Filter, InitializingBean {
         return extractor.extract(request);
     }
 
-    protected void verifyEnvironment(CloudEnvironment env) {
+    protected boolean verifyEnvironment(CloudEnvironment env) {
         // Check if the product rental is expired
         ProductRental productRental = env.getProductRental();
-        if (productRental.isActive()) {
-            throw new InvalidRequestException(BedrockErrorCodes.EXPIRED_PRODUCT_RENTAL, productRental.getStartDate(), productRental.getEndDate());
+        if (!productRental.isActive()) {
+            logger.warn("Product rental is not active: {}", productRental);
+            return false;
         }
 
         // Check if the tenant product supports the context instance
         ClientConfig clientConfig = env.getClientConfig();
         if (!clientConfig.supportContext(env.getContextInstance())) {
-            throw new InvalidRequestException(BedrockErrorCodes.CONTEXT_INSTANCE_NOT_SUPPORTED_BY_TENANT_CLIENT, env.getContextPath(), env.getTenantId(), env.getClientId());
+            logger.warn("The tenant client ({}, {}) dose not support by context instance ({})",
+                    env.getTenant().getCode(), env.getClient().getCode(), env.getContextPath());
+            return false;
         }
 
         // Check if the tenant product supports the application
         if (!clientConfig.supportApplication(env.getApplication())) {
-            throw new InvalidRequestException(BedrockErrorCodes.APPLICATION_NOT_SUPPORTED_BY_TENANT_CLIENT, env.getApplicationId(), env.getTenantId(), env.getClientId());
+            logger.warn("The tenant client ({}, {}) dose not support by application ({})",
+                    env.getTenant().getCode(), env.getClient().getCode(), env.getApplication().getCode());
+            return false;
         }
 
         // Check if the context instance supports the application
         if (!env.getContextConfig().supportApplication(env.getApplication())) {
-            throw new InvalidRequestException(BedrockErrorCodes.APPLICATION_NOT_SUPPORTED_BY_CONTEXT_INSTANCE, env.getApplicationId(), env.getContextPath());
-        }
-    }
-
-    protected void setResponseHeader(HttpServletRequest request, HttpServletResponse response, CloudEnvironment environment) {
-        String tenantCode = WebUtil.findValueFromRequest(request, PlatformConstants.TENANT_GUID);
-        String clientId = WebUtil.findValueFromRequest(request, PlatformConstants.CLIENT_CODE);
-
-        if (!StringUtils.hasText(tenantCode) || !StringUtils.hasText(clientId)) {
-            WebUtil.addValueIntoResponseHeaderAndCookie(response, request, PlatformConstants.CLIENT_CODE, environment.getClient().getCode());
-            WebUtil.addValueIntoResponseHeaderAndCookie(response, request, PlatformConstants.TENANT_GUID, environment.getTenant().getCode());
+            logger.warn("The context instance ({}) dose not support application ({})",
+                    env.getContextPath(), env.getApplication().getCode());
+            return false;
         }
 
-        request.setAttribute(PlatformConstants.ENVIRONMENT_DIGEST, environment.getDigest());
+        return true;
     }
+
 }

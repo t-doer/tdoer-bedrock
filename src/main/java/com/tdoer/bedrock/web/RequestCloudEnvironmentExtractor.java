@@ -120,7 +120,8 @@ public class RequestCloudEnvironmentExtractor {
                     throw new InvalidRequestException(BedrockErrorCodes.NO_CONTEXT_INSTANCE, contextPath);
                 }
                 if (!contextInstance.getContextPath().equals(contextPath)) {
-                    throw new InvalidRequestException(BedrockErrorCodes.INVALID_CONTEXT_PATH, contextPath);
+                    throw new InvalidRequestException(BedrockErrorCodes.CONTEXT_PATH_NOT_MATCH,
+                            contextInstance.getContextPath(), contextPath);
                 }
             }
 
@@ -162,7 +163,7 @@ public class RequestCloudEnvironmentExtractor {
             Locale language = LocaleUtil.getLocale(digest.getLanguage());
             return new CloudEnvironment(productRental, tenantClient, contextInstance, application, language);
         } catch (Throwable t) {
-            throw new InvalidRequestException(BedrockErrorCodes.INVALID_ENV_DIGEST, t, digest.toDigestString());
+            throw new InvalidRequestException(BedrockErrorCodes.INVALID_ENV_DIGEST, t, digest);
         }
     }
 
