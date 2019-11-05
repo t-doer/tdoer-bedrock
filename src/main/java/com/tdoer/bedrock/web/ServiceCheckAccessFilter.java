@@ -76,7 +76,7 @@ public class ServiceCheckAccessFilter  implements Filter, InitializingBean {
         }
 
         if(!service.matchRequest(request.getMethod(), request.getRequestURI())){
-            // todo, no service method matches the request
+            // todo, no exposed service method matches the request
         }
     }
 

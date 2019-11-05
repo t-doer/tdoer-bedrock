@@ -26,9 +26,9 @@ import java.util.Map;
  * @create 2017-09-19
  */
 public enum ServiceType {
-    GATEWAY, BUSINESS, INFRASTRUCTURE;
+    GATEWAY, AUTHORIZATION, BUSINESS, INFRASTRUCTURE;
 
-    private static final Map<String, ServiceType> mappings = new HashMap<>(3);
+    private static final Map<String, ServiceType> mappings = new HashMap<>(4);
 
     static {
         for (ServiceType clientCategory : values()) {
