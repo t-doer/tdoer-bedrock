@@ -13,18 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tdoer.bedrock.autoconfigure;
+package com.tdoer.bedrock;
 
-import com.tdoer.bedrock.PlatformConfiguration;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import javax.servlet.http.HttpServletRequest;
 
 /**
+ * The class is used by {@link com.tdoer.bedrock.web.CloudEnvironmentProcessingFilter}
+ * to extract a cloud environment from Http Request.
+ *
  * @author Htinker Hu (htinker@163.com)
- * @create 2019-10-21
+ * @create 2019-11-11
  */
-@Configuration
-@Import({PlatformConfiguration.class})
-public class BedrockAutoConfiguration {
-
+public interface CloudEnvironmentExtractor {
+    CloudEnvironment extract(HttpServletRequest request);
 }

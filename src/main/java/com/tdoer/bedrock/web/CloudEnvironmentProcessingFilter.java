@@ -19,12 +19,10 @@ import com.tdoer.bedrock.*;
 import com.tdoer.bedrock.product.ClientConfig;
 import com.tdoer.bedrock.tenant.ProductRental;
 import com.tdoer.springboot.http.StatusCodes;
-import com.tdoer.springboot.util.WebUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -36,19 +34,20 @@ import java.io.IOException;
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
-public class CloudEnvironmentParseFilter implements Filter, InitializingBean {
+public class CloudEnvironmentProcessingFilter implements Filter, InitializingBean {
 
-    private final static Logger logger = LoggerFactory.getLogger(CloudEnvironmentParseFilter.class);
+    private final static Logger logger = LoggerFactory.getLogger(CloudEnvironmentProcessingFilter.class);
 
-    protected RequestCloudEnvironmentExtractor extractor;
+    protected CloudEnvironmentExtractor extractor = new DefaultCloudEnvironmentExtractor();
 
-    public CloudEnvironmentParseFilter(RequestCloudEnvironmentExtractor extractor) {
-        Assert.notNull(extractor, "RequestCloudEnvironmentExtractor cannot be null");
+    public void setExtractor(CloudEnvironmentExtractor extractor) {
+        Assert.notNull(extractor, "CloudEnvironmentExtractor cannot be null");
+
         this.extractor = extractor;
     }
 
     public void afterPropertiesSet() {
-
+        Assert.notNull(extractor, "CloudEnvironmentExtractor is required");
     }
 
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException,
@@ -69,22 +68,17 @@ public class CloudEnvironmentParseFilter implements Filter, InitializingBean {
             boolean valid = false;
             if(environment != null){
                 logger.debug("Verifying cloud environment {} for the request: {}", environment, request.getRequestURL());
-                valid = verifyEnvironment(environment);
-                logger.debug("Verified cloud environment {} for the request: {}", environment, request.getRequestURL());
-            }
-
-            logger.info("Cloud environment {} for the request ({}) is valid: {}", environment,
-                    request.getRequestURL(), valid);
-
-            if(valid){
-                // Set to environment holder for later use
-                CloudEnvironmentHolder.setEnvironment(environment);
-                // go on
-                chain.doFilter(request, response);
-            }else{
-                logger.error("Request ({}) is denied because of invalid cloud environment {}",
-                        request.getRequestURL(), environment);
-                response.setStatus(StatusCodes.FORBIDDEN);
+                if(verifyEnvironment(environment)){
+                    logger.debug("Verified cloud environment {} for the request: {}", environment, request.getRequestURL());
+                    // Set to environment holder for later use
+                    CloudEnvironmentHolder.setEnvironment(environment);
+                    // go on
+                    chain.doFilter(request, response);
+                }else{
+                    logger.warn("Request ({}) is denied because of invalid cloud environment: {}",
+                            request.getRequestURL(), environment);
+                    response.setStatus(StatusCodes.FORBIDDEN);
+                }
             }
         } finally {
             logger.debug("Processed request: {}", request.getRequestURL());

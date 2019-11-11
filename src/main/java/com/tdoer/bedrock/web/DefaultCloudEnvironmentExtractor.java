@@ -19,6 +19,7 @@ import com.tdoer.bedrock.*;
 import com.tdoer.bedrock.application.Application;
 import com.tdoer.bedrock.context.ContextInstance;
 import com.tdoer.bedrock.context.ContextPath;
+import com.tdoer.bedrock.service.Service;
 import com.tdoer.bedrock.tenant.ProductRental;
 import com.tdoer.bedrock.tenant.TenantClient;
 import com.tdoer.springboot.error.ErrorCodeException;
@@ -36,9 +37,9 @@ import java.util.Locale;
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
-public class RequestCloudEnvironmentExtractor {
+public class DefaultCloudEnvironmentExtractor implements CloudEnvironmentExtractor {
 
-    private final static Logger logger = LoggerFactory.getLogger(RequestCloudEnvironmentExtractor.class);
+    private final static Logger logger = LoggerFactory.getLogger(DefaultCloudEnvironmentExtractor.class);
 
     protected EnvironmentDigest extractEnvironmentDigest(HttpServletRequest request) {
 
@@ -85,21 +86,43 @@ public class RequestCloudEnvironmentExtractor {
         return null;
     }
 
+    @Override
     public CloudEnvironment extract(HttpServletRequest request) {
         CloudEnvironment ret = null;
-        // Request from internal provider after zuul
-        EnvironmentDigest digest = extractEnvironmentDigest(request);
-        if (digest != null) {
-            ret = buildFromDigest(digest);
-        } else {
-            // Request from public web (browser or app etc.)
-            ret = buildFromRequest(request);
+        Service service = Platform.getCurrentService();
+        EnvironmentDigest digest = null;
+        switch (service.getType()){
+            case GATEWAY:
+                // Parse from request
+                ret = buildFromRequest(request);
+                break;
+            case AUTHORIZATION:
+                // Parse from digest or request
+                digest = extractEnvironmentDigest(request);
+                if (digest != null) {
+                    ret = buildFromDigest(digest);
+                } else {
+                    // Request from public web (browser or app etc.)
+                    ret = buildFromRequest(request);
+                }
+                break;
+            case BUSINESS:
+            case INFRASTRUCTURE:
+            default:
+                digest = extractEnvironmentDigest(request);
+                if (digest != null) {
+                    ret = buildFromDigest(digest);
+                }else{
+                    logger.error("No cloud environment digest found in the request: {}", request.getRequestURL());
+                }
         }
+
         return ret;
     }
 
     protected CloudEnvironment buildFromRequest(HttpServletRequest request) {
         try {
+            logger.debug("Building cloud environment from request: {}", request.getRequestURL());
             TenantClient tenantClient = extractTenantClient(request);
             ProductRental productRental = Platform.getRentalCenter().getProductRendtal(
                     tenantClient.getTenantId(), tenantClient.getClient().getProductId());
@@ -142,17 +165,23 @@ public class RequestCloudEnvironmentExtractor {
                 language = Locale.SIMPLIFIED_CHINESE;
             }
 
-            return new CloudEnvironment(productRental, tenantClient, contextInstance, application, language);
+            CloudEnvironment ret = new CloudEnvironment(productRental, tenantClient, contextInstance, application,
+                    language);
+            logger.debug("Built cloud environment {} from request: {}", ret, request.getRequestURL());
+            return ret;
 
         } catch (InvalidRequestException req) {
+            logger.warn("Failed to build cloud environment from request: " + request.getRequestURL(), req);
             throw req;
         } catch (Throwable t) {
+            logger.warn("Failed to build cloud environment from request: " + request.getRequestURL(), t);
             throw new ErrorCodeException(BedrockErrorCodes.INTERNAL_SERVER_ERROR, t);
         }
     }
 
     protected CloudEnvironment buildFromDigest(EnvironmentDigest digest) {
         try {
+            logger.debug("Buiding cloud environment from digest: {}", digest );
             TenantClient tenantClient = Platform.getRentalCenter().getTenantClient(digest.getTenantId(), digest.getClientId());
             ProductRental productRental = Platform.getRentalCenter().getProductRendtal(digest.getTenantId(),
                     tenantClient.getClient().getProductId());
@@ -161,8 +190,13 @@ public class RequestCloudEnvironmentExtractor {
                     Platform.getContextCenter().getContextInstance(digest.getTenantId(), contextPath);
             Application application = Platform.getApplicationRepository().getApplication(digest.getApplicationId());
             Locale language = LocaleUtil.getLocale(digest.getLanguage());
-            return new CloudEnvironment(productRental, tenantClient, contextInstance, application, language);
+            CloudEnvironment ret = new CloudEnvironment(productRental, tenantClient, contextInstance, application,
+                    language);
+            logger.debug("Built cloud environment {} from digest: {}", ret, digest);
+            return ret;
+
         } catch (Throwable t) {
+            logger.warn("Failed to build cloud environment from digest: " + digest, t);
             throw new InvalidRequestException(BedrockErrorCodes.INVALID_ENV_DIGEST, t, digest);
         }
     }

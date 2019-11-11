@@ -15,23 +15,19 @@
  */
 package com.tdoer.bedrock.web;
 
-import com.tdoer.bedrock.BedrockErrorCodes;
 import com.tdoer.bedrock.CloudEnvironment;
-import com.tdoer.bedrock.PlatformConstants;
 import com.tdoer.bedrock.Platform;
+import com.tdoer.bedrock.PlatformConstants;
 import com.tdoer.bedrock.application.Application;
 import com.tdoer.bedrock.product.Client;
 import com.tdoer.bedrock.service.Service;
 import com.tdoer.bedrock.service.ServiceType;
 import com.tdoer.bedrock.service.UnknownServiceTypeException;
-import com.tdoer.springboot.error.ErrorCodeException;
 import com.tdoer.springboot.http.StatusCodes;
 import com.tdoer.springboot.util.WebUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.*;
@@ -57,8 +53,8 @@ import java.io.IOException;
  * @author Htinker Hu (htinker@163.com)
  * @create 2019-10-18
  */
-public class ServiceCheckAccessFilter  implements Filter, InitializingBean {
-    private static Logger logger = LoggerFactory.getLogger(ServiceCheckAccessFilter.class);
+public class CloudServiceCheckAccessFilter implements Filter, InitializingBean {
+    private static Logger logger = LoggerFactory.getLogger(CloudServiceCheckAccessFilter.class);
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
