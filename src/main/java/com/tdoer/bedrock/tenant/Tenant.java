@@ -113,5 +113,5 @@ public interface Tenant extends ContextInstance, Serializable {
      * @param instanceId Context instance Id, cannot be <code>null</code>
      * @return Context instance or <code>null</code>
      */
-    ContextInstance getContextInstance(Long instanceId);
+    ContextInstance getContextInstance(Long contextType, Long instanceId);
 }
