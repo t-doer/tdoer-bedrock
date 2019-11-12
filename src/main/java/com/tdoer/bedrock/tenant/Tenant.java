@@ -108,7 +108,7 @@ public interface Tenant extends ContextInstance, Serializable {
     ContextInstance getContextInstance(ContextPath contextPath);
 
     /**
-     * Get context instance by Id
+     * Get context instance by context type and instance Id
      *
      * @param contextType Context type, cannot be  <code>null</code>
      * @param instanceId Context instance Id, cannot be <code>null</code>
