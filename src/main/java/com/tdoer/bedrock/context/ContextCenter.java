@@ -75,11 +75,12 @@ public interface ContextCenter {
      * Get context instance of specific context path in specific tenant
      *
      * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param contextType Context type, cannot be <code>null</code>
      * @param instanceId Context instance Id, cannot be <code>null</code>
      * @return Context instance if it exists and is enabled
      * @throws ContextInstanceNotFoundException if it is not found
      */
-    ContextInstance getContextInstance(Long tenantId, Long instanceId) throws ContextInstanceNotFoundException;
+    ContextInstance getContextInstance(Long tenantId, Long contextType, Long instanceId) throws ContextInstanceNotFoundException;
 
     /**
      * Get specific role defined in a tenant' context
