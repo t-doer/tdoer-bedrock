@@ -15,7 +15,7 @@
  */
 package com.tdoer.bedrock;
 
-import com.tdoer.security.crypto.Base64;
+import com.tdoer.bedrock.security.Base64;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
