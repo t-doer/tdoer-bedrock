@@ -22,8 +22,8 @@ import com.tdoer.bedrock.product.ProductRepository;
 import com.tdoer.bedrock.security.AuthenticationUtil;
 import com.tdoer.bedrock.service.Service;
 import com.tdoer.bedrock.service.ServiceRepository;
+import com.tdoer.bedrock.tenant.BaseUser;
 import com.tdoer.bedrock.tenant.RentalCenter;
-import com.tdoer.bedrock.tenant.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -101,7 +101,7 @@ public class Platform {
         return CloudEnvironmentHolder.getEnvironment();
     }
 
-    public static User getCurrentUser(){
+    public static BaseUser getCurrentUser(){
         return AuthenticationUtil.getUser();
     }
 }

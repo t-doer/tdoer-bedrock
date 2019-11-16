@@ -15,7 +15,7 @@
  */
 package com.tdoer.bedrock.security;
 
-import com.tdoer.bedrock.tenant.User;
+import com.tdoer.bedrock.tenant.BaseUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -50,7 +50,7 @@ public class AuthenticationUtil {
      *
      * @return User or <code>null</code>
      */
-    public static User getUser() {
+    public static BaseUser getUser() {
         UserDetails ud = null;
         try {
             ud = getUserDetails();
