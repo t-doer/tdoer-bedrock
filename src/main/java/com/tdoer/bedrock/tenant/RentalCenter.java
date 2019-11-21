@@ -74,9 +74,18 @@ public interface RentalCenter {
      * Get tenant client of specific tenant and client
      * @param tenantId Tenant Id, cannot be <code>null</code>
      * @param clientId Client Id, cannot be <code>null</code>
-     * @return
+     * @return Tenant client or <code>null</code> if not found
      */
     TenantClient getTenantClient(Long tenantId, Long clientId);
+
+    /**
+     * Get tenant client of specific tenant and client
+     *
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param clientGUID Client GUID, cannot be blank
+     * @return Tenant client or <code>null</code> if not found
+     */
+    TenantClient getTenantClient(Long tenantId, String clientGUID);
 
     /**
      * Get all tenant clients of a tenant

@@ -105,7 +105,7 @@ public class CloudEnvironmentProcessingFilter implements Filter, InitializingBea
             return false;
         }
 
-        // Check if the tenant product supports the context instance
+        // Check if the tenant client supports the context instance
         ClientConfig clientConfig = env.getClientConfig();
         if (!clientConfig.supportContext(env.getContextInstance())) {
             logger.warn("The tenant client ({}, {}) dose not support by context instance ({})",
@@ -113,7 +113,7 @@ public class CloudEnvironmentProcessingFilter implements Filter, InitializingBea
             return false;
         }
 
-        // Check if the tenant product supports the application
+        // Check if the tenant client supports the application
         if (!clientConfig.supportApplication(env.getApplication())) {
             logger.warn("The tenant client ({}, {}) dose not support by application ({})",
                     env.getTenant().getCode(), env.getClient().getCode(), env.getApplication().getCode());

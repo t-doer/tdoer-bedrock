@@ -31,6 +31,15 @@ public class AuthenticationUtil {
     static Logger logger = LoggerFactory.getLogger(AuthenticationUtil.class);
 
     /**
+     * Get current session's authentication
+     *
+     * @return Authentication, AnonymousAuthenticationToken or null
+     */
+    public static Authentication getAuthentication(){
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
+
+    /**
      * Get current session's UserDetails from security context
      *
      * @return User details if the user is authenticated

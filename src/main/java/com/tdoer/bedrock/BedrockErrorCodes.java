@@ -120,6 +120,9 @@ public interface BedrockErrorCodes extends com.tdoer.springboot.http.StatusCodes
     @ReasonPhrase("Context instance's context path ({0}) dose not match request's context path: {1}")
     int CONTEXT_PATH_NOT_MATCH = 40031;
 
+    @ReasonPhrase("Unknown client category: {0}")
+    int UNKNOWN_CLIENT_CATEGORY = 40032;
+
     /* ----------------------------------------------------
      * Server-side error codes: 50001 ~ 50100
      * ----------------------------------------------------

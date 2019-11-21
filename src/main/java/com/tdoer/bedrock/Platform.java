@@ -26,6 +26,7 @@ import com.tdoer.bedrock.tenant.BaseUser;
 import com.tdoer.bedrock.tenant.RentalCenter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
 import org.springframework.util.Assert;
 
 import java.nio.charset.Charset;
@@ -57,6 +58,7 @@ public class Platform {
     // ------------------------------------------------
     // From configuration
     // ------------------------------------------------
+
     public static ContextPathParser getContextPathParser(){
         return configuration.getContextPathParser();
     }
@@ -81,6 +83,10 @@ public class Platform {
         return configuration.getRentalCenter();
     }
 
+    public static String getServiceCode(){
+        return configuration.getServiceCode();
+    }
+
     public static Service getCurrentService(){
         return getServiceRepository().getService(configuration.getServiceCode());
     }
@@ -97,10 +103,29 @@ public class Platform {
     // From parser filter
     // -----------------------------------------------
 
+    /**
+     * Get current cloud environment which is parsed out from each request
+     * @return Cloud environment, it must not <code>null</code>
+     */
     public static CloudEnvironment getCurrentEnvironment(){
         return CloudEnvironmentHolder.getEnvironment();
     }
 
+    /**
+     * Get current authentication, if user
+     *
+     * @return Authentication, it may be
+     * {@link org.springframework.security.authentication.AnonymousAuthenticationToken}
+     */
+    public static Authentication getCurrentAuthentication(){
+        return AuthenticationUtil.getAuthentication();
+    }
+
+    /**
+     * Get current login user
+     *
+     * @return User or <code>null</code> if the user dose log in yet
+     */
     public static BaseUser getCurrentUser(){
         return AuthenticationUtil.getUser();
     }
