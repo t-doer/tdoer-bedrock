@@ -34,11 +34,11 @@ import java.util.List;
  * @create 2017-09-19
  */
 public interface Tenant extends ContextInstance, Serializable {
-    @Override
-    default boolean isTenant(){
-        return true;
-    }
 
+    /**
+     * Tenant is the top context instance, it has no parent.
+     * @return <code>null</code>
+     */
     @Override
     default ContextInstance getParent(){
         return null;
@@ -58,20 +58,17 @@ public interface Tenant extends ContextInstance, Serializable {
     void listTenantClients(List<TenantClient> list);
 
     /**
-     * List all context types defined by the tenant.
-     *
-     * Note the list should not include "TENANT" context type which is
-     * the root context type for all.
+     * List context types available for the tenant.
      *
      * @param list List to hold a tenant's context types.
      */
     void listContextTypes(List<ContextType> list);
 
     /**
-     * List context types of specific category defined by the tenant.
+     * List context types of specific category available for the tenant
      *
-     * @param category Context category
-     * @param list List to hold context types, cannot be <code>null</code>
+     * @param category Context category, cannot be blank
+     * @param list List to holds context types, cannot be <code>null</code>
      */
     void listContextTypes(String category, List<ContextType> list);
 

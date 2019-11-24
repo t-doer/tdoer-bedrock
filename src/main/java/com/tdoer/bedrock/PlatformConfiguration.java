@@ -26,6 +26,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.Assert;
 
 /**
  * Platform configuration needs Bedrock Implementation to provide below beans:
@@ -72,6 +73,13 @@ public class PlatformConfiguration implements BeanPostProcessor {
                                  ContextPathParser contextPathParser,
                                  ContextCenter contextCenter,
                                  RentalCenter rentalCenter) {
+        Assert.notNull(serviceRepository, "ServiceRepository cannot be null");
+        Assert.notNull(applicationRepository, "ApplicationRepository cannot be null");
+        Assert.notNull(productRepository, "ProductRepository cannot be null");
+        Assert.notNull(contextPathParser, "ContextPathParser cannot be null");
+        Assert.notNull(contextCenter, "ContextCenter cannot be null");
+        Assert.notNull(rentalCenter, "RentalCenter cannot be null");
+
         this.serviceRepository = serviceRepository;
         this.applicationRepository = applicationRepository;
         this.productRepository = productRepository;

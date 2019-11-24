@@ -18,8 +18,11 @@ package com.tdoer.bedrock.context;
 import java.io.Serializable;
 
 /**
- * @Description A contextPath instance is usually a organization (tenant/district/city/store/office etc.)
- * or a user.
+ * @Description A context instance is a context in which applications are installed
+ * and user is authorized with roles to play the applications. Bedrock inherent context
+ * instance is tenant and user, other instances can be organizations, say, club, class,
+ * committee, office etc.
+ *
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
@@ -57,20 +60,6 @@ public interface ContextInstance extends Serializable {
      * @return Instance code, must not be blank
      */
     String getCode();
-
-    /**
-     * Get instance's detail information object's ID, say, class's Id, user's Id etc.
-     *
-     * @return associated detail object Id, may be <code>null</code>
-     */
-    Long getDetailObjectId();
-
-    /**
-     * Is the instance a tenant, the root context instance?
-     *
-     * @return true if the instance is a tenant
-     */
-    boolean isTenant();
 
     /**
      * Parent context instance. If the instance is a tenant, its parent context instance

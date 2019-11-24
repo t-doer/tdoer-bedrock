@@ -15,6 +15,12 @@
  */
 package com.tdoer.bedrock.tenant;
 
+import com.tdoer.bedrock.Platform;
+import com.tdoer.bedrock.context.ContextConfig;
+import com.tdoer.bedrock.context.ContextInstance;
+import com.tdoer.bedrock.context.ContextPath;
+import com.tdoer.bedrock.context.ContextType;
+
 /**
  * @Description
  * @author Htinker Hu (htinker@163.com)
@@ -135,11 +141,6 @@ public class BaseUser implements User {
         this.credentialStatus = credentialStatus;
     }
 
-    @Override
-    public String getCategory() {
-        return category;
-    }
-
     public void setCategory(String category) {
         this.category = category;
     }
@@ -151,6 +152,70 @@ public class BaseUser implements User {
 
     public void setReal(boolean real) {
         this.real = real;
+    }
+
+    /**
+     * Instance code, unique in a tenant
+     *
+     * @return Instance code, must not be blank
+     */
+    @Override
+    public String getCode() {
+        return getGuid();
+    }
+
+    /**
+     * Parent context instance, that's, the tenant to which the user belongs
+     *
+     * @return the tenant to which the user belongs, must not be <code>null</code>
+     */
+    @Override
+    public ContextInstance getParent() {
+        return Platform.getContextCenter().getContextInstance(getTenantId(), ContextType.TENANT.getType(),
+                getTenantId());
+    }
+
+    /**
+     * The top parent of the instance, that's, the tenant to which the user belongs
+     *
+     * @return the tenant to which the user belongs, must not be <code>null</code>
+     */
+    @Override
+    public ContextInstance getTopParent() {
+        return getParent();
+    }
+
+    /**
+     * Context path to the context instance, say, '1.1-2.1', it's always
+     * globally unique.
+     *
+     * @return Context path, must not be <code>null</code>
+     */
+    @Override
+    public ContextPath getContextPath() {
+        return new ContextPath(ContextType.USER.getType(), getId(), new ContextPath(ContextType.TENANT.getType(),
+                getTenantId()));
+    }
+
+    /**
+     * Context type of the context instance. An instance must below to only one
+     * context type.
+     *
+     * @return Context type, must not be <code>null</code>
+     */
+    @Override
+    public ContextType getContextType() {
+        return ContextType.USER;
+    }
+
+    /**
+     * The instance's configurations, for example, available applications, context roles etc.
+     *
+     * @return Context configuration, must not be <code>null</code>
+     */
+    @Override
+    public ContextConfig getContextConfig() {
+        return Platform.getContextCenter().getContextConfig(this);
     }
 
     @Override

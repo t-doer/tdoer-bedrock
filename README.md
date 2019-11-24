@@ -16,8 +16,8 @@ T-Doer provides the specification's default implementation, please see
 
 ## Filters
 
-- `com.tdoer.bedrock.web.CloudEnvironmentProcessingFilter`, the filter should be installed before to call 
-  `Platform#getCurrentEnvironment()` to get current environment.
+- `com.tdoer.bedrock.web.CloudEnvironmentProcessingFilter`, the filter should be installed before any 
+   request to call `Platform#getCurrentEnvironment()` to get current environment.
 - `com.tdoer.bedrock.web.CloudServiceCheckAccessFilter`, the filter should be installed to check the access
   to service after `com.tdoer.bedrock.web.CloudEnvironmentProcessingFilter`
 

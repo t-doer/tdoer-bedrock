@@ -15,14 +15,14 @@
  */
 package com.tdoer.bedrock.tenant;
 
-import java.io.Serializable;
+import com.tdoer.bedrock.context.ContextInstance;
 
 /**
  * @Description
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
  */
-public interface User extends Serializable {
+public interface User extends ContextInstance {
 
     /**
      * The user's ID
@@ -93,13 +93,6 @@ public interface User extends Serializable {
      * @return Credential status, must not be <code>null</code>
      */
     CredentialStatus getCredentialStatus();
-
-    /**
-     * User category, say, b-end or c-end
-     *
-     * @return User category, must not be blank
-     */
-    String getCategory();
 
     /**
      * The user is real or fictional. When a user is not authenticated yet, the user may be fabricated,

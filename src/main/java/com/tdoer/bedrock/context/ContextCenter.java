@@ -25,13 +25,22 @@ import java.util.List;
  * @create 2017-09-19
  */
 public interface ContextCenter {
+    /**
+     * List all content types available for the tenant
+     *
+     * @param tenantId Tenant Id, cannot be <code>null</code>
+     * @param list List to holds context types, cannot be <code>null</code>
+     */
+    void listContextTypes(Long tenantId, List<ContextType> list);
 
     /**
-     * Get the root context type for specific tenant
+     * List context types of specific category available for the tenant
+     *
      * @param tenantId Tenant Id, cannot be <code>null</code>
-     * @return Context type, must not be <code>null</code>
+     * @param category Context category, cannot be blank
+     * @param list List to holds context types, cannot be <code>null</code>
      */
-    ContextType getRootContextType(Long tenantId);
+    void listContextTypes(Long tenantId, String category, List<ContextType> list);
 
     /**
      * Get specific context type available for specific tenant
@@ -81,6 +90,14 @@ public interface ContextCenter {
      * @throws ContextInstanceNotFoundException if it is not found
      */
     ContextInstance getContextInstance(Long tenantId, Long contextType, Long instanceId) throws ContextInstanceNotFoundException;
+
+    /**
+     * The configuration of specific context instance.
+     *
+     * @param contextInstance Context instance, cannot be <code>null</code>
+     * @return Context configuration, must not be <code>null</code>
+     */
+    ContextConfig getContextConfig(ContextInstance contextInstance);
 
     /**
      * Get specific role defined in a tenant' context
